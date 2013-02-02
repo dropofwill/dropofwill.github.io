@@ -1,0 +1,8 @@
+
+.special .slides li img {
+	display: block;
+	margin-left : 2%;
+	width: 96%;
+	max-width: none;
+	padding-bottom: 2em; 
+}
