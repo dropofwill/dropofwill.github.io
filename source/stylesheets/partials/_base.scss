@@ -1,0 +1,42 @@
+$serif: 'Lora', Times, serif;
+$sans-serif: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$monospace: 'Source Code Pro', 'Andale Mono', AndaleMono, monospace;
+
+$base-font-family: $serif;
+$base-font-size: 18px;
+$base-font-weight: 400;
+$base-line-height: 1.7;
+
+$heading-font-family: $sans-serif;
+$heading-font-weight: 700;
+
+$fixed-font-family: $monospace;
+$fixed-font-size: 95%;
+$fixed-line-height: 1.5;
+
+$loud-color: #000;
+$quiet-color: rgba($loud-color, 0.5);
+$text-color: rgba($loud-color, 0.8);
+$heading-color: rgba($loud-color, 0.9);
+$link-color: #2ecc71;
+$link-hover-color: saturate($link-color, 20%);
+$link-visited-color: $link-color;
+$border-color: rgba($text-color, 0.1);
+
+$reversed-background-color: #36363d;
+$reversed-text-color: rgba(white, 0.6);
+$reversed-quiet-color: rgba(white, 0.3);
+$reversed-loud-color: rgba(white, 0.8);
+$reversed-heading-color: rgba(white, 0.7);
+$reversed-link-hover-color: white;
+$reversed-link-color: rgba($reversed-link-hover-color, 0.8);
+$reversed-link-visited-color: rgba($reversed-link-hover-color, 0.8);
+$reversed-border-color: rgba($reversed-text-color, 0.1);
+
+$accent-color: #2ecc71;
+
+$masthead-height: 50px;
+
+@import "compass/css3";
+@import "compass/reset";
+@import "../modules/all";

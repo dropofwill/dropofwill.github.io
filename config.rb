@@ -24,9 +24,9 @@ activate :blog do |blog|
   blog.calendar_template = "calendar.html"
 
   # Enable pagination
-  # blog.paginate = true
-  # blog.per_page = 10
-  # blog.page_link = "page/{num}"
+	 #blog.paginate = true
+	 #blog.per_page = 2
+	 #blog.page_link = "page/{num}"
 end
 
 page "/feed.xml", layout: false
@@ -69,7 +69,7 @@ page "/feed.xml", layout: false
 # activate :automatic_image_sizes
 
 # Reload the browser automatically whenever files change
-# activate :livereload
+ activate :livereload
 
 # Methods defined in the helpers block are available in templates
 # helpers do
@@ -80,25 +80,35 @@ page "/feed.xml", layout: false
 
 activate :directory_indexes
 
+activate :syntax
+set :inline_theme, "github"
+set :markdown_engine, :kramdown
+
 set :css_dir, 'stylesheets'
 
 set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
+###
+# Disqus
+###
+set :disqus_short_name, 'dropofwill'
+
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
-  # activate :minify_css
+	 activate :minify_css
 
   # Minify Javascript on build
-  # activate :minify_javascript
+	 activate :minify_javascript
 
   # Enable cache buster
-  # activate :asset_hash
+	 activate :asset_hash
 
   # Use relative URLs
-  # activate :relative_assets
+	 activate :relative_assets
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
