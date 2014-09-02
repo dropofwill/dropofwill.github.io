@@ -1,0 +1,9 @@
+<% wrap_layout 'layout' do %>
+  <article class="article">
+		<%= yield %>
+
+    <div class="article-comments">
+			<%= partial 'disqus' %>
+    </div>
+  </article>
+<% end %>
