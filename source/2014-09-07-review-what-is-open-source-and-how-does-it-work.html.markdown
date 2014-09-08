@@ -2,7 +2,7 @@
 title: "Review: What Is Open Source and How Does it Work?"
 date: 2014-09-07 19:42 UTC
 tags: HFOSS, Review
-summary: A lit review of a book
+summary: "Who: Steven Weber a Political Science Professor at University of California, Berkeley. What/Where: What is Open Source and How Does it Work?, which is Chapter 3 from The Success of Open Source When: Published: November 30th, 2005"
 ---
 
 ## Review: What Is Open Source and How Does it Work?
