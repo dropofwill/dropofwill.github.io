@@ -28,7 +28,7 @@ summary: "In Chapter 3 of Stephen Weber's The Success of Open Source, there was 
 
 ### 3) What are the similarities between Weber's eight principles, and the five pillars?
 
-Weber's principles of *solve problems in parallel*, *minimize how many times you have to reinvent the wheel*, and *release early* read kind of like a how to guide for the third pillar, *rapid prototyping*. *Make it interesting* and *scratch an itch* (effectively the same idea) are proven on the grounds of *meritocracy*, at least in the way opensource.com intends it to be used. The *law of large numbers* is directly synonymous with the way the fifth pillar, *community*, meaning a global community can accomplish far more than one individual or team can on its own. Finally *open exchange* and *participation* all come down to communication, which is what Weber is describing with *document what you do* and *talk a lot*.
+Weber's principles of *solve problems in parallel*, *minimize how many times you have to reinvent the wheel*, and *release early* read kind of like a how to guide for the third pillar, *rapid prototyping*. *Make it interesting* and *scratch an itch* (effectively the same idea) are proven on the grounds of *meritocracy*, at least in the way opensource.com intends it to be used. The *law of large numbers* is directly synonymous with the way the fifth pillar, *community*, is being used, meaning a global community can accomplish far more than one individual or team can on its own. Finally *open exchange* and *participation* all come down to communication, which is what Weber is describing with *document what you do* and *talk a lot*.
 
 ### 4) What are the differences?
 
@@ -36,7 +36,7 @@ Weber's principles are presented in a more [normative](http://en.wikipedia.org/w
 
 Weber's is obviously far more verbose with his explanations of each point taking almost 10 pages, whereas the pillars can be viewed on one reasonably sized screen. Weber uses this space to not just explain what he means, but also to give a little proof through examples or showing how this may play out in different situations.
 
-I think both these differences are the result of their different contexts and they don't really contradict each other. Weber presents his in the middle of a section focused on understanding the people and their motivations, so he frames it from a developers perspective within the community. This contrasts with the Opensource.com Pillars, which I assume are focused on educating the public on what open source is. Not to mention the different expectations from a web context vs. the middle of a lengthy book.
+I think both these differences are the result of their different contexts and they don't really contradict each other. Weber presents his in the middle of a section focused on understanding open source contributors and their motivations, so he frames it from a developers perspective within the community. This contrasts with the Opensource.com Pillars, which I assume are focused more on educating the public on what open source is. Not to mention the different expectations from a web context vs. the middle of a lengthy book.
 
 ### 5) Who's "keen analysis" did Weber "draw heavily" upon?
 
