@@ -11,8 +11,8 @@ This is the first in what will probably be a three part series on creating and d
 
 ### Where we're going in the next couple of posts:
 
-1. **[What's Middleman?](2014/09/14/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/)**
-2. **Blogging with Middleman**
+1. **[What's Middleman?](/2014/09/14/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/)**
+2. **[Blogging with Middleman](/2014/09/22/creating-and-deploying-a-middleman-blog-part-2-blogging-with-middleman/)**
 3. **Deploying to Heroku**
 
 ### What's Middleman?
