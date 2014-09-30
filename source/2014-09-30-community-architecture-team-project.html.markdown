@@ -2,7 +2,7 @@
 title: Community Architecture Team Project
 date: 2014-09-30 05:24 UTC
 tags: HFOSS, Commarch, Rails
-summary: ""
+summary: "This the final write up for our Community Architecture report on Ruby on Rails. There's quite a bit of content to wade through, so here's a quick overview."
 ---
 
 ## Community Architecture Team Project Report
@@ -26,7 +26,7 @@ This the final write up for our Community Architecture report on Ruby on Rails. 
 16. Decision Making Process
 17. Would I want to work in this sort of structure?
 
-### 1. Community Overview (See http://rubyonrails.org/community/)
+### 1. Community Overview (See [community](http://rubyonrails.org/community/))
 **Rails IRC on irc.freenode.net**
 
 For Rails Users: \#rubyonrails
@@ -37,31 +37,31 @@ For Rails contributors: \#rails-contrib
 
 There are three main mailing lists:
 
-[Ruby on Rails Talk]() is a general user mailing list.
+[Ruby on Rails Talk](https://groups.google.com/forum/#!forum/rubyonrails-talk) is a general user mailing list.
 
-[Ruby on Rails Core]() is where people talk about contributing to Rails.
+[Ruby on Rails Core](https://groups.google.com/forum/#!forum/rubyonrails-core) is where people talk about contributing to Rails.
 
-[Ruby on Rails Security]() is where security breaches are announced.
+[Ruby on Rails Security](https://groups.google.com/forum/#!forum/rubyonrails-core) is where security breaches are announced.
 
 **Documentation**
 
-There are two main sources of documentation, [The Rails Guides](), which explain in detail with code examples how to use various features of the project and the [API Guide]() which documents every framework, class, and method.
+There are two main sources of documentation, [The Rails Guides](http://guides.rubyonrails.org/), which explain in detail with code examples how to use various features of the project and the [API Guide](http://api.rubyonrails.org/) which documents every framework, class, and method.
 
 **Source Code repository**
 
-The main project is located at [https://github.com/rails/rails](), other (non-core) parts of the project are also stored under the [Rails username]().
+The main project is located at [https://github.com/rails/rails](https://github.com/rails/rails), other (non-core) parts of the project are also stored under the [Rails username](https://github.com/rails).
 
 **Other communication channels**
 
-They also use Twitter: [https://twitter.com/search?q=rails]()
+They also use Twitter: [https://twitter.com/search?q=rails](https://twitter.com/search?q=rails)
 
-And Planet Ruby on Rails: [http://planetrubyonrails.com/]()
+And Planet Ruby on Rails: [http://planetrubyonrails.com/](http://planetrubyonrails.com/)
 
 **Project Website and Blog**
 
-Main site: [http://rubyonrails.org/]()
+Main site: [http://rubyonrails.org/](http://rubyonrails.org/)
 
-Blog: [http://weblog.rubyonrails.org/]()
+Blog: [http://weblog.rubyonrails.org/](http://weblog.rubyonrails.org/)
 
 ### 2. Project Description
 Rails is an open source Model View Controller (MVC) framework written in Ruby. It follows the mantra ‘convention over configuration’, offering reasonable defaults and scaffolding to speed up the development process. The original goal of the project was to standardize the process of building a web app so that, 1) developers weren't rebuilding the wheel every time and 2) it would be easier to on-board new developers. It is one of the primary reasons that Ruby became popular and to some extent still drives the community development.
@@ -92,12 +92,11 @@ Tiny follow-up to #16999 [ci skip]
 
 
 ### 4. Core Committers
-Core team is listed here (13 members): http://rubyonrails.org/core/ and past members here (14 members): http://rubyonrails.org/core/alumni/
+Core team is listed here (13 members): [http://rubyonrails.org/core/](http://weblog.rubyonrails.org/) and past members here (14 members): [http://rubyonrails.org/core/alumni/](http://rubyonrails.org/core/alumni/)
 
 There has been a bit of turnover within the core team, with 14 no longer actively involved with project, however nine of the top ten contributors are still active.
 
 Total there have been 3,634 people who have made 47,173 commits.
-
 
 
 ### 6. Benevolent Dictator for Life
@@ -119,7 +118,7 @@ As shown on the code frequency graph on GitHub, it seems as if Rails has been ge
 
 
 ### Most Unique Knowledge
-There is a discrepancy here. On GitHub, dhh has the most commits by a significant margin (3414 to 3162). On contributors.rubyonrails.org, however, Aaron Patterson (tenderlove) blows others away (4453 to 4132). We think this difference may be caused by the fact that Rails has multiple repositories; the Rails website may counts all repositories, while GitHub figure is specific to the core.
+There is a discrepancy here. On GitHub, dhh has the most commits by a significant margin (3414 to 3162). On [contributors.rubyonrails.org](contributors.rubyonrails.org), however, Aaron Patterson (tenderlove) blows others away (4453 to 4132). We think this difference may be caused by the fact that Rails has multiple repositories; the Rails website may counts all repositories, while GitHub figure is specific to the core.
 
 
 ### 10. The Raptor Test (i.e. would the project survive if the main contributor was eaten by a Velociraptor)
@@ -154,11 +153,11 @@ I think this is a little ridiculous seeing as only point 4 seems like it could p
 
 
 ### 13. On-boarding Process
-There is a thorough guide for newbies: http://guides.rubyonrails.org/contributing_to_ruby_on_rails.html and even a Rails dev box, a VM setup for contributing to Rails: https://github.com/rails/rails-dev-box
+There is a thorough guide for newbies: [http://guides.rubyonrails.org/contributing_to_ruby_on_rails.html](http://guides.rubyonrails.org/contributing_to_ruby_on_rails.html) and even a Rails dev box, a VM setup for contributing to Rails: [https://github.com/rails/rails-dev-box](https://github.com/rails/rails-dev-box)
 
 
 ### 14. Documentation Status
-Yes to all. Documentation can be found at http://rubyonrails.org/documentation/.
+Yes to all. Documentation can be found at [http://rubyonrails.org/documentation/](http://rubyonrails.org/documentation/)
 
 
 ### 15. Newbie Help
