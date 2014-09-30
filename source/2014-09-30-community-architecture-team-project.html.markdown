@@ -67,7 +67,7 @@ Blog: [http://weblog.rubyonrails.org/](http://weblog.rubyonrails.org/)
 Rails is an open source Model View Controller (MVC) framework written in Ruby. It follows the mantra ‘convention over configuration’, offering reasonable defaults and scaffolding to speed up the development process. The original goal of the project was to standardize the process of building a web app so that, 1) developers weren't rebuilding the wheel every time and 2) it would be easier to on-board new developers. It is one of the primary reasons that Ruby became popular and to some extent still drives the community development.
 
 ### 3. Project History
-David Heinemeier Hansson (nick dhh) started Rails as a part of Basecamp, an internal project for 37signals (where he is now a partner). He open sourced it in 2004 and gave other contributors commit rights in 2005. In 2008 Rails was merged with one of it’s leading competitors, Merb, which itself was created to alleviate some of the major problems with Rails. It is now at version 4.1, with the 4.2 soon to be released (hopefully within the month).
+David Heinemeier Hansson (nick dhh) started Rails as a part of Basecamp, an internal project for 37signals (where he is now a partner). He open sourced it in 2004 with an MIT License and gave other contributors commit rights in 2005. In 2008 Rails was merged with one of it’s leading competitors, Merb, which itself was created to alleviate some of the major problems with Rails. It is now at version 4.1, with the 4.2 soon to be released (hopefully within the month).
 
 First commit:
 
