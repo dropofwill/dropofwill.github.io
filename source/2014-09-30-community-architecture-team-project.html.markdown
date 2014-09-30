@@ -117,49 +117,57 @@ As for scalability, there was a big discussion that started when Twitter moved t
 ### 9. Project Trends
 As shown on the code frequency graph on GitHub, it seems as if Rails has been getting steady contributions during the past year, without too many spikes in either additions or deletions. This is probably because with so many contributors, the amount of work done remains fairly consistent, even if everyone isn’t working all the time. The only spikes that do occur appear to line up with coming release dates so that makes sense.
 
+
 ### Most Unique Knowledge
 There is a discrepancy here. On GitHub, dhh has the most commits by a significant margin (3414 to 3162). On contributors.rubyonrails.org, however, Aaron Patterson (tenderlove) blows others away (4453 to 4132). We think this difference may be caused by the fact that Rails has multiple repositories; the Rails website may counts all repositories, while GitHub figure is specific to the core.
+
 
 ### 10. The Raptor Test (i.e. would the project survive if the main contributor was eaten by a Velociraptor)
 
 While DHH seems to have the most commits on the project and has definitely been extremely influential in terms of marketing the framework, at this point his role is more of figurehead/manager. That's an important job, no question, but it's also one that other members of the community could easily pick up. So at this point with the community and core team at the size that it is, Rails would be ok if DHH were to die tomorrow.
 
+
 ### 11. The Bus Test
+Rails is big, like over a 150MB, so the Git by a Bus program couldn't handle the size of the history and crashed my computer. I tried installing the new supposedly faster Git by a Truck, but I couldn't get it to install on my computer. So we decided to some analysis by hand.
+
+The bus test, if you don't know, is if 20% of the top contributors to a project were to die in a bus accident would the project be able to survive? The Git by a Bus uses some statistical models to do a little bit more intelligent analysis, but in lieu of that we decide to just look at the raw commit info.
+
+Turns out if the top 20% of Rails contributors were to die in a bus accident that would leave just people that have 5 or less commits each. That leaves the project in a pretty dire state, even with the contributor and user base as large as it is.
+
+However, that bus crash would be quite the event, seeing as 20% of Rails contributors is a total of **737** people. That's more than have been killed by shark attacks, in all of recorded history.
+
+So we decided to apply the bus test to just the core team. Which would kill the top 3 contributors (dhh, tenderlove, and jeremy). These three developers account for about 20% of the commits overall. So while this would be a major blow to the project, we think it is big enough to be able to survive.
 
 
 ### 12. The Coefficient of Fail
+The Coefficient of Fail is a "system" developed by Tom 'spot' Callaway to detect red flags in an open source project. A great deal of the items are tied to developing compiled applications/packages, so the questions aren't always applicable to the Rails project.
+
+So these are the four points of failure we identified from his list that Rails didn't pass:
+1. Source is over 100 MB, even compressed (+10)
+2. Dependencies need to be installed first (+10)
+3. 1-2 years proprietary before open source (+10)
+4. No per-file licensing (Though each module has a license) (+10)
+
+This gives Rails a total of 40 point of fail, which according to Callaway means that, "Babies cry when it's downloaded."
+
+I think this is a little ridiculous seeing as only point 4 seems like it could possibly construed as a bad thing.
 
 
 ### 13. On-boarding Process
+There is a thorough guide for newbies: http://guides.rubyonrails.org/contributing_to_ruby_on_rails.html and even a Rails dev box, a VM setup for contributing to Rails: https://github.com/rails/rails-dev-box
 
 
 ### 14. Documentation Status
+Yes to all. Documentation can be found at http://rubyonrails.org/documentation/.
 
 
 ### 15. Newbie Help
+It seems that in the #rails-contrib IRC channel there isn’t a whole lot of activity, it mainly seems like a place where the core developers hang out. But the mailing list “Ruby on Rails Core” seems a lot more active and more friendly for new users/contributors.
 
 
 ### 16. Decision Making Process
+Pre-pull request discussion happens in the Ruby on Rails Core mailing list, after the PR is submitted to Github most of the discussion occurs on the issue tracker. In general the decision structure is more consensus based, but not in the sense that every core member has to agree in order to merge, more like every core member that has an opinion on the PR has to agree. A lot of times there are just 2 or 3 core members with a lot .
 
 
 ### 17. Would I want to work in this sort of structure?
-
-
-
-In your opinion, would the project survive if the core team, or most active 20% of contributors, were hit by a bus? Why or why not?
-	[Opinion based; answer on your own]
-
-Does the project have an official "on-boarding" process in place? (new contributor guides, quickstarts, communication leads who focus specifically on newbies, etc...)
-
-Guide for newbies: http://guides.rubyonrails.org/contributing_to_ruby_on_rails.html
-Rails dev box, a VM setup for contributing to Rails: https://github.com/rails/rails-dev-box
-
-Does the project have Documentation available? Is it extensive? Does it include code examples?
-Yes to all. Documentation can be found at http://rubyonrails.org/documentation/.
-If you were going to contribute to this project, but ran into trouble or hit blockers, who would you contact, and how?
-It seems that in the #rails-contrib IRC channel there isn’t a whole lot of activity, it mainly seems like a place where the core developers hang out. But the mailing list “Ruby on Rails Core” seems a lot more active and more friendly for new users/contributors.
-Based on these answers, how would you describe the decision structure/process of this group?  Is it hierarchical, consensus building, ruled by a small group, barely contained chaos, or ruled by a single or pair of individuals?
-
-Pre-pull request discussion happens in the Ruby on Rails Core mailing list, after the PR is submitted to Github most of the discussion occurs on the issue tracker. In general the decision structure is more consensus based, but not in the sense that every core member has to agree in order to merge, more like every core member that has an opinion on the PR has to agree. A lot of times there are just 2 or 3 core members with a lot .
-Is this the kind of structure you would enjoy working in? Why, or why not?
-	[Opinion based; answer on your own]
+This is exactly the type of structure I would like to contribute to, domain knowledge is spread evenly among top contributors, there is not one guy making the final call on everything,the process is consensus based
