@@ -83,6 +83,9 @@ activate :directory_indexes
 activate :syntax
 set :inline_theme, "github"
 set :markdown_engine, :kramdown
+set :markdown, layout_engine: :slim,
+               tables: true,
+               smartypants: true
 
 set :css_dir, 'stylesheets'
 
