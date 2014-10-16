@@ -18,8 +18,8 @@ tags:
 ### What projects did your team choose?
 
 First choice: Puppy’s Pen (new project)
+
 Second choice: Blocku (existing project)
-2 line description of the project:
 
 #### Puppy’s Pen:
 
