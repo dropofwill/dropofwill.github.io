@@ -68,3 +68,5 @@ In the words of Harvard Law Professor, Lawrence Lessig, when describing the stat
 > That's, what's the word? That's fucked.
 
 What are we going to do about it? I think that's the big takeaway from this documentary, is that some things have actually improved (they stopped going after individuals that download music and focused on the distributors, e.g. pirate bay or Dotcom), but that's only the beginning. We still have a lot of work ahead of us to complete part four of the manifesto.
+
+Rating 4.5/5
