@@ -7,7 +7,7 @@ summary: "For HFOSS we are making Open Source games for the XO (a.k.a. One Lapto
 
 ## XO Smoke Test
 
-For HFOSS we are making Open Source games for the XO (a.k.a. One Laptop Per Child) laptops and as part of that recently received our test XO's to hack on. To make sure everything is as it should be we went through the ["Smoke Test"](http://wiki.laptop.org/go/Smoke_test/10.1.x/1_hour_smoke_test){target: "_blank"} from the OLPC wiki. This is blog post serves as a reference to my run through on RIT XO LTL1.5-01.
+For HFOSS we are making Open Source games for the XO (a.k.a. One Laptop Per Child) laptops and as part of that recently received our test XO's to hack on. To make sure everything is as it should be we went through the ["Smoke Test"](http://wiki.laptop.org/go/Smoke_test/10.1.x/1_hour_smoke_test) from the OLPC wiki. This is blog post serves as a reference to my run through on RIT XO LTL1.5-01.
 
 ### Start Up
 
