@@ -1,7 +1,7 @@
 ---
-title: "XO Smoke Test"
+title: XO Smoke Test
 date: 2014-10-28 20:47 UTC
-tags: "HFOSS", "XO"
+tags: HFOSS, XO
 summary: "For HFOSS we are making Open Source games for the XO (a.k.a. One Laptop Per Child) laptops and as part of that recently received our test XO's to hack on. To make sure everything is as it should be we went through the Smoke Test from the OLPC wiki. This is blog post serves as a reference to my run through on RIT XO LTL1.5-01."
 ---
 
