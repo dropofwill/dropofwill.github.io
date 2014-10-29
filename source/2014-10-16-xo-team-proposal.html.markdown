@@ -1,7 +1,8 @@
 ---
 title: XO Team Proposal
 date: 2014-10-16 19:30 UTC
-tags:
+tags: "HFOSS"
+summary: "In Puppy’s Pen the player has to construct an fenced area so that their dog can romp around outside. Each puzzle will give a set of criteria (area, perimeter, symmetry, angles, etc.) and ask the player to construct a pen that meets all requirements. The completion of a successful pen will result in an animation of a frolicking dog, while an unsuccessful attempt will result in the criterion or criteria not met flashing red."
 ---
 
 ## XO Team Proposal

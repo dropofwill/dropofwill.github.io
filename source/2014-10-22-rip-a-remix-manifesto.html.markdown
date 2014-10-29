@@ -2,7 +2,7 @@
 title: "RiP: A Remix Manifesto"
 date: 2014-10-22 03:41 UTC
 tags: HFOSS, IP, Review
-summary: ""
+summary: "Pop music and our music from different genres seems untouchable, Elton John seems untouchable, you know? Obviously, they create that, they force that that idea into your mind, that the superstars are untouchable. So just being able to manipulate it and do what ever you want, put Elton John in a headlock. Just put a beat behind him, and pour a beer on his head. - Girl Talk"
 ---
 
 ## RiP: A Remix Manifesto
