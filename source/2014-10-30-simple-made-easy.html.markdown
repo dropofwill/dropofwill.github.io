@@ -2,7 +2,7 @@
 title: Simple Made Easy
 date: 2014-10-30 20:16 UTC
 tags: Review, Video, Talk, Functional Programming
-summary: ""
+summary: "A talk by Rick Hickey, the author of the JVM-based functional programming language Clojure, about the value of writing simpler, non-complected code. The talk was given to a functional programming audience, so some of the material (and the jokes) may go over OO programmer's heads at times. Along the way he critiques object oriented approaches, test driven development, programmer centric coding, and breathes new life into common and archaic words by carefully defining their meanings."
 ---
 
 ## Gist
