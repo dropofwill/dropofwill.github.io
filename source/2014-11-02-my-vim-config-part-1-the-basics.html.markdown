@@ -1,8 +1,8 @@
 ---
-title: My Vim Config Part 1: The Basics
+title: "My Vim Config Part 1: The Basics"
 date: 2014-11-02 03:23 UTC
 tags: Vim, Config
-summary: ""
+summary: "As someone that came to Vim from Sublime Text (through the excellent Vi-ntage mode), one thing that held me back was just how annoying the default Vim settings are. In a way looking back at it that wasn't a bad thing, it let me really craft my own configuration that I'm pretty happy with, but always looking for ways to improve. In order to help someone else a who is headed down that path find a config that works for them a little quicker."
 ---
 
 ## My Vim Config Part 1: The Basics
@@ -33,18 +33,18 @@ Next we want to make things start to look a little better (more on that in a lat
 Scroll off makes sure the current line always has n lines above or below visible. Some people like to set this to 4000 or some other high number to always keep the cursor in the center of the screen, personally I like to just leave it at 4 or 5.
 
 ~~~
-syntax on		        " Syntax highlighting
+syntax on           " Syntax highlighting
 set relativenumber	" Line numbers relative to cursor
-set number		      " But ignore the current line
+set number          " But ignore the current line
 set numberwidth=4   " How wide the line number column should be by default
-set showcmd		      " Show incomplete commands
-set noerrorbells	  " No dinging!
-set scrolloff=4		  " Pad lines vertically by 4
-set hidden		      " Hide buffers instead of yelling at me about it
+set showcmd         " Show incomplete commands
+set noerrorbells    " No dinging!
+set scrolloff=4     " Pad lines vertically by 4
+set hidden          " Hide buffers instead of yelling at me about it
 set ruler           " Tells you the coords of the cursor in the status line
-set wildmenu	    	" Tab complete vim commands
+set wildmenu        " Tab complete vim commands
 set wildmode=longest,list,full
-set laststatus=2	  " Always show status line
+set laststatus=2    " Always show status line
 ~~~
 
 Tabs are something that everyone complains about with Vim and they are a little bit confusing at first. Basically the width of what your tab key creates and what the shift keys (`<<`, `>>`, `<`, and `>`) create are two separate settings, even though you would very rarely actually want them different. Here I'm just showing how I like to indent my code in a perfect world (2 spaces, autoindented nicely), later when we talk about plugins I'll show you how to do this on a per file-type basis.
