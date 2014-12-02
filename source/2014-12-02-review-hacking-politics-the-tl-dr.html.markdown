@@ -8,7 +8,9 @@ summary: "A collection of quotes from key players talking about the uprising res
 ## Review: Hacking Politics the TL;DR
 
 > **Who:** key figures from the political battle over the internet. Primarily on the side of free internet, but occasionally some responses from the other side as well.
+>
 > **When:** published in 2013, covers events from 2010 to 2013.
+>
 > **What/Where:** The first chapter from [Hacking Politics](http://hfoss-fossrit.rhcloud.com/static/books/hackingpolitics_txtwithcvfb.pdf)
 
 
