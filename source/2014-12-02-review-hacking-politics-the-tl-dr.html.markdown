@@ -21,7 +21,7 @@ A collection of quotes from key players talking about the uprising response to a
 
 > "It’s so easy to accidentally copy something. So easy, in fact, that we found the leading Republican supporter of COICA, Orrin Hatch, had illegally copied a bunch of code into his own Senate website."
 
-- Aaron Swartz
+> Aaron Swartz
 
 * I'd never heard of prior restraint before and really it seems exceedingly clear that SOPA was completely out of bounds with existing case law:
 
@@ -31,13 +31,13 @@ A collection of quotes from key players talking about the uprising response to a
 
 > One of the complaints we’ve heard is that such past prior restraint cases do not apply here since “copyright infringement is illegal.” But, both defamation and child pornography also break the law. The point is that in all of these cases, there are existing laws on the books to deal with that specific content, which can be handled with a scalpel. Adding an additional layer that takes down an entire publication is where it stretches into clear censorship.
 
-- Mike Masnick
+> Mike Masnick
 
 * The irony that some of the biggest proponents of bills like SOPA, Fox and Universal Studios, only exist because there founders were able to escape the reach of Edison's east coast lawyers in California. Unfortunately in our global economy there is no California for today's innovators.
 
 > When movies were invented, Thomas Edison, who held key film-related pat- ents, claimed the right to authorize the production of films, tightly controlling how many movies could be made each year and what subjects these movies could address. The filmmakers of the day hated this, and they flew west to California to escape the long arm of Edison’s legal enforcers in New Jersey. William Fox, Adolphe Zukor, and Carl Laemmle, of Fox Studios, Famous Players, and Universal, respectively, founded the great early studios because they believed that their right to expression trumped Edison’s proprietary rights.
 
-- Cory Doctorow
+> Cory Doctorow
 
 ### The Bad
 
