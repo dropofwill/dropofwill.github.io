@@ -2,6 +2,7 @@
 title: Quiz 2
 date: 2014-12-04 23:38 UTC
 tags: HFOSS, Quiz
+summary: "Another HFOSS Quiz, this time about Pedagogy and the XO's"
 ---
 
 ## Quiz 2
