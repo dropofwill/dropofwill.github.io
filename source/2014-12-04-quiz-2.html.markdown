@@ -1,0 +1,66 @@
+---
+title: Quiz 2
+date: 2014-12-04 23:38 UTC
+tags: HFOSS, Quiz
+---
+
+## Quiz 2
+
+### 0) Expand the Following acronyms:
+
+**a) FOSS:** Free and Open Source Software
+
+**b) OLPC:** One Laptop Per Child
+
+**c) tl;dr:** Too Long; Didn't Read
+
+**g) LGTM:** Looks Good To Me
+
+**h) RTFM:** Read the Fucking Manual
+
+**i) PEBKAC:** Problem Exists Between Chair and Keyboard, or alternately PICNIC, Problem In Chair Not In Computer.
+
+**f) LOL:** List of Links
+
+
+### 1) Define the following instructional theories:
+
+**a) Didactic:** A.K.A. as the lecture method, the teacher is treated as if they have absolute knowledge of the subject and project it onto their students.
+
+**b) Dialectic:** A.K.A. as the Socratic method, broadly about questions for rhetoric, in the context of teaching it means the role of teacher is more an organizer of class. Their goal is to spark interest in the topic by asking the students to figure out the answers to questions and in the process the teacher might just learn something themselves.
+
+**c) Constructivist:** A.K.A. tactile or hands on learning, where the goal of teacher is to have the students build knowledge by reflecting on what they personally 'construct' or build. This is probably the method that most reflects my major's, New Media Interactive Development, for better or worse.
+
+**g) Multiple Intelligence:** Is really more of a theory of cognitive development, but that has obvious applications in the education sphere. Basically challenges the notion that every child develops knowledge in the same way, that rather there are at least Verbal, Logical, Musical, Kinesthetic, Spatial knowledge and all sorts of combinations of those in a single child. And what follows from that is we need to adapt our education practices to fit the child being taught.
+
+### 2) Describe the role of the instructor in each theory:
+
+**a) Didactic:** Expert, responsible only to impart knowledge on students.
+
+**b) Dialectic:** Questioner, responsible for asking questions and leading discussion towards a learning goal.
+
+**c) Constructivist:** Facilitator, responsible for providing an framework where students can constantly build on what they already learned and crucially reflect on it to construct a better mental model (IGM falls short here at times).
+
+**g) Multiple Intelligence:** Tuner, responsible for making sure the classroom doesn't skew towards one sort of intelligence, customizing the learning experience to each student's learning style.
+
+### 3) What are the three key aspects of the lesson plan?:
+
+**1) Objective**
+
+**2) Methods**
+
+**3) Evaluation**
+
+### 4) How does Sugar integrate and implement constructivist learning theory?:
+
+For one it makes it so each child has their own hardware to hack on and I think this sense of ownership really promotes the constructivist idea that students should learn by building on their past work, because that work isn't going anywhere, even after school goes out of session.
+
+Building off of that idea, I think it also takes the focus away from lecturing and projecting knowledge in a classroom and more on providing a framework to guide students towards learning on their own, which I think is key.
+
+### Bonus: Where can new Sugar users and contributors go to find out more information, ask questions, and get involved?
+
+[The Wiki would probably be a good place to start](http://wiki.sugarlabs.org/go/Welcome_to_the_Sugar_Labs_wiki)
+
+Also the [home page](https://www.sugarlabs.org/index.php) has info links for [leaners](https://www.sugarlabs.org/index.php?template=page&page=learners), [parents](https://www.sugarlabs.org/index.php?template=page&page=parents), [teachers](https://www.sugarlabs.org/index.php?template=page&page=teachers), and [contributors](https://www.sugarlabs.org/index.php?template=page&page=contributors).
+
+[And here's the Github if you want to get your hands dirty with some Python](https://github.com/sugarlabs)
