@@ -1,7 +1,7 @@
 ---
 title: Roc.py, last meetup of the semester
 date: 2014-12-10 05:55 UTC
-tags: "Roc.py", HFOSS
+tags: Roc.py, HFOSS
 summary: "Last report from Roc.py for the semester"
 ---
 
