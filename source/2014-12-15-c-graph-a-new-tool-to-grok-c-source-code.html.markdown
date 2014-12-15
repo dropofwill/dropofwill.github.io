@@ -1,5 +1,5 @@
 ---
-title: C-Graph: A new tool to grok C-source code
+title: "C-Graph: A new tool to grok C-source code"
 date: 2014-12-15 01:43 UTC
 tags: C, JavaScript, Data Viz
 summary: "Source code is often the most up to date documentation available, but while code is written in a linear fashion, the execution is a network of calls that often jump across files. Known as a function call graph, this data can help programmers quickly grasp the structure of a program. How can  we use visualization to make the process of grokking source code easier?  "
