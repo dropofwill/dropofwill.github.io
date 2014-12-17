@@ -2,7 +2,7 @@
 title: Review of Pitch Interactive's Out of Sight, Out of Mind
 date: 2014-12-17 01:41 UTC
 tags: Data Viz, Review
-summary: ""
+summary: "This interactive web site shows each drone strike in Pakistan from 2004 to 2013. It allows the user to examine the data from the perspective attacks or victims, with a nice transition between the two views. There is a lot of data used here and some of it is represented in multiple ways."
 ---
 
 ## Review of Pitch Interactive's Out of Sight, Out of Mind
