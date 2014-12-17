@@ -1,5 +1,5 @@
 ---
-title: Geocoding My Lastfm Data
+title: "Geocoding my Lastfm Data"
 date: 2014-12-17 01:15 UTC
 tags: D3, JavaScript, DataViz
 summmary: "One question that often comes to my mind is how does geographical location (and the culture that comes with it) influence the band’s music and therefore my taste as well. So that’s why I decided to use this data to create a cartogram of my listening data."
