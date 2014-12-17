@@ -2,7 +2,7 @@
 title: Review of 4 Data Visualizations, 2 Good & 2 Bad
 date: 2014-12-17 01:45 UTC
 tags: Data Viz, Review
-summary: ""
+summary: "Just a review of a few data vizualizations"
 ---
 
 ## Review of 4 Data Visualizations, 2 Good & 2 Bad
