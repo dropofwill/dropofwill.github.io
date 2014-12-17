@@ -5,7 +5,7 @@ tags: D3, JavaScript, DataViz
 summary: "One question that often comes to my mind is how does geographical location (and the culture that comes with it) influence the band’s music and therefore my taste as well. So that’s why I decided to use this data to create a cartogram of my listening data."
 ---
 
-## Geocoding My Last Data
+## Geocoding My Last.fm Data
 
 [If you don't want to read this run down check the code out here on Github.](https://github.com/dropofwill/d3-lastfm-geo-viz)
 
