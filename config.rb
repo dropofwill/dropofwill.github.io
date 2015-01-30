@@ -2,7 +2,7 @@
 # Blog settings
 ###
 
-# Time.zone = "UTC"
+Time.zone = "UTC"
 
 activate :blog do |blog|
   # This will add a prefix to all links, template references and source paths
@@ -31,6 +31,7 @@ end
 
 page "/feed.xml", layout: false
 page "/bizleg_feed.xml", layout: false
+page "/linux_dev_feed.xml", layout: false
 
 ###
 # Compass
