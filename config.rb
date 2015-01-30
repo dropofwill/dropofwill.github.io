@@ -30,6 +30,7 @@ activate :blog do |blog|
 end
 
 page "/feed.xml", layout: false
+page "/bizleg_feed.xml", layout: false
 
 ###
 # Compass
