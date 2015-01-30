@@ -2,13 +2,13 @@
 title: First Flight
 date: 2014-09-02 19:24 UTC
 tags: HFOSS, FOSS
-summary: For Humanitarian Free/Open Source Software our first assignment (First Flight) was a sort of starter guide to the tools of Open Source culture. Some of it I was already familiar with, but some was new. This blog post outlines my experience setting everything up. 
- 
+summary: "For Humanitarian Free/Open Source Software our first assignment (First Flight) was a sort of starter guide to the tools of Open Source culture. Some of it I was already familiar with, but some was new. This blog post outlines my experience setting everything up."
+
 ---
 
 ##First Flight
 
-For Humanitarian Free/Open Source Software our first assignment ([First Flight](http://hfoss-fossrit.rhcloud.com/hw/firstflight)) was a sort of starter guide to the tools of Open Source culture. Some of it I was already familiar with, but some was new. This blog post outlines my experience setting everything up. 
+For Humanitarian Free/Open Source Software our first assignment ([First Flight](http://hfoss-fossrit.rhcloud.com/hw/firstflight)) was a sort of starter guide to the tools of Open Source culture. Some of it I was already familiar with, but some was new. This blog post outlines my experience setting everything up.
 
 ###What's Ahead:
 - IRC
