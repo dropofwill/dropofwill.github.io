@@ -72,7 +72,7 @@ a.links:hover { border-bottom: 1px solid #30323B; }
 /* DEFAULT MOBILE STYLE */
 body{width: 92%; margin: 0 auto; background : #E9EFFF ;} /* Center page without wrapper */
 #doc { min-height: 100%; }
-#content{ overflow : auto ; padding-bottom : 14em ;}
+#content{ overflow : auto ;}
 
 /* column grid */
 .g1,.g2,.g3{display:block; position: relative; margin-left: 1%; margin-right: 1%}
@@ -85,9 +85,9 @@ header a:hover {text-decoration : none ;}
 
 header h2 {font-size : 1em ; font-weight : 300 ; margin-top : -1.25em; margin-bottom : 1.25em ; color : #30323B;	 }
 
-aside { margin-left : 2%;}
+aside { margin-left : 2%; margin-bottom: 3em;}
 aside h5 { font-size: 0.875em; margin-bottom :0.5em; }
-aside p { font-size: 0.875em; line-height: 1.7142857142857142857142857142857em; margin-bottom: 2.5em ; }
+aside p { font-size: 0.875em; line-height: 1.7142857142857142857142857142857em; }
 aside > p > span  {color : #9097AD;}
 
 footer {position : relative  ; margin-top: -14em; margin-left : 1%; height: 14em;	padding-bottom : 0em ;clear:both; }
@@ -142,7 +142,7 @@ Change widths as necessary
 	
 	aside { margin-left : 2%;}
 	aside h5 { font-size: 1.3125em; line-height: 1.1428571428571428571428571428571em; }
-	aside p { font-size: 1em; line-height: 1.5em; margin-bottom: 3em }
+	aside p { font-size: 1em; line-height: 1.5em; }
 	
 	.g1,.g2,.g3 {display:inline; float: left}
 	
@@ -218,8 +218,8 @@ Change widths as necessary
 .blueberry .pager li a,
 .blueberry .pager li a span {
 	display: block;
-	height: 4px;
-	width: 4px;
+	height:8px;
+	width: 8px;
 }
 .blueberry .pager li a {
 	padding:0px 12px;
@@ -231,13 +231,26 @@ Change widths as necessary
 	overflow: hidden;
 	background: #c0c0c0;
 	text-indent: -9999px;
--webkit-border-radius: 2px;
-   -moz-border-radius: 2px;
-	border-radius: 2px;
+-webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+	border-radius: 6px;
 }
 .blueberry .pager li.active a span { background: #404040; }
 
 
+#content, footer {
+	max-width: 970px;
+	margin: 0 auto;
+}
+
+
+.special .slides li img {
+	display: block;
+	margin-left : 2%;
+	width: 96%;
+	max-width: none;
+	padding-bottom: 2em; 
+}
 
 /* PRINT */
 @media print {
