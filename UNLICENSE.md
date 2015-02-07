@@ -1,3 +1,5 @@
+All code (.html, .js, .css, etc.) is released under the following terms.
+
 CC0 1.0 Universal
 
 Statement of Purpose
