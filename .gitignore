@@ -1,2 +1,3 @@
 /images
-*.DS_store
+.DS_store
+.dropbox**
