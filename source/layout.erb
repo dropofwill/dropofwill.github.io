@@ -35,7 +35,7 @@
 				</ol>
 
 				<h2>Tags</h2>
-				<ol>
+				<ol class="columize">
 					<% blog.tags.each do |tag, articles| %>
 						<li><%= link_to "#{tag} (#{articles.size})", tag_path(tag) %></li>
 					<% end %>
