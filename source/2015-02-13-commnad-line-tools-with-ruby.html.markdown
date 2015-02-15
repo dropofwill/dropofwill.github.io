@@ -2,13 +2,13 @@
 title: Writing Command Line Tools with Ruby
 date: 2015-02-13 17:16 UTC
 tags: LinuxDev, Ruby
-summary: "I've written a lot of Ruby code over the years from web applications, to rack frameworks, to rake tasks, even packaged a few up as gems, but one thing I've never done is write a command line tool directly in ruby. This post is just sums up my initial foray into this area."
+summary: "I've written a lot of Ruby code over the years from web applications, to rack frameworks, to rake tasks, even packaged a few up as gems, but one thing I've never done is write a command line tool directly in ruby. This post just sums up my initial foray into making Ruby cli tools, as usual with Ruby it's not nearly as hard as it sounds."
 
 ---
 
 # Writing Command Line Tools with Ruby
 
-I've written a lot of Ruby code over the years from web applications, to rack frameworks, to rake tasks, even packaged a few up as gems, but one thing I've never done is write a command line tool directly in ruby. This post is just sums up my initial foray into this area.
+I've written a lot of Ruby code over the years from web applications, to rack frameworks, to rake tasks, even packaged a few up as gems, but one thing I've never done is write a command line tool directly in ruby. This post just sums up my initial foray into making Ruby cli tools, as usual with Ruby it's not nearly as hard as it sounds.
 
 ## The Basics
 
