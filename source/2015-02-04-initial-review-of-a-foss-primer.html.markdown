@@ -1,5 +1,5 @@
 ---
-title: Initial Review of a FOSS Primer
+title: "Initial Review of a FOSS Primer"
 date: 2015-02-04 01:25 UTC
 tags: BizLeg, Review, Legal, License
 summary: "This section of the book is focused on copyrights and licensing issues facing FOSS projects. It starts at a high level explaining why a license is necessary and then works its way down to the details of choosing the correct license, dealing with copyright in teams and organizations, and finally how to deal with copyright violations from a FOSS perspective."
@@ -10,7 +10,7 @@ summary: "This section of the book is focused on copyrights and licensing issues
 
 This section of the book is focused on copyrights and licensing issues facing FOSS projects. It starts at a high level explaining why a license is necessary and then works its way down to the details of choosing the correct license, dealing with copyright in teams and organizations, and finally how to deal with copyright violations from a FOSS perspective.
 
-> **Who:**, 
+> **Who:**
 >
 > * [Richard Fontana](http://en.wikipedia.org/wiki/Richard_Fontana) (lawyer, worked on GPLv3, LGPLv3, AGPL, director of OSI),
 >
@@ -60,9 +60,10 @@ This section of the book is focused on copyrights and licensing issues facing FO
 
 * Copyright expires after X-years. Doesn't that mean that copyleft licenses also expire after that amount of years as well? Why then is it called a "*forever* free" license?
 
-* A footnote in the section on the AGPL mentions that client side code (via JavaScript, CSS, and HTML) is distribution of software "in the strictest sense". As the creation of frontend code becomes more and more complex the result sent to the end user begins to look more and more like binaries, complete with a build or compilation step (via preprocessors, templating systems, dependency managers, minfiers, and the like). What this means is the code sent to the browser is much less usable than the source the developer used to make, while not as difficult as reverse engineering a binary, figuring out a complex program with 2 letter variables and function inlining is no easy task. So I guess my question is what counts as "source code" when it comes to frontend code under the GPL? 
+* A footnote in the section on the AGPL mentions that client side code (via JavaScript, CSS, and HTML) is distribution of software "in the strictest sense". As the creation of frontend code becomes more and more complex the result sent to the end user begins to look more and more like binaries, complete with a build or compilation step (via preprocessors, templating systems, dependency managers, minfiers, and the like). What this means is the code sent to the browser is much less usable than the source the developer used to make, while not as difficult as reverse engineering a binary, figuring out a complex program with 2 letter variables and function inlining is no easy task. So I guess my question is what counts as "source code" when it comes to frontend code under the GPL?
 
-* The OSI and FSF disagree on what are valid open source licenses, I'm thinking specifically about the Creative Commons 0 here (which generated a lot of discussion on the OSI mailing list, here, here, and here, before it was eventually rejected). Why should I trust one source over the other in matters of such disagreement? 
+* The OSI and FSF disagree on what are valid open source licenses, I'm thinking specifically about the Creative Commons 0 here (which generated a lot of discussion on the OSI mailing list, here, here, and here, before it was eventually rejected). Why should I trust one source over the other in matters of such disagreement?
+
 * What rights do you have in an employee/employer relationship? Can they really own everything you create? Are there ways to circumvent this, like say anonymous contributions?
 
 

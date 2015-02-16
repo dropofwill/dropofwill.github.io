@@ -1,5 +1,5 @@
 ---
-title: Review of Patent Defense for FOSS Developers
+title: "Review of Patent Defense for FOSS Developers"
 date: 2015-02-15 04:47 UTC
 tags: Bizleg, Patents
 summary: "This is a review of Chapter 4 of the *SFLC Legal Primer*, *Patent Defense for FOSS Developers*, inside it describes the anatomy of a patent, how to deal with claims brought against you, and why you, as a FOSS developer, should not bother with patenting your software, even as a protective measure."
