@@ -2,7 +2,7 @@
 title: "Taskwarrior timesheet plugin plan"
 date: 2015-02-16 19:36 UTC
 tags: Ruby, LinuxDev
-summary: ""
+summary: "This is a plan for a project that will act as a plugin for the application Taskwarrior that allows the users to use `task` to keep track of their time involved with tasks. I chose task_time as the name because the original program is run with the `task` command and in Ruby underscores are used to denote spaces (dashes imply some sort of class hierarchy)."
 
 ---
 
