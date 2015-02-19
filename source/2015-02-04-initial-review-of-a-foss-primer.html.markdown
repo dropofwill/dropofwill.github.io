@@ -1,7 +1,7 @@
 ---
 title: "Initial Review of a FOSS Primer"
 date: 2015-02-04 01:25 UTC
-tags: BizLeg, Review, Legal, License
+tags: BizLeg, Review, Legal, Licenses
 summary: "This section of the book is focused on copyrights and licensing issues facing FOSS projects. It starts at a high level explaining why a license is necessary and then works its way down to the details of choosing the correct license, dealing with copyright in teams and organizations, and finally how to deal with copyright violations from a FOSS perspective."
 
 ---
