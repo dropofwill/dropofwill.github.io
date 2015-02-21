@@ -26,8 +26,6 @@ A high level overview of the patent policies of several key players in the techn
 
 The Red Hat focus is explicitly to protect all open source efforts, not just their own patents, they will help out smaller downstream projects that could not afford what patent or patent battles in the same way a large corporation like Red Hat can.
 
-### Bad
-
 
 
 ## IBM Statement of Non-Assertion of Named Patents Against OSS
