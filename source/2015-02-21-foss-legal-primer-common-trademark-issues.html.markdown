@@ -11,7 +11,6 @@ summary: "Common Trademark Issues gives an overview of how trademark law in the 
 Common Trademark Issues gives an overview of how trademark law in the US works and what that means to you as a FOSS developer. It explains the registration process, how you can lose your registration, and how to handle licensing agreements and enforcement.
 
 
-
 > **Who:**,
 >
 > * [Richard Fontana](http://en.wikipedia.org/wiki/Richard_Fontana) (lawyer, worked on GPLv3, LGPLv3, AGPL, director of OSI),
@@ -70,6 +69,6 @@ Perhaps you can design the original name in such a way that it is awkward to use
 
 Trademarks seem to me the least evil of all IP rights, but also the least important to worry about as an open source project. These issues will really only effect you if your project reaches a certain size and to be honest on the internet we have better ways for consumers to find out what is legitimate: sha keys and links.
 
-Interesting read, learned a lot about TM, don't really see the point of them for anything I'll be working on in the future, but good to know about.
+Interesting read, learned a lot about TM, don't really see the point of them for anything I'll be working on in the future, but good to know about. As always in this text I wish there were more motivating examples, but I understand why they might consider that out of scope.
 
-7/10
+6/10
