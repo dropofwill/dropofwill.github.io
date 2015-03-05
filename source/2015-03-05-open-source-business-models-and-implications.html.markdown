@@ -8,7 +8,6 @@ summary: ""
 
 # Open Source Business Models and Implications
 
-<insert gist>
 
 > **Who:** The Open Source Initiative and the Free Software Foundation
 >
