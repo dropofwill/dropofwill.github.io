@@ -2,7 +2,7 @@
 title: "Review of Common FOSS Organizational Issues"
 date: 2015-03-03 02:40 UTC
 tags: BizLeg, FOSS
-summary: "This chapter gives an overview of ways that a FOSS organization can limit their individual liability, primarily through various means of incorporation. It serves as a guide to the various options available and clairifies some general (but not case specific) requirements to maintain a nonprofit status."
+summary: "This chapter gives an overview of ways that a FOSS organization can limit their individual liability, primarily through various means of incorporation. It serves as a guide to the various options available and clarifies some general (but not case specific) requirements to maintain a nonprofit status."
 
 ---
 

@@ -2,13 +2,13 @@
 title: "Open Source Business Models and Implications"
 date: 2015-03-05 04:02 UTC
 tags: BizLeg, Business
-summary: "The GPL doesn't actually care what enterprise companies do with the code internally, even if they make changes, distribution only counts if it happens outside of their immediate company. There are four major business models built around open source software: Support Sellers (e.g. "Give away the recipe, open a restaurant"), Loss Leader ("Give it away to speed up or help out your prop project"), Widget Frosting ("Sell the hardware, give away the software"), and Accesorizing (Sell books, t-shirts, penguin dolls, etc.)."
+summary: "The GPL doesn't actually care what enterprise companies do with the code internally, even if they make changes, distribution only counts if it happens outside of their immediate company. There are four major business models built around open source software: Support Sellers (e.g. give away the recipe, open a restaurant), Loss Leader (e.g. give it away to speed up or help out your prop project), Widget Frosting (e.g. sell the hardware, give away the software), and Accesorizing (e.g. sell books, t-shirts, penguin dolls, etc.)."
 
 ---
 
 # Open Source Business Models and Implications
 
-The GPL doesn't actually care what enterprise companies do with the code internally, even if they make changes, distribution only counts if it happens outside of their immediate company. There are four major business models built around open source software: Support Sellers (e.g. "Give away the recipe, open a restaurant"), Loss Leader ("Give it away to speed up or help out your prop project"), Widget Frosting ("Sell the hardware, give away the software"), and Accesorizing (Sell books, t-shirts, penguin dolls, etc.).
+The GPL doesn't actually care what enterprise companies do with the code internally, even if they make changes, distribution only counts if it happens outside of their immediate company. There are four major business models built around open source software: Support Sellers (e.g. give away the recipe, open a restaurant), Loss Leader (e.g. give it away to speed up or help out your prop project), Widget Frosting (e.g. sell the hardware, give away the software), and Accesorizing (e.g. sell books, t-shirts, penguin dolls, etc.).
 
 > **Who:** The Open Source Initiative and the Free Software Foundation
 >
