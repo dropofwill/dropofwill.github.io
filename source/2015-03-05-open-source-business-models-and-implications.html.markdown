@@ -10,7 +10,7 @@ summary: ""
 
 <insert gist>
 
-> **Who:**, The Open Source Initiative and the Free Software Foundation
+> **Who:** The Open Source Initiative and the Free Software Foundation
 >
 > **What:** Chapter 12, Section 1 of the book *Copyleft and the GNU General Public License: A Comprehensive Tutorial and Guide* and an article on the OSI's website titled *Open Source Case for Business*.
 >
