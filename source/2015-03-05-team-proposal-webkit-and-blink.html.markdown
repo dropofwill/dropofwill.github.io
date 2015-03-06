@@ -31,11 +31,31 @@ WebKit (and its recent fork Blink) is the open source rendering engine for a num
 
 ## Describe each team member's role?
 
-* snapschott:
+Will divvy this stuff to do equally:
 
-* kocsen:
+* Organizational details for each enterprise
 
-* dropofwill:
+  * Google
+
+  * Apple
+
+  * Adobe
+
+  * (probably Opera)
+
+  * (maybe KDE?)
+
+* WebKit communication channels
+
+* Blink communication channels
+
+* WebKit community architecture
+
+* Blink community architecture
+
+* WebKit technology/product overview
+
+* Blink technology/product overview
 
 ## Organization/Project Source Code Repository URL?
 
