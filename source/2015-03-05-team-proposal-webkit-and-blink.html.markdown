@@ -10,11 +10,11 @@ summary: "Our teams proposal for profiling the WebKit project and its relationsh
 
 ## List your other team members below
 
-* Andrew Schott - afs7827@rit.edu - snapschott
+* Andrew Schott - snapschott
 
-* Kocsen Chung - kocsenc@gmaill.com - kocsen
+* Kocsen Chung - kocsen
 
-* Will Paul - whp3652@rit.edu - dropofwill
+* Will Paul - dropofwill
 
 
 ## Which Entity did your team choose to profile?
