@@ -1,4 +1,4 @@
-# HFOSS-Blog
+# dropofwill-blog
 
 My blog, originally created for the HFOSS class I took in 2014, it has since expanded to include posts from 3 other classes and counting as well as other development related posts that I have on my mind. Eventually the content will be merged with dropofwill/dropofwill.github.io when I convert that into a middleman site (whenever I have time for that).
 
