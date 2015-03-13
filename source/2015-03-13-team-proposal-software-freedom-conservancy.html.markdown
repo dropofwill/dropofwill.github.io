@@ -30,8 +30,11 @@ Google/Apple/Opera/Adobe and WebKit/Blink
 Stuff to do:
 
 * Organizational details - dropofwill
+
 * communication channels - kocsen
+
 * community architecture -  kocsen
+
 * service overview - snapschott
 
 ## Organization/Project Source Code Repository URL?
