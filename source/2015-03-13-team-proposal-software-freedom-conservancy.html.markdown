@@ -19,7 +19,7 @@ summary: "Our teams proposal for profiling the Software Freedom Conservancy and 
 
 ## Which Entity did your team choose to profile?
 
-Google/Apple/Opera/Adobe and WebKit/Blink
+The Software Freedom Conservancy
 
 ## Description of the Organization?
 
