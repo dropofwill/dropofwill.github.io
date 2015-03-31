@@ -2,7 +2,7 @@
 title: "Review of: the Quantifying the Value of Open Source Hardware Development"
 date: 2015-03-31 03:45 UTC
 tags: BizLeg, Review, Econ
-summary: ""
+summary: "He presents three different equations to evaluate the value of an open source hardware project and several ways to extrapolate into long term predictions. He then shows how to use these as a case study on open hardware, a syringe pump. In the end he predicted the value of the pump to be between 240k to 800,000k"
 
 ---
 
