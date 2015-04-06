@@ -1,8 +1,8 @@
 ---
-title: Team Proposal for Coinbase Profile
-date: 2015-03-31 18:27 UTC
+title: Team proposal for gratipay profile
+date: 2015-04-06 18:49 UTC
 tags: BizLeg, TeamProp
-summary: "Our teams proposal for profiling Coinbase and its relationship with its Open Source projects."
+summary: "Our teams proposal for profiling Gratipay and its relationship with Open Source."
 
 ---
 
@@ -19,13 +19,11 @@ summary: "Our teams proposal for profiling Coinbase and its relationship with it
 
 ## Which Entity did your team choose to profile?
 
-[Coinbase](https://www.coinbase.com/), the bitcoin wallet/marketplace provider.
+[Gratipay](https://gratipay.com), the "public domain" company for sustainable crowd-funding.
 
 ## Description of the Organization?
 
-> Coinbase is the world’s most popular bitcoin wallet. We make it easy to securely buy, use, and accept bitcoin currency.
-
-Basically they are a startup to make it easier start using bitcoin.
+Gratipay is a crowd-funding platform that focuses on supporting projects long-term through small, recurring payments with no-strings attached.
 
 ## Describe each team member's role?
 
@@ -33,15 +31,15 @@ Stuff to do:
 
 * Organizational details - dropofwill
 
-* communication channels - kocsen
+* Communication channels - kocsen
 
-* community architecture -  kocsen
+* Community architecture -  kocsen
 
-* service overview - snapschott
+* Service overview - snapschott
 
 ## Organization/Project Source Code Repository URL?
 
-No source code, that we are aware of at the moment.
+[Here's their Github](https://github.com/gratipay), all public domain.
 
 ## What do you anticipate the easy parts will be?
 
@@ -49,7 +47,7 @@ No source code, that we are aware of at the moment.
 
 ## What do you anticipate the hard parts will be?
 
-* Finding information about it, it's not a small-ish, closed organization.
+* Finding the information we want about it, since it's a small-ish organization. That said the company is about as open as it gets, so if the info exists we should be able to find it.
 
 ## How will you overcome both?
 
