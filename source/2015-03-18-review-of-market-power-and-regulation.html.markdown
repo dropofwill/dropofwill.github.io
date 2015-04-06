@@ -1,7 +1,7 @@
 ---
 title: "Review of: Market power and regulation"
 date: 2015-03-18 03:42 UTC
-tags: Bizleg, Review, Econ
+tags: BizLeg, Review, Econ
 summary: "Regulation of public services produced by monopolies or oligopolies in a way that balances production, innovation, and performance is a really, really hard problem. Jean Tirole has spent most of his academic career studying the ways these power relationships interact generally and then exploring specific industries to give actual advice."
 
 ---
