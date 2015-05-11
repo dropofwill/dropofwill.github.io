@@ -1,7 +1,7 @@
 ---
 title: "Thoughts on some GPL Compliance Case Studies: Bortez GCC Modifications"
 date: 2015-02-19 02:24 UTC
-tags: BizLeg, License
+tags: BizLeg, Licenses
 summary: "One of my main problems with our first reading out of the Comprehensive GPL Guide was that the first section never motivated itself with some examples. Luckily in the last section (starting at page 92) they go over some real world examples of enforcing the terms of the GPL and how to go about it (from the FSF's perspective). For this post I want to look at Chapter 22, which talks about the FSF's approach with the software company Bortez."
 
 ---
