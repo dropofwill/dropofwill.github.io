@@ -46,3 +46,5 @@ Definitely NDAs and employer negotiation. We really only brushed over this in th
 I use the MIT license for most of my Ruby projects. I prefer to use 'open' licenses for interpreted languages, because I don't feel like they the advantages of 'free' licenses are necessary when the source code is the executable, plus they are simpler and easier to mix with each other. I use the MIT specifically because of community convention, MIT is the default license for gems made using the `bundler` scaffolding tool and as such a huge percentage of the community uses them as well.
 
 ## If you would suggest a video to be watched as part of this course, what would it be?
+
+In Molly Sauter's guest lecture she mentioned how everyone should go and watch the HBO documentary *Hot Coffee*, which looks at how tort law reform has changed the American judicial system. While not explicitly dealing with software or free software, it deals with legal issues that have a real impact on free software cases and I think it could lead to some interesting discussion.
