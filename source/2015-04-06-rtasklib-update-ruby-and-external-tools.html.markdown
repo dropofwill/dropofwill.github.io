@@ -1,7 +1,7 @@
 ---
 title: "rtasklib update: Ruby and external tools"
 date: 2015-04-06 02:22 UTC
-tags: LinuxDev, Ruby, rtasklib
+tags: LinuxDev, BizLeg, Ruby, rtasklib
 summary: "It turns out that one of the reasons Ruby was popular before the advent of Rails was because it was so easy to integrate with 3rd party tools through subprocesses. In fact Ruby has at least 7 ways of executing processes either in the core or the standard libraries and many more user implemented varieties. Since rtasklib is at its core concerned with interacting with a subprocess having a solid understanding of the available options is important. Below I summarize the results of my research for several of Ruby's subprocess methods."
 
 ---

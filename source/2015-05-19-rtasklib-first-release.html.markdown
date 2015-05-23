@@ -1,7 +1,7 @@
 ---
 title: rtasklib first release
 date: 2015-05-19 14:31 UTC
-tags: Ruby, Rtasklib, LinuxDev, BizLeg
+tags: Ruby, rtasklib, LinuxDev, BizLeg
 summary: "So the semester has come to a close and I've made the first 'official' release of rtasklib. Install the gem from RubyGems.org (gem install rtasklib or install the RPM on your Fedora system if you prefer. I reached out to the TaskWarrior devs and they also are adding rtasklib to the list of available libraries on the TaskWarrior main website in the next few days, which is pretty cool."
 
 ---
