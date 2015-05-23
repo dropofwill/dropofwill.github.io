@@ -48,6 +48,8 @@ Bottom of the coaster:
 
 ![Bottom of the coaster](https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/bottom.JPG)
 
+![The coaster lit up](https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/lit_up.jpg)
+
 ## Videos
 
 <iframe src="https://player.vimeo.com/video/128517905" width="500" height="282" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/128517905">Shows selecting the spirit</a> from <a href="https://vimeo.com/user37593906">Will Paul</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
