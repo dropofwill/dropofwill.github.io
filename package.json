@@ -1,0 +1,36 @@
+{
+  "name": "dropofwill.github.io",
+  "version": "0.1.0",
+  "description": "Personal site for Will Paul",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dropofwill/dropofwill.github.io.git"
+  },
+  "keywords": [
+    "portfolio",
+    "metalsmith",
+    "gulp"
+  ],
+  "author": "Will Paul",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/dropofwill/dropofwill.github.io/issues"
+  },
+  "homepage": "https://github.com/dropofwill/dropofwill.github.io#readme",
+  "devDependencies": {
+    "babel": "^5.6.23",
+    "browserify": "^11.0.0",
+    "gulp": "^3.9.0",
+    "gulpsmith": "^0.5.5",
+    "harmonize": "^1.4.4",
+    "metalsmith": "^2.0.1",
+    "metalsmith-collections": "^0.7.0",
+    "metalsmith-feed": "0.0.6",
+    "metalsmith-paginate": "^0.3.0",
+    "metalsmith-permalinks": "^0.4.0"
+  }
+}
