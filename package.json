@@ -2,7 +2,7 @@
   "name": "dropofwill.github.io",
   "version": "0.1.0",
   "description": "Personal site for Will Paul",
-  "main": "gulpfile.js",
+  "main": "index.js",
   "scripts": {
     "test": "gulp test"
   },
@@ -25,12 +25,20 @@
     "babel": "^5.6.23",
     "browserify": "^11.0.0",
     "gulp": "^3.9.0",
+    "gulp-front-matter": "^1.2.3",
     "gulpsmith": "^0.5.5",
+    "handlebars": "^3.0.3",
     "harmonize": "^1.4.4",
+    "lodash": "^3.10.0",
     "metalsmith": "^2.0.1",
+    "metalsmith-branch": "0.0.4",
     "metalsmith-collections": "^0.7.0",
     "metalsmith-feed": "0.0.6",
+    "metalsmith-in-place": "^1.1.0",
+    "metalsmith-layouts": "^1.1.0",
+    "metalsmith-markdown": "^0.2.1",
     "metalsmith-paginate": "^0.3.0",
-    "metalsmith-permalinks": "^0.4.0"
+    "metalsmith-permalinks": "^0.4.0",
+    "metalsmith-relative": "^1.0.3"
   }
 }
