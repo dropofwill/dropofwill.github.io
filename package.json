@@ -46,5 +46,8 @@
     "metalsmith-serve": "0.0.3",
     "metalsmith-skip": "^0.0.2",
     "metalsmith-watch": "^1.0.1"
+  },
+  "dependencies": {
+    "typographic": "^2.9.3"
   }
 }
