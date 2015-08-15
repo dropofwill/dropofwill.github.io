@@ -1,4 +1,3 @@
-###
 # Blog settings
 ###
 
@@ -6,11 +5,11 @@ Time.zone = "UTC"
 
 activate :blog do |blog|
   # This will add a prefix to all links, template references and source paths
-  # blog.prefix = "blog"
+  # blog.prefix = "posts"
 
-  # blog.permalink = "{year}/{month}/{day}/{title}.html"
+  # blog.permalink = "{title}.html"
   # Matcher for blog source files
-  # blog.sources = "{year}-{month}-{day}-{title}.html"
+  blog.sources = "content/posts/{title}.html"
   # blog.taglink = "tags/{tag}.html"
 	blog.layout = "article"
   # blog.summary_separator = /(READMORE)/
@@ -18,10 +17,18 @@ activate :blog do |blog|
   # blog.year_link = "{year}.html"
   # blog.month_link = "{year}/{month}.html"
   # blog.day_link = "{year}/{month}/{day}.html"
-  # blog.default_extension = ".markdown"
+  blog.default_extension = ".md"
 
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
+
+  # blog.summary_generator = Proc.new do |rendered|
+  #   doc = Oga.parse_xml rendered
+  #   summary = doc.css('p').first
+  #   puts summary
+  #   puts doc.css('p')
+  #   return summary
+  # end
 
   # Enable pagination
 	blog.paginate = true
@@ -90,9 +97,7 @@ set :markdown, layout_engine: :slim,
                smartypants: true
 
 set :css_dir, 'stylesheets'
-
 set :js_dir, 'javascripts'
-
 set :images_dir, 'images'
 
 ###
@@ -103,16 +108,16 @@ set :disqus_short_name, 'dropofwill'
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
-	 activate :minify_css
+	activate :minify_css
 
   # Minify Javascript on build
-	 activate :minify_javascript
+	activate :minify_javascript
 
   # Enable cache buster
-	 activate :asset_hash
+	activate :asset_hash
 
   # Use relative URLs
-	 activate :relative_assets
+  activate :relative_assets
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"

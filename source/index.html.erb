@@ -14,11 +14,11 @@ per_page: 8
 
 <% page_articles.each_with_index do |article, i| %>
 	<article class="summary">
-			<h3 class="summary-title"><a href="<%= article.url %>"><%= article.data.title %></a></h3>
-			<div class="summary-body emphasis">
-				<p><%= article.data.summary %>&nbsp; <a class="summary-more" href="<%= article.url %>">Read more&#8230;</a></p>
-			</div>
-			</p>
+    <h3 class="summary-title"><a href="<%= article.url %>"><%= article.data.title %></a></h3>
+    <div class="summary-body emphasis">
+      <p><%= article.summary %>&nbsp; <a class="summary-more" href="<%= article.url %>">Read more&#8230;</a></p>
+    </div>
+    </p>
 	</article>
 <% end %>
 
