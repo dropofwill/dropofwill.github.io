@@ -9,6 +9,7 @@ gem "middleman-syntax"
 gem "kramdown"
 gem "nokogiri"
 #gem "middleman-livereload"
+gem "middleman-deploy"
 
 gem "rack-contrib"
 gem "puma"
