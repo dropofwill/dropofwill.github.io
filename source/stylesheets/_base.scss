@@ -1,0 +1,29 @@
+$serif: 'Lora', Times, serif;
+$sans-serif: 'Akzidenz-Grotesk', 'Helvetica Neue', 'Helvetica', 'sans-serif';
+$monospace: 'Source Code Pro', 'Consolas', "Andale Mono WT", 'Andale Mono',
+            'Lucida Console', 'DejaVu Sans Mono', monospace;
+
+$base-font-family: $sans-serif;
+$base-font-size: 18px;
+$base-font-weight: 400;
+$base-line-height: 1.7;
+
+$heading-font-family: $sans-serif;
+$heading-font-weight: 700;
+
+$fixed-font-family: $monospace;
+$fixed-font-size: 95%;
+$fixed-line-height: 1.5;
+
+$loud-color: #000;
+$quiet-color: rgba($loud-color, 0.5);
+$text-color: rgba($loud-color, 0.8);
+$heading-color: rgba($loud-color, 0.9);
+$link-color: #2ecc71;
+$link-hover-color: saturate($link-color, 20%);
+$link-visited-color: $link-color;
+$border-color: rgba($text-color, 0.1);
+
+$accent-color: #2ecc71;
+
+$masthead-height: 50px;

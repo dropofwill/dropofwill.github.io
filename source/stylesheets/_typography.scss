@@ -1,0 +1,220 @@
+%link {
+  color: $link-color;
+  text-decoration: underline;
+
+  &:visited {
+    color: $link-visited-color;
+  }
+  &:hover, &:visited:hover {
+    color: $link-hover-color;
+    text-decoration: none;
+  }
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+%h1, %h2, %h3, %h4, %h5, %h6 {
+  font-family: $heading-font-family;
+  font-weight: $heading-font-weight;
+  color: $heading-color;
+}
+
+h1, h2, .h1, .h2, %h1, %h2 { line-height: 0.6 * $base-line-height; }
+h3, h4, .h3, .h4, %h3, %h4 { line-height: 0.7 * $base-line-height; }
+h5, h6, .h5, .h6, %h5, %h6 { line-height: 0.8 * $base-line-height; }
+
+h1, .h1, %h1 { font-size: 400%; letter-spacing: -2px; }
+h2, .h2, %h2 { font-size: 250%; letter-spacing: -1px; }
+h3, .h3, %h3 { font-size: 200%; }
+h4, .h4, %h4 { font-size: 180%; }
+h5, .h5, %h5 { font-size: 130%; }
+h6, .h6, %h6 { font-size: 100%; }
+
+.fixed {
+  font-family: $fixed-font-family;
+  font-size: $fixed-font-size;
+  line-height: $fixed-line-height;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: 700;
+  color: $loud-color;
+}
+
+.fine-print {
+  font-size: 0.9 * $base-font-size;
+}
+
+.highlight {
+  @include syntax-highlight($text-color, $link-color);
+}
+
+.abbreviation {
+  border-bottom: 1px dotted rgba(mix(white, $text-color), 0.5);
+}
+
+.emphasis {
+  i, em {
+    @extend .italic;
+  }
+  b, strong {
+    @extend .bold;
+  }
+}
+
+.blockquote {
+  border-left: 3px solid $border-color;
+  color: $accent-color;
+  padding-left: 1.5rem;
+  @extend .italic;
+}
+
+.intro {
+  font-size: 1.25 * $base-font-size;
+}
+
+.anchor {
+  position: relative;
+  top: -($masthead-height + 30px);
+  display: block;
+  visibility: hidden;
+}
+
+a.top-link {
+  font-family: $sans-serif;
+  font-size: 70%;
+  text-transform: uppercase;
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
+
+.hero {
+  h1, .h1 {
+    @extend %h1;
+    margin: 1rem 0 3.5rem;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+}
+
+.typeset {
+  color: $text-color;
+
+  a {
+    @extend %link;
+  }
+
+  h1, .h1 {
+    @extend %h1;
+    margin: 3rem 0 2.75rem;
+  }
+  h2, .h2 {
+    @extend %h2;
+    margin: 2rem 0 1.5rem;
+  }
+  h3, .h3 {
+    @extend %h3;
+    margin: 2rem 0 1.5rem;
+  }
+  h4, .h4 {
+    @extend %h4;
+    margin: 2rem 0 1.5rem;
+  }
+  h5, .h5 {
+    @extend %h5;
+    margin: 2rem 0 1.5rem;
+  }
+  h6, .h6 {
+    @extend %h6;
+    margin: 2rem 0 1.5rem;
+  }
+
+  p, ul, ol, blockquote {
+    margin: 1.5rem 0;
+  }
+
+  ul {
+    list-style: disc;
+  }
+  ol {
+    list-style: decimal;
+  }
+  li {
+    margin-left: 2.25rem;
+    margin-bottom: 0.5rem
+  }
+  blockquote {
+    @extend .blockquote;
+  }
+
+  @extend .emphasis;
+
+  code, pre {
+    @extend .fixed;
+  }
+
+  abbr[title] {
+    @extend .abbreviation;
+  }
+
+  pre {
+    @include border-radius(1rem);
+    font-size: 80%;
+    line-height: 1.6;
+    margin: 2rem 0;
+    padding: 2.5rem;
+    background: #f0f2f4;
+    overflow: auto;
+  }
+
+  sup, sub {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+  }
+  sup {
+    top: -0.5rem;
+  }
+  sub {
+    bottom: -0.25rem;
+  }
+}
+
+.title {
+  @extend %h1;
+  margin: 1rem 0 0.25rem;
+  text-align: left;
+}
+
+.subtitle {
+  @extend %h5;
+  font-weight: 300;
+  margin: 0 0 1rem;
+  text-align: left;
+}
+
+.footnotes {
+  position: relative;
+  margin-top: 2rem;
+  padding-top: 0.5rem;
+
+  p, ul, ol {
+    font-size: 80%;
+  }
+
+  &:before {
+    position: absolute;
+    top: 0;
+    display: block;
+    width: 8rem;
+    content: "";
+    height: 0;
+    border-top: 1px solid $border-color;
+  }
+}

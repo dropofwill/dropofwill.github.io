@@ -7,6 +7,8 @@ tags: Ruby, Middleman, Blog
 
 This is the first in what will probably be a three part series on creating and deploying a [Middleman](https://github.com/middleman/middleman){:target="_blank"} site, specifically a blog deployed to a [Heroku](https://devcenter.heroku.com/start){:target="_blank"} instance.
 
+READMORE
+
 ### Where we're going in the next couple of posts:
 
 1. **[What's Middleman?](/2014/09/14/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/)**

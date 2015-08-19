@@ -2,9 +2,12 @@
 title: "Mouse Rat: Technical explanation"
 date: 2015-03-28 18:37 UTC
 tags: Physical Computing, Wearables, Arduino, Mouse Rat
-summary: "Technical explanation for a wearable gesture based mouse glove. It used the Arduino Flora, the wearable LSM9DSO accelerometer, and MPR121 capacitive touch breakout, all from Adafruit."
 
 ---
+
+Technical explanation for a wearable gesture based mouse glove. It used the Arduino Flora, the wearable LSM9DSO accelerometer, and MPR121 capacitive touch breakout, all from Adafruit.
+
+READMORE
 
 Source code available on Github: [dropofwill/mouse_rat](http://github.com/dropofwill/mouse_rat)
 

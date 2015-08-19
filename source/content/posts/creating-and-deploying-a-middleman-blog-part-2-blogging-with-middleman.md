@@ -7,6 +7,8 @@ tags: Ruby, Middleman, Blog
 
 [Last time](/2014/09/14/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/) I talked about static site generators in general (why you would use them) and a little bit about Middleman specifically (why you would use it in particular). Today I am going to talk about Middleman's blogging capabilities.
 
+READMORE
+
 ### Prepping your Middleman for Blogging
 
 Middleman doesn't ship with blogging capabilities, but this wasn't an oversight, it was by design. Trying to follow the Unix principle of [do one thing, and do it well](http://en.wikipedia.org/wiki/Unix_philosophy#Doug_McIlroy_on_Unix_programming){:target="_blank"}, the Middleman core contains only what is required to run any Middleman site. The blogging features our definitely out of that scope so they're placed in their own gem, maintained by the same people that work on the core.
@@ -21,7 +23,7 @@ And `bundle install` and you are all set to go.
 
 To activate it add this block to your config.rb:
 
-~~~
+~~~ruby
 activate :blog do |blog|
   # set options on blog
 end

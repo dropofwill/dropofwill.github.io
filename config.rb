@@ -7,17 +7,17 @@ activate :blog do |blog|
   # This will add a prefix to all links, template references and source paths
   # blog.prefix = "posts"
 
-  # blog.permalink = "{title}.html"
   # Matcher for blog source files
   blog.sources = "content/posts/{title}.html"
-  # blog.taglink = "tags/{tag}.html"
 	blog.layout = "article"
+  blog.summary_length = 300
+  blog.default_extension = ".md"
+  # blog.permalink = "{title}.html"
+  # blog.taglink = "tags/{tag}.html"
   # blog.summary_separator = /(READMORE)/
-  # blog.summary_length = 250
   # blog.year_link = "{year}.html"
   # blog.month_link = "{year}/{month}.html"
   # blog.day_link = "{year}/{month}/{day}.html"
-  blog.default_extension = ".md"
 
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
@@ -45,9 +45,9 @@ page "/linux_dev_feed.xml", layout: false
 ###
 
 # Change Compass configuration
-# compass_config do |config|
-#   config.output_style = :compact
-# end
+compass_config do |config|
+  config.output_style = :compact
+end
 
 ###
 # Page options, layouts, aliases and proxies
@@ -74,18 +74,8 @@ page "/linux_dev_feed.xml", layout: false
 # Helpers
 ###
 
-# Automatic image dimensions on image_tag helper
-# activate :automatic_image_sizes
-
-# Reload the browser automatically whenever files change
- #activate :livereload
-
-# Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
+helpers do
+end
 
 activate :directory_indexes
 

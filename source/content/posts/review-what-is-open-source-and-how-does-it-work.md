@@ -2,7 +2,6 @@
 title: "Review: What Is Open Source and How Does it Work?"
 date: 2014-09-07 19:42 UTC
 tags: HFOSS, Review
-summary: "Weber introduces the topic by talking about the success of Linux and asks why would people do hard work for free? A question that classical economics doesn't have an answer for. He thinks that the answer lies in the people and the process, not the particular problem or domain."
 
 ---
 
@@ -11,6 +10,8 @@ summary: "Weber introduces the topic by talking about the success of Linux and a
 >**What/Where:** [What is Open Source and How Does it Work?](http://hfoss-fossrit.rhcloud.com/static/books/Weber-SuccessofOpenSource-Chap3.pdf){:target="_blank"}, which is Chapter 3 from [The Success of Open Source](http://smile.amazon.com/Success-Open-Source-Steven-Weber/dp/0674018583/ref=smi_www_rcolv2_go_smi?_encoding=UTF8&*Version*=1&*entries*=0){:target="_blank"}
 >
 >**When:** Published: November 30th, 2005
+
+READMORE
 
 ### The Gist
 

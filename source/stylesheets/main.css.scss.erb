@@ -1,9 +1,16 @@
 <%= Rouge::Themes::Github.render(:scope => '.highlight') %>
 
-@import 'partials/base';
+@import 'base';
+@import "modules/all";
+@import "compass/css3";
+@import "compass/reset";
+@import "compass";
+@import 'typography';
 
 // Reset
 @include global-reset;
+
+$standard-border: solid black 10px;
 
 body {
   color: $text-color;
@@ -11,13 +18,14 @@ body {
   font-family: $base-font-family;
   font-weight: $base-font-weight;
   line-height: $base-line-height;
+
+  border: $standard-border;
+  padding: 2rem;
 }
 
-img {
-    max-width: 100%;
+*, *:before, *:after {
+  @include box-sizing(border-box);
 }
-
-*, *:before, *:after { @include box-sizing(border-box); }
 
 .columnize {
   -webkit-column-width: 200px;
@@ -25,13 +33,24 @@ img {
           column-width: 200px;
 }
 
-// Partials
-@import 'partials/typography';
-@import 'partials/grid';
-@import 'partials/lists';
-@import 'partials/figures';
-@import 'partials/layout';
-@import 'partials/headers';
-@import 'partials/heros';
-@import 'partials/summaries';
-@import 'partials/articles';
+hr {
+  border-top: $standard-border;
+}
+
+.article {
+  img {
+    max-width: 100%;
+  }
+
+  @extend %restrict-width;
+}
+
+.summary {
+  @extend %restrict-width;
+}
+
+%restrict-width {
+  p, blockquote, code, ul, ol, pre {
+    max-width: 50rem;
+  }
+}

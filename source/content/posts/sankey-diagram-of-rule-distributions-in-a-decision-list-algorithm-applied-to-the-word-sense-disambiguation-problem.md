@@ -2,72 +2,10 @@
 title: Sankey Diagram of Rule Distributions in a Decision List Algorithm Applied to the Word Sense Disambiguation Problem
 date: 2014-11-15 06:14 UTC
 tags: NLP, Semantics, Data Viz
-summary: "Crazy long title, I know, but it's not as complicated as it sounds. For my Natural Language Processing class we recently approached the problem of Word Sense Disambiguation from a Machine Learning perspective, using the simple, but effective, decision list algorithm. This is my attempt at visualizing the results."
 
 ---
 
-<style>
-
-.figure {
-  width: 33%;
-  min-width: 200px;
-  margin: 20px;
-  float: right;
-  padding: 1em !important;
-  white-space: pre-wrap;
-  white-space: -moz-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: -o-pre-wrap;
-  word-wrap: break-word;
-}
-
-text {
-  font-size: 11px;
-  pointer-events: none;
-}
-
-.group path {
-  stroke: #000;
-}
-
-path.chord {
-  stroke-width: 0;
-  fill-opacity: 1;
-}
-
-.chart {
-  margin: 5em 0;
-}
-
-.node rect {
-  cursor: move;
-  fill-opacity: 1;
-  shape-rendering: crispEdges;
-  stroke-opacity: 0;
-}
-
-.node text {
-  pointer-events: none;
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 0 1px #fff;
-  font-size: 14px;
-  font-family: "Merriweather", sans-serif;
-}
-
-.link {
-  stroke-opacity: 0.4;
-  fill-opacity: 0;
-}
-
-.link:hover {
-  stroke-opacity: 1;
-  fill-opacity: 0;
-}
-
-</style>
-
-## Sankey Diagram of a Decision List's Rule Distributions when Applied to the Word Sense Disambiguation Problem
-
-For my Natural Language Processing (NLP) class we recently approached the problem of Word Sense Disambiguation (WSD) from a Machine Learning (ML) perspective (we also looked at others, including lookup approaches like Lesk), using the simple, but quite effective, decision list algorithm.
+Crazy long title, I know, but it's not as complicated as it sounds. For my Natural Language Processing class we recently approached the problem of Word Sense Disambiguation from a Machine Learning perspective (we also looked at others, including lookup approaches like Lesk), using the simple, but effective, decision list algorithm. This is my attempt at visualizing the results.
 
 The WSD task is determining which ambiguous meaning of a word is intended, usually based on the context, e.g. <em>play </em>bass<em> guitar</em> versus <em>caught a largemouth </em>bass.
 
@@ -128,6 +66,64 @@ Another takeaway is how few rules we have for the sake\* case and also how low i
 My first attempt (incomplete version shown to the *right*) was the straight forward Reign-Gold tree diagram with labelled nodes. This admittedly shows the exact numbers immediately (without hover over), but it loses the high level visual cues of size and is not interpreted necessarily as a temporal flow like the Sankey approach.
 
 
+<style>
+
+.figure {
+  width: 33%;
+  min-width: 200px;
+  margin: 20px;
+  float: right;
+  padding: 1em !important;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+text {
+  font-size: 11px;
+  pointer-events: none;
+}
+
+.group path {
+  stroke: #000;
+}
+
+path.chord {
+  stroke-width: 0;
+  fill-opacity: 1;
+}
+
+.chart {
+  margin: 5em 0;
+}
+
+.node rect {
+  cursor: move;
+  fill-opacity: 1;
+  shape-rendering: crispEdges;
+  stroke-opacity: 0;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, 0 0 1px #fff;
+  font-size: 14px;
+  font-family: "Merriweather", sans-serif;
+}
+
+.link {
+  stroke-opacity: 0.4;
+  fill-opacity: 0;
+}
+
+.link:hover {
+  stroke-opacity: 1;
+  fill-opacity: 0;
+}
+
+</style>
 <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 <script src="http://d3js.org/colorbrewer.v1.min.js"></script>
 <!--The D3 plugin for Sankey diagrams-->
