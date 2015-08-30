@@ -49,10 +49,6 @@ h6, .h6, %h6 { font-size: 100%; }
   font-size: 0.9 * $base-font-size;
 }
 
-.highlight {
-  @include syntax-highlight($text-color, $link-color);
-}
-
 .abbreviation {
   border-bottom: 1px dotted rgba(mix(white, $text-color), 0.5);
 }
