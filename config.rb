@@ -1,3 +1,4 @@
+###
 # Blog settings
 ###
 
@@ -114,5 +115,5 @@ configure :build do
   activate :relative_assets
   set :relative_links, true
 
-  set :http_prefix, "/blog/"
+  # set :http_prefix, "/blog/"
 end
