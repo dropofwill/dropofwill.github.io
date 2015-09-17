@@ -114,6 +114,5 @@ configure :build do
   activate :relative_assets
   set :relative_links, true
 
-  # Or use a different image path
-  # set :http_prefix, "/Content/images/"
+  set :http_prefix, "/blog/"
 end
