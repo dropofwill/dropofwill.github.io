@@ -16,14 +16,17 @@
   <body>
 
     <header class="hero">
-      <h1><%= link_to "&lambda;will.paul", "/" %></h1>
+      <% link_to "/blog" do %>
+        <h1>
+          &lambda;will.paul
+        </h1>
+      <% end %>
       <hr>
     </header>
 
     <div class="typeset" role="main">
 
       <%= yield %>
-
       <hr>
 
       <aside>
