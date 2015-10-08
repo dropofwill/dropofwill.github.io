@@ -1,0 +1,10 @@
+<% wrap_layout 'layout' do %>
+  <article class="article">
+    <h1><%= current_page.data.title %></h1>
+		<%= yield %>
+
+    <div class="article-comments">
+			<%= partial 'disqus' %>
+    </div>
+  </article>
+<% end %>

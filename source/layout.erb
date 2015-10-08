@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will<%= ' - ' + current_article.title unless current_article.nil? %></title>
+
+    <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
+
+    <%= stylesheet_link_tag 'main' %>
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+
+    <header class="hero">
+      <% link_to "/blog" do %>
+        <h1>
+          &lambda;will.paul
+        </h1>
+      <% end %>
+      <hr>
+    </header>
+
+    <div class="typeset" role="main">
+
+      <%= yield %>
+      <hr>
+
+      <aside>
+        <h2>Recent Articles</h2>
+        <ol>
+          <% blog.articles[0...10].each do |article| %>
+            <li><%= link_to article.title, article %> <span><%= article.date.strftime('%b %e') %></span></li>
+          <% end %>
+        </ol>
+
+        <h2>Tags</h2>
+        <ol class="columnize">
+          <% blog.tags.each do |tag, articles| %>
+            <li><%= link_to "#{tag} (#{articles.size})", tag_path(tag) %></li>
+          <% end %>
+        </ol>
+
+        <h2>By Year</h2>
+        <ol>
+          <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
+            <li><%= link_to "#{year} (#{articles.size})", blog_year_path(year) %></li>
+          <% end %>
+        </ol>
+      </aside>
+    </div>
+  </body>
+</html>
