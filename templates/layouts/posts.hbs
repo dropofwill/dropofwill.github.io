@@ -1,0 +1,39 @@
+<h2>Rendering for real</h2>
+
+<ul>
+  {{#each collections.posts}}
+  <li>
+    <h3>{{this.title}}</h3>
+    <article>{{this.excerpt}}</article>
+    <a href="{{this.previous}}">Prev</a>
+    <a href="{{this.next}}">Next</a>
+  </li>
+  {{/each}}
+</ul>
+
+<!-- {{#each (limit collections.posts this.pagination.end this.pagination.start)}} -->
+<!-- <li class="post"> -->
+<!--   <h2 class="entry&#45;title"> -->
+<!--     <a href="{{ this.path }}" rel="bookmark">{{ this.title }}</a> -->
+<!--   </h2> -->
+<!--   <article class="entry&#45;summary"> -->
+<!--     {{{ this.excerpt }}} -->
+<!--   </article> -->
+<!--   <footer> -->
+<!--  -->
+<!--     <a href="{{ this.path }}" class="button">Read More</a> -->
+<!--   </footer> -->
+<!-- </li> -->
+<!-- {{/each}} -->
+
+<!-- {{#if this.pagination}} -->
+<!-- <nav class="pagination"> -->
+<!--   {{#if this.pagination.next}} -->
+<!--   <a href="{{this.pagination.next.path}}">&#38;lt; Prev</a> -->
+<!--   {{/if}} -->
+<!--  -->
+<!--   {{#if this.pagination.prev}} -->
+<!--   <a href="{{this.pagination.prev.path}}">Next &#38;gt;</a> -->
+<!--   {{/if}} -->
+<!-- </nav> -->
+<!-- {{/if}} -->

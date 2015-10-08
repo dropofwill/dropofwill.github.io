@@ -15,6 +15,15 @@ var _                 = require('lodash'),
     Metalsmith        = require('metalsmith')
     ;
 
+var tap = function(file_interceptor, metal_interceptor) {
+  return function(files, metalsmith, done) {
+    file_interceptor(files);
+    metal_interceptor(metalsmith);
+  };
+};
+
+var helpers = require('./templates/helpers');
+
 var forge = exports;
 
 var skip_config = {
@@ -41,23 +50,20 @@ var layouts_config = {
   'partials': {
     'header': '../partials/header',
     'footer': '../partials/footer'
-  }
+  },
+  'helpers': helpers()
 };
 
 var collections_config = {
-  'blogs': {
-    'pattern': 'src/content/blogs/*.md',
+  'posts': {
+    'pattern': 'content/posts/*.md',
     'sortBy': 'date',
-    'reverse': true
+    'reverse': true,
+    'limit': 5
   },
   'projects': {
-    'pattern': 'src/content/projects/*.md'
+    'pattern': 'content/projects/*.md'
   }
-};
-
-var pagination_config = {
-  'perPage': 10,
-  'path': 'blog/page'
 };
 
 forge.init = function() {
@@ -72,11 +78,17 @@ forge.finish = function(metal_instance) {
 
 forge.construct = function(metal_instance) {
   return metal_instance
+    .clean(true)
     .use(skip(skip_config))
-    // .use(collections(collections_config))
-    // .use(paginate(pagination_config))
-    // .use(markdown())
-    // .use(layouts(layouts_config))
+    .use(collections(collections_config))
+    .use(markdown())
+
+    .use(layouts(layouts_config))
+
+    // .use(tap(console.log,
+    //          function(obj) {
+    //            console.log(JSON.stringify(obj._metadata, null, 4));
+    //          }))
     ;
 };
 
