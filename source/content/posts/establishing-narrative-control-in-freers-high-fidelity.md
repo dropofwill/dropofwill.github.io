@@ -12,10 +12,6 @@ So as Rob's narcissism and poor treatment of Laura is introduced we, like Laura'
 
 -->
 
-# Establishing narrative control in Freer's High Fidelity
-
-Cinematography
-
 In the film *High Fidelity* (2000) director Stephen Freer takes on the challenging task of adapting a novel that is effectively a collection of inner-monologues and setting them into the visual reality of film. Thematically it covers a lot of ground as it progresses, but one theme that seems to underlie the whole narrative is control over your reality, more specifically the struggle to remain relevant as a lover and a critic in a world of women and musicians and women musicians. For this to hold our interest it needs to develop a close, empathetic relationship between us and the protagonist Rob, otherwise his rather narcissistic outlook on life would be too grating. At the same time from a thematic standpoint it was important to establish that Rob was at least in control of this narrative, if nothing else.
 
 Despite the fact that directors can exact complete control over a scene, the medium still proffers a sort of omniscient perspective of the world, i.e. pictures are viewed as objective by default. A common way to break this perspective is to introduce a diegetic narrator to voice over or lead us through scenes, showing that this visual is dependent on the narrator's own perception. A good example of this is Malick's *Badlands*, which moves through scenes with the guidance of the dreamy, drawl of its teenage protagonist. Freer uses this technique in *High Fidelity* to handle flashbacks as the protagonist recounts his top 5 worst breakups.
