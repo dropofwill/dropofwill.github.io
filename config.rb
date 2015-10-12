@@ -10,6 +10,7 @@ activate :blog do |blog|
 
   # Matcher for blog source files
   blog.sources = "content/posts/{title}.html"
+  blog.permalink = "{year}/{title}.html"
 	blog.layout = "article"
   blog.summary_length = 300
   blog.default_extension = ".md"

@@ -26,11 +26,11 @@ The idea here is that rules that are equally common across the senses don't give
 Given this list of rules with their relative ranks we can sort them by log likelihood. This is why we took the absolute value before, because rules weighted towards sense\* will be negative and we want to sort by magnitude. Using the algorithm is as simple as running a sample sentence through the list of rules accepting the first one to find a match.
 
 <pre class="figure">
-    |  *    |         |  *    |
-    |  b  b |         |  s  s |
-    |  a  a |         |  a  a |
-    |  s  s |         |  k  k |
-    |  s  s |         |  e  e |
+      |  *    |         |  *    |
+      |  b  b |         |  s  s |
+      |  a  a |         |  a  a |
+      |  s  s |         |  k  k |
+      |  s  s |         |  e  e |
 ------+-------+   ------+-------+
 bass* |<40> 4 |   sake* | <3> 3 |
 bass  | 4 <52>|   sake  |   <94>|
