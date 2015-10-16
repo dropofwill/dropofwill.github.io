@@ -94,6 +94,8 @@ activate :deploy do |deploy|
   deploy.method = :git
 end
 
+set :site_url, ''
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
