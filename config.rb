@@ -14,8 +14,8 @@ activate :blog do |blog|
 	blog.layout = "article"
   blog.summary_length = 300
   blog.default_extension = ".md"
+  blog.taglink = "tags/{tag}.html"
   # blog.permalink = "{title}.html"
-  # blog.taglink = "tags/{tag}.html"
   # blog.summary_separator = /(READMORE)/
   # blog.year_link = "{year}.html"
   # blog.month_link = "{year}/{month}.html"
@@ -106,7 +106,8 @@ configure :build do
 	activate :asset_hash
 
   # Use relative URLs
-  # activate :relative_assets
-  # set :relative_links, true
-  set :http_prefix, "/blog"
+  activate :relative_assets
+  set :relative_links, true
+  set :site_url, '/blog'
+  # set :http_prefix, "/blog"
 end
