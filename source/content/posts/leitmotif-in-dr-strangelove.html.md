@@ -1,0 +1,48 @@
+---
+title: Leitmotif and comedic relief in Kubrick's Dr. Strangelove
+date: 2015-10-29 03:29 UTC
+tags: Film, Leitmotif
+published: false
+
+---
+
+<!--
+
+Leitmotif
+
+Pick a scene. Identify color and sound amplify the effect of the moment. In the course of discussion cite an example of leitmotif that supports/detracts from the given scene:
+
+* Montage of nuclear bombs going off with romantic music in the background
+  Intro scene of planes being refueled, shows the coming of full circle the sexual innuendos between man and weapons of war.
+
+* B52 crew and the Johnny comes marching home music.
+  Scenes like the Major riding the atomic bomb to the ground.
+
+Music in Dr. Strangelove is often jarringly juxtaposed with the thematic elements of the scene it is placed giving it its ridiculous, comedic effect.
+
+Intro
+* Musical elements
+*
+
+-->
+
+The prevailing theme of Kubrick's Dr. Strangelove (1964) is a comedic (though certainly dark) outlook on the 'strange love' world leaders have with the game of nuclear warfare. This is built up in the film in every way from subtle visual innuendos to the obvious like names of the characters like General Jack Ripper. Kubrick uses this juxtaposition not only to make a statement about the perversion of Cold War politics of his day, but also to give the film some of its best comedic elements, which often pop-up right at the least funny plot points. One such scene that stood out for me was Major 'King' Kong's last valiantly effort to drop their nuclear payload while giving up his own life, unwittingly wiping out the whole world.
+
+Obviously, this somber sounding scene does not seem like a good moment for humour, but Kubrick manages to turn this plot point into one of the funniest moments of the film. One way he manages to lighten the mood throughout the film is the recurring use of pop music to add a cheerful and sometimes even ironic tone to a scene (e.g. the song *We'll Meet Again* playing over a montage of the world exploding). For the scenes with Major Kong's crew in particular Kubrick has already established a leitmotif of a marching band's rendition of *When Johnny Comes Marching Home*. This obviously accomplishes the purpose of alerting the audience to the change of cast and scenery, but since the film does not have any other strong musical settings, so obviously Kubrick had other reasons for making it such a strong element for this crew.
+
+The key to this lies in the lyrics, unsung in this rendition, of the song:
+
+    When Johnny comes marching home again
+      Hurrah! Hurrah!
+    We'll give him a hearty welcome then
+      Hurrah! Hurrah!
+    The men will cheer and the boys will shout
+    The ladies they will all turn out
+      And we'll all feel gay
+
+At first it seems like this may just be a reference to the crew's mission paralleling that of the 'Johnny' archetype in the song. But as the plot progresses it becomes apparent that Major King's crew probably will not be 'marching home' at the end and that Kubrick is playing with the irony of the situation again.
+
+Looking at the music from this perspective it really works well with some of the more playful elements in the scene. For example during the shot at 1:27:07 the bombs have hand written notes on them, as if they serve as the start to a cheerful conversation ('HI THERE!') or a love letter ('DEAR JOHN'). The song continues playing right up until Major Kong reaches the point of no return and drops out of bay riding the nuke rodeo style (1:27:18) triggering a somehow comedic end to the world.
+
+
+7.5/10
