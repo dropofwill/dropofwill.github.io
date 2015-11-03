@@ -1,7 +1,7 @@
 ---
 title: "FOSS Legal Primer: Common Trademark Issues"
 date: 2015-02-21 19:21 UTC
-tags: BizLeg, Reviews, Trademark
+tags: BizLeg, Review, Trademark
 
 ---
 

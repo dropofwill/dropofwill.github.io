@@ -1,10 +1,9 @@
 ---
 title: "Review of Trademarks and Your FOSS Project"
 date: 2015-02-21 20:26 UTC
-tags: BizLeg, Reviews, Trademark
+tags: BizLeg, Review, Trademark
 
 ---
-
 
 Karen's talk covers a lot of the same ground as the chapter in FOSS Legal Primer that I [reviewed previously](2015-02-21-foss-legal-primer-common-trademark-issues.html.markdown), but does so in a way that motivates, persuades, and explains with consistent use of examples, which I found much more persuasive and engaging.
 
