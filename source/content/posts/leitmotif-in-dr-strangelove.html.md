@@ -1,8 +1,7 @@
 ---
 title: Leitmotif and comedic relief in Kubrick's Dr. Strangelove
 date: 2015-10-29 03:29 UTC
-tags: Film, Leitmotif
-published: false
+tags: Film
 
 ---
 
@@ -43,6 +42,5 @@ The key to this lies in the lyrics, unsung in this rendition, of the song:
 At first it seems like this may just be a reference to the crew's mission paralleling that of the 'Johnny' archetype in the song. But as the plot progresses it becomes apparent that Major King's crew probably will not be 'marching home' at the end and that Kubrick is playing with the irony of the situation again.
 
 Looking at the music from this perspective it really works well with some of the more playful elements in the scene. For example during the shot at 1:27:07 the bombs have hand written notes on them, as if they serve as the start to a cheerful conversation ('HI THERE!') or a love letter ('DEAR JOHN'). The song continues playing right up until Major Kong reaches the point of no return and drops out of bay riding the nuke rodeo style (1:27:18) triggering a somehow comedic end to the world.
-
 
 7.5/10
