@@ -1,7 +1,8 @@
 ---
+layout: project
 project:
   title: C-Graph
-  sub: Interactive data-viz
+  sub: interactive data-viz
 
 tags: Frontend, Data Viz
 tech: Node.js, D3.js, Browserify, SVG

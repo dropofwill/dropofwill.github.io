@@ -2,19 +2,30 @@
 layout: layout
 ---
 
-<% page_articles.each_with_index do |article, i| %>
-	<article class="summary">
+<h5>I am a developer with research skills. My interests include functional programming, natural language processing, interactive data-viz, and server development.</h5>
 
-    <% link_to article do %>
-      <h3 class="summary-title"><%= article.data.title %></h3>
-    <% end %>
+<ul class='project-nav'>
+  <li>
+    <a href='content/projects/cgraph' class='project-link'>
+      <h1 class='project-title'>C-Graph <span>interactive data-viz</span></h1>
+    </a>
+  </li>
 
-    <div class="summary-body emphasis">
-      <p>
-        <%= article.summary %>
-        <%= link_to "Read more&#8230;", article.url %>
-      </p>
-    </div>
+  <li>
+    <a href='content/projects/bloxeo' class='project-link'>
+      <h1 class='project-title'>Bloxeo <span>real-time server</span></h1>
+    </a>
+  </li>
 
-	</article>
-<% end %>
+  <li>
+    <a href='content/projects/stressed-out' class='project-link'>
+      <h1 class='project-title'>Stressed out <span>NLP research</span></h1>
+    </a>
+  </li>
+
+  <li>
+    <a href='content/projects/rtasklib' class='project-link'>
+      <h1 class='project-title'>Rtasklib <span>task data library</span></h1>
+    </a>
+  </li>
+</ul>

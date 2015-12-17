@@ -1,0 +1,19 @@
+
+<% wrap_layout 'layout' do %>
+
+  <div class="article">
+    <h1 class="project-title"><%= current_page.data.project.title %> <span><%= current_page.data.project.sub %></span></h1>
+
+    <h5><%= current_page.data.description %></h5>
+
+    <%= image_tag current_page.data.hero_img, class: 'project-hero-img' %>
+
+    <%= yield %>
+
+    <% if !current_page.data.images.nil? %>
+      <% current_page.data.each do |image| %>
+        <%= image_tag image, class: 'project-hero-img' %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

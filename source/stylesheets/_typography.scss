@@ -100,6 +100,20 @@ a.top-link {
   }
 }
 
+.project-nav {
+  li {
+    margin-left: 0 !important;
+    list-style-type: none;
+  }
+}
+
+.project-title {
+
+  span {
+    font-weight: normal;
+  }
+}
+
 .typeset {
   color: $text-color;
 

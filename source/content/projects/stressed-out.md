@@ -1,4 +1,5 @@
 ---
+layout: project
 project:
   title: Stressed Out
   sub: NLP research

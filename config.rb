@@ -52,9 +52,19 @@ compass_config do |config|
 end
 
 helpers do
-  def current_page?(page)
-    p current_page.url
-    current_page.url == page ? 'current-page-link' : ''
+  def current_page?(page, category)
+    # print "#{current_page.url} #{page} #{category}"
+    # p ' '
+    # p current_page.url == page
+    # p current_page.url.include? category
+
+    if current_page.url == page
+      return 'current-page-link'
+    elsif current_page.url.include? category
+      return 'current-pag-link'
+    else
+      return ''
+    end
   end
 end
 

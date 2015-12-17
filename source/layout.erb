@@ -14,9 +14,10 @@
     <meta name="viewport" content="initial-scale=0.6">
   </head>
   <body>
+    <div class="wrapper">
 
     <header class="hero">
-      <% link_to "/blog" do %>
+      <% link_to "/" do %>
         <%= image_tag 'logo.svg', class: 'logo', alt: 'Will Paul' %>
         <!-- <h1> -->
         <!--   &#38;lambda;will.paul -->
@@ -24,8 +25,8 @@
       <% end %>
       <nav>
         <ul>
-          <li class="<%= current_page?('/') %>"><%= link_to 'projects', '/' %></li>
-          <li class="<%= current_page?('/posts/') %>"><%= link_to 'blog', '/posts' %></li>
+          <li class="<%= current_page?('/', 'projects') %>"><%= link_to 'projects', '/' %></li>
+          <li class="<%= current_page?('/posts/', 'posts') %>"><%= link_to 'blog', '/posts' %></li>
           <li><%= link_to 'github', 'http://github.com/dropofwill' %></li>
           <li><%= link_to 'resume', 'http://will-paul.com/resume' %></li>
         </ul>
@@ -37,5 +38,6 @@
       <%= yield %>
 
     </div>
+  </div>
   </body>
 </html>
