@@ -17,42 +17,25 @@
 
     <header class="hero">
       <% link_to "/blog" do %>
-        <h1>
-          &lambda;will.paul
-        </h1>
+        <%= image_tag 'logo.svg', class: 'logo', alt: 'Will Paul' %>
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
       <% end %>
-      <hr>
+      <nav>
+        <ul>
+          <li class="<%= current_page?('/') %>"><%= link_to 'projects', '/' %></li>
+          <li class="<%= current_page?('/posts/') %>"><%= link_to 'blog', '/posts' %></li>
+          <li><%= link_to 'github', 'http://github.com/dropofwill' %></li>
+          <li><%= link_to 'resume', 'http://will-paul.com/resume' %></li>
+        </ul>
+      </nav>
     </header>
 
     <div class="typeset" role="main">
 
       <%= yield %>
-      <hr>
 
-      <aside>
-        <h2>Recent Articles</h2>
-        <ol>
-          <% blog.articles[0...10].each do |article| %>
-            <li>
-              <%= link_to article.title, article %> <span><%= article.date.strftime('%b %e') %></span>
-            </li>
-          <% end %>
-        </ol>
-
-        <h2>Tags</h2>
-        <ol class="columnize">
-          <% blog.tags.each do |tag, articles| %>
-            <li><%= link_to "#{tag} (#{articles.size})", "#{site_url}#{tag_path(tag)}" %></li>
-          <% end %>
-        </ol>
-
-        <h2>By Year</h2>
-        <ol>
-          <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
-            <li><%= link_to "#{year} (#{articles.size})", "#{site_url}#{blog_year_path(year)}" %></li>
-          <% end %>
-        </ol>
-      </aside>
     </div>
   </body>
 </html>

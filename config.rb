@@ -51,6 +51,13 @@ compass_config do |config|
   config.output_style = :compact
 end
 
+helpers do
+  def current_page?(page)
+    p current_page.url
+    current_page.url == page ? 'current-page-link' : ''
+  end
+end
+
 ###
 # Page options, layouts, aliases and proxies
 ###

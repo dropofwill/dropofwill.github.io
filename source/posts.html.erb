@@ -1,0 +1,61 @@
+---
+layout: layout
+pageable: true
+per_page: 8
+---
+
+<% if paginate && num_pages > 1 %>
+  <p>Page <%= page_number %> of <%= num_pages %></p>
+
+  <% if prev_page %>
+    <p><%= link_to '&laquo; Previous page', prev_page %></p>
+  <% end %>
+<% end %>
+
+<% page_articles.each_with_index do |article, i| %>
+	<article class="summary">
+
+    <% link_to article do %>
+      <h3 class="summary-title"><%= article.data.title %></h3>
+    <% end %>
+
+    <div class="summary-body emphasis">
+      <p>
+        <%= article.summary %>
+        <%= link_to "Read more&#8230;", article.url %>
+      </p>
+    </div>
+
+	</article>
+<% end %>
+
+<% if paginate %>
+  <% if next_page %>
+    <p><%= link_to 'Next page &raquo;', next_page %></p>
+  <% end %>
+<% end %>
+
+<aside>
+  <h2>Recent Articles</h2>
+  <ol>
+    <% blog.articles[0...10].each do |article| %>
+      <li>
+        <%= link_to article.title, article %> <span><%= article.date.strftime('%b %e') %></span>
+      </li>
+    <% end %>
+  </ol>
+
+  <h2>Tags</h2>
+  <ol class="columnize">
+    <% blog.tags.sort_by(&:size).each do |tag, articles| %>
+      <li><%= link_to "#{tag} (#{articles.size})", "#{site_url}#{tag_path(tag)}" %></li>
+    <% end %>
+  </ol>
+
+  <h2>By Year</h2>
+  <ol>
+    <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
+      <li><%= link_to "#{year} (#{articles.size})", "#{site_url}#{blog_year_path(year)}" %></li>
+    <% end %>
+  </ol>
+</aside>
