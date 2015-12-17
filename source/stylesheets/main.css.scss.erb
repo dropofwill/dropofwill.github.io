@@ -48,8 +48,45 @@ hr {
   @extend %restrict-width;
 }
 
+.hero {
+  @extend %clearfix;
+
+  .logo {
+    float: left;
+    height: 4.5rem;
+    margin: 0.3rem 0;
+  }
+
+  nav {
+    float: right;
+    margin-top: 3.3rem;
+
+    li {
+      display: inline-block;
+    }
+  }
+}
+
+.current-page-link {
+  &:before {
+    content: '( ';
+  }
+
+  &:after  {
+    content: ' )';
+  }
+}
+
 %restrict-width {
   p, blockquote, code, ul, ol, pre {
-    max-width: 50rem;
+    max-width: 40rem;
+  }
+}
+
+%clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
   }
 }
