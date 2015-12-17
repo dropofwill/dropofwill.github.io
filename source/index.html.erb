@@ -1,0 +1,36 @@
+---
+layout: layout
+pageable: true
+per_page: 8
+---
+
+<% if paginate && num_pages > 1 %>
+  <p>Page <%= page_number %> of <%= num_pages %></p>
+
+  <% if prev_page %>
+    <p><%= link_to '&laquo; Previous page', prev_page %></p>
+  <% end %>
+<% end %>
+
+<% page_articles.each_with_index do |article, i| %>
+	<article class="summary">
+
+    <% link_to article do %>
+      <h3 class="summary-title"><%= article.data.title %></h3>
+    <% end %>
+
+    <div class="summary-body emphasis">
+      <p>
+        <%= article.summary %>
+        <%= link_to "Read more&#8230;", article.url %>
+      </p>
+    </div>
+
+	</article>
+<% end %>
+
+<% if paginate %>
+  <% if next_page %>
+    <p><%= link_to 'Next page &raquo;', next_page %></p>
+  <% end %>
+<% end %>

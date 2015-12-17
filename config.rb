@@ -10,11 +10,12 @@ activate :blog do |blog|
 
   # Matcher for blog source files
   blog.sources = "content/posts/{title}.html"
+  blog.permalink = "{year}/{title}.html"
 	blog.layout = "article"
   blog.summary_length = 300
   blog.default_extension = ".md"
+  blog.taglink = "tags/{tag}.html"
   # blog.permalink = "{title}.html"
-  # blog.taglink = "tags/{tag}.html"
   # blog.summary_separator = /(READMORE)/
   # blog.year_link = "{year}.html"
   # blog.month_link = "{year}/{month}.html"
@@ -93,6 +94,8 @@ activate :deploy do |deploy|
   deploy.method = :git
 end
 
+set :site_url, ''
+
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
@@ -104,8 +107,13 @@ configure :build do
   # Enable cache buster
 	activate :asset_hash
 
-  # Use relative URLs
+  # Root/Refresh
   # activate :relative_assets
   # set :relative_links, true
-  set :http_prefix, "/blog"
+
+  # Blog/Refresh
+  activate :relative_assets
+  set :relative_links, true
+  # set :site_url, '/blog'
+  # set :http_prefix, "/blog"
 end
