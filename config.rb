@@ -13,7 +13,7 @@ activate :blog do |blog|
   blog.permalink = "{year}/{title}.html"
 	blog.layout = "article"
   blog.summary_length = 300
-  blog.default_extension = ".md"
+  blog.default_extension = ".md.erb"
   blog.taglink = "tags/{tag}.html"
   # blog.permalink = "{title}.html"
   # blog.summary_separator = /(READMORE)/
