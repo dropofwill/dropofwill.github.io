@@ -1,0 +1,194 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - Creating and Deploying a Middleman Blog, Part 1: What's Middleman?</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../stylesheets/main-aec3cd83.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class=""><a href="/posts">blog</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>Creating and Deploying a Middleman Blog, Part 1: What's Middleman?</h1>
+		<p>This is the first in what will probably be a three part series on creating and deploying a <a target="_blank" href="https://github.com/middleman/middleman">Middleman</a> site, specifically a blog deployed to a <a target="_blank" href="https://devcenter.heroku.com/start">Heroku</a> instance.</p>
+
+<p></p>
+
+<h3 id="where-were-going-in-the-next-couple-of-posts">Where we’re going in the next couple of posts:</h3>
+
+<ol>
+  <li><strong><a href="/2014/09/14/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/">What’s Middleman?</a></strong></li>
+  <li><strong><a href="/2014/09/22/creating-and-deploying-a-middleman-blog-part-2-blogging-with-middleman/">Blogging with Middleman</a></strong>
+3.-<strong><a href="/2014/09/29/creating-and-deploying-a-middleman-blog-part-3-deployment">Deploying</a>
+)</strong></li>
+</ol>
+
+<h3 id="whats-middleman">What’s Middleman?</h3>
+
+<p>Middleman is a static site generator built in the programming language of <a target="_blank" href="https://www.ruby-lang.org/en/">Ruby</a> and the <a target="_blank" href="http://rack.github.io/">Rack</a> interface. As a generator it allows you to use features of “modern web development” that you would expect in a backend framework without the extra overhead of database. It also comes packaged with a “server” that runs on Rack, designed to be run in development so you can see your changes live instead of having to rebuild every time. But as we’ll see in a later post you can also use this to run Middleman in production to host on a site like Heroku.</p>
+
+<h3 id="why-and-when-to-use-a-static-site-generator">Why and When to Use a Static Site Generator?</h3>
+
+<p>So why even bother with a static site generator, doesn’t it just add needless complexity? Another point of failure? To some extent yes. You need to weigh your options, but here’s the thing: if you’re building a site with more than 4 or 5 pages without some sort of templating system, the time sink won’t be problems with your generator, it’s going to be changing the verbiage in the footer for the tenth time or something equally stupid.</p>
+
+<p>The way I see it you have 4 basic options:</p>
+
+<ol>
+  <li>Play it close to the metal use a programming or web server for dynamic content directly (e.g. <a target="_blank" href="http://php.net/">PHP</a> or <a target="_blank" href="http://httpd.apache.org/">Apache</a>).</li>
+  <li>Get a little help from a framework and templating language to standardize your setup (e.g. <a href="https://www.djangoproject.com/">Django</a>,{:target=”_blank”} <a target="_blank" href="http://codex.wordpress.org/Developer_Documentation">Wordpress</a>, <a target="_blank" href="http://slim-lang.com/">Slim</a>).</li>
+  <li>Use a task runner to manage the repetitive or laborious tasks for you (e.g. <a target="_blank" href="http://gruntjs.com/">Grunt</a> or <a target="_blank" href="http://www.gnu.org/software/make/">Make</a>/<a target="_blank" href="https://github.com/jimweirich/rake">Rake</a>).</li>
+  <li>Use a static site generator (e.g. <a target="_blank" href="https://github.com/middleman/middleman">Middleman</a>, <a target="_blank" href="https://github.com/jekyll/jekyll">Jekyll</a>, or <a target="_blank" href="https://github.com/getpelican/pelican">Pelican</a>).</li>
+</ol>
+
+<p>Obviously, these are extremely loose distinctions and there certainly can be overlap between them (e.g. using Grunt with Slim or Mustache is something I’ve done on many occasions).</p>
+
+<p>IMO, 1 is a dangerous game unless you’re working alone <em>and</em> know what you’re doing. Even so, tying your markup to one language or even worse one web server seems like a bad idea. What if later on you realize running <a target="_blank" href="http://nginx.com/">NGINX</a> for your web server would lead to a noticeable speed boost. Suddenly all those Apache specific <a target="_blank" href="http://httpd.apache.org/docs/current/howto/ssi.html">Server Side Includes</a> are broken and you’re back to editing every single template again.</p>
+
+<p>2 is a good choice if you know where a project is headed long term, though there is quite a bit of technical debt to take on when starting a project like this, depending on what choices you make. Though this subsides with experience in the framework, for instance while it seems like a poor idea I wouldn’t mind prototyping the frontend of a project in Rails, because I’ve built so many sites with it over the past couple of years. But ask me to do that with say Wordpress or Django it would be a different story, it would just be too much of a waste of time if we weren’t completely sure what the final backend would be and even then I probably would rather not.</p>
+
+<p>That’s kind of where 3 comes in, it’s the middle ground, a good place to start prototyping a project when you don’t know where it’s actually going to end up. Most templating languages or implemented in all the modern web languages so pick one with good support and you’re code base remains portable from web server to programming language.</p>
+
+<p>So where does this leave Middleman and company? It’s kind of a niche market to be honest, it’s for situations where developers or at least technically savvy individuals are going to be editing content (it’s all templates and markdown, no pretty CMS to hold your hand) and where your sure you won’t be adding a backend at a later date. So generally what we’re looking at are personal sites and project sites. One advantage here is the ease of use, while perfecting a Gruntfile can be an arduous task, with something like Middleman it can be as simple as <code>middleman init</code> and you’re off and running.</p>
+
+<h3 id="why-middleman">Why Middleman?</h3>
+
+<p>Why Middleman specifically and not Jekyll or <a target="_blank" href="http://hexo.io/">Hexo</a> or one of <a target="_blank" href="http://staticsitegenerators.net/">hundreds of other generators</a> popping up all over the web? Well, for me personally it’s because Middleman models itself after Rails and that’s just what I was familiar with so I gave it a shot. To be honest I’ve only messed around with <a target="_blank" href="http://hugo.spf13.com/">Hugo</a> and <a target="_blank" href="https://github.com/bmcmurray/hekyll">Hekyll</a> (as a way to mess around with Go and Haskell respectively), so I can’t definitively say that Middleman is particularly better (and if you want to publish to Github pages Jekyll probably seems like the better integrated option…).</p>
+
+<p>So what Rails features carry over? The main tenant of Rails development is “convention over configuration”, basically most people are trying to do similar things with their web frameworks, so why not pre-configure everything to work out of the box and sprinkle in some best practices along the way? This mantra is alive and well in the Middleman community and for the most part you probably won’t make that many changes in the <code>config.rb</code> file.</p>
+
+<p>Like Rails, Middleman ships with Erb, Sass, and CoffeeScript support, as well as the prettier (<a target="_blank" href="http://sephinrothcn.wordpress.com/2014/04/14/slim-vs-haml-performance-perspective/">but awfully slow</a>) Haml and the Markdown engine <a target="_blank" href="http://kramdown.gettalong.org/">Kramdown (the fastest ruby implementation, with some nice extra features)</a>. However, if you prefer logicless templates like me it’s trivial to add Slim support or a different markdown engine or whatever.</p>
+
+<p>Also like Rails you get an Asset Pipeline complete with <a target="_blank" href="https://github.com/sstephenson/sprockets">Sprockets</a> for file concatenation so you can keep your JavaScript under control in multiple files. One advantage of this setup is you can turn on cache busting which appends a unique number to the end of each asset url that changes whenever the asset changes so no more asking a client to clear their cache or anything like that. You can also lock into the pipeline with an image compressor that will automatically make sure none of your images make it into production any larger than they need to be.</p>
+
+<p>Other features like local data (they call it Frontmatter), dynamic pages (we’ll talk more about this with the blog plugin later), localization, routes, and more are all at your finger tips. If you would like to dive in check out the Getting Started page or try out a template like <a target="_blank" href="https://github.com/dropofwill/middleman-slim">my Bower/Slim setup</a> or one from the <a target="_blank" href="http://directory.middlemanapp.com/#/templates/all">ever growing official list</a> or make your own it’s super easy.</p>
+
+<p>Until next time happy hacking!</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../../2015/pacing-and-character-in-mcconaugheys-performance-in-mud/">Pacing and character in McConaughey’s performance in Mud</a> <span>Nov 19</span>
+        </li>
+        <li>
+          <a href="../../2015/leitmotif-in-dr-strangelove/">Leitmotif and comedic relief in Kubrick's Dr. Strangelove</a> <span>Oct 29</span>
+        </li>
+        <li>
+          <a href="../../2015/establishing-narrative-control-in-freers-high-fidelity/">Establishing narrative control in Freer's High Fidelity</a> <span>Sep 30</span>
+        </li>
+        <li>
+          <a href="../../2015/a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../../2015/packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../../2015/playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../../2015/lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/bizleg/">BizLeg (15)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/hfoss/">HFOSS (4)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/film/">Film (3)</a></li>
+        <li><a href="/tags/cinematography/">Cinematography (1)</a></li>
+        <li><a href="/tags/review/">Review (10)</a></li>
+        <li><a href="/tags/trademark/">Trademark (2)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/legal/">Legal (1)</a></li>
+        <li><a href="/tags/licenses/">Licenses (1)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/business/">Business (1)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/foss/">FOSS (1)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/patents/">Patents (1)</a></li>
+        <li><a href="/tags/ip/">IP (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/video/">Video (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (28)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+  </body>
+</html>

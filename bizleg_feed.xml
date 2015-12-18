@@ -1,0 +1,1247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Dropofwill's Blog</title>
+  <subtitle>Business and Legal Posts</subtitle>
+  <id>http://dropofwill.herokuapp.com/</id>
+  <link href="http://dropofwill.herokuapp.com/"/>
+  <link href="http://dropofwill.herokuapp.com/bizleg_feed.xml" rel="self"/>
+  <updated>2015-11-19T13:09:00-05:00</updated>
+  <author>
+    <name>Will Paul</name>
+  </author>
+  <entry>
+    <title>A Scanner Orderly: The smart coaster</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/a-scanner-orderly-the-smart-coaster/"/>
+    <id>http://dropofwill.herokuapp.com/2015/a-scanner-orderly-the-smart-coaster/</id>
+    <published>2015-05-19T22:04:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;What if you could order drink with your coaster? This blog post explains how we made one using an Arduino and Node.js.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/dropofwill/a-scanner-orderly-embed"&gt;Arduino Source Code&lt;/a&gt; (BSD 3, with GPL libraries)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/dropofwill/a-scanner-orderly-web"&gt;Node Source Code&lt;/a&gt; (BSD 3)&lt;/p&gt;
+
+&lt;h2 id="team"&gt;Team&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://github.com/JosephCoppola"&gt;Joe Coppola&lt;/a&gt;: Mechanical Engineer&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://github.com/Petroochio"&gt;Peter Gyory&lt;/a&gt;: Electrical Engineer&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://github.com/dropofwill"&gt;Will Paul&lt;/a&gt;: Software Engineer&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;strong&gt;Advisor:&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;James Wagoner: Actual Engineer&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="design-overview"&gt;Design Overview&lt;/h2&gt;
+
+&lt;p&gt;A general problem with work is that we are often asked to put our mental energy towards multiple tasks at once. Often times people will say that they are good at multi-tasking, but research has shown that multitasking leads to severe bottlenecking in planning actions and information retrieval from memory.&lt;/p&gt;
+
+&lt;p&gt;Enter the bar domain, a common problem, especially for busy bars, is that the bartenders are asked to manage the ordering, making, and paying for the drinks all while managing a mental queue of what to work on next. This leads to long waits and a struggle to get the bartenders attention. Our idea is to automate the ordering and queuing process, with an eye towards the payment process, to let the bartenders focus on what they do best: make drinks.&lt;/p&gt;
+
+&lt;p&gt;To achieve this we envisioned a smart coaster, which each patron would receive upon entry and would serve as their primary method of ordering drinks. Underneath the top of the coaster was a Force Resistant Sensor (FSR), which would allow the user to perform selection and detect when a drink arrived.Along the inner edge of the coaster a strand of LEDs were placed to give the user feedback on the state of their interaction with the coaster and the state of their drink. The coaster itself was 3D printed with translucent plastic so that the lights can shine through.&lt;/p&gt;
+
+&lt;p&gt;On the bottom of the coaster we needed some sort of menu reader. We looked into barcode scanners, cameras, RFID tags, but all were either too expensive or too bulky for our needs, so we ended up going for an RGB sensor to be paired with a color-coded menu. For this prototype we decided to limit the options to ordering Highballs, which are two-part mixed drinks composed of one spirit and one mixer. One benefit of the RGB sensor we chose was that it had its own light source, so it can work even in a dark bar. While the sensor was actually surprisingly accurate we decide to limit the menu to just 3 spirits and 3 mixers for simplicity.&lt;/p&gt;
+
+&lt;h2 id="pics"&gt;Pics&lt;/h2&gt;
+
+&lt;p&gt;Top of the coaster:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Top of the coaster" src="https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/top.JPG" /&gt;&lt;/p&gt;
+
+&lt;p&gt;Bottom of the coaster:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Bottom of the coaster" src="https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/bottom.JPG" /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="The coaster lit up" src="https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/lit_up.jpg" /&gt;&lt;/p&gt;
+
+&lt;h2 id="videos"&gt;Videos&lt;/h2&gt;
+
+&lt;iframe src="https://player.vimeo.com/video/128517905" width="500" height="282" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""&gt;&lt;/iframe&gt;
+&lt;p&gt;&lt;a href="https://vimeo.com/128517905"&gt;Shows selecting the spirit&lt;/a&gt; from &lt;a href="https://vimeo.com/user37593906"&gt;Will Paul&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;iframe src="https://player.vimeo.com/video/128516073" width="500" height="282" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""&gt;&lt;/iframe&gt;
+&lt;p&gt;&lt;a href="https://vimeo.com/128516073"&gt;Shows selecting the mixer and waiting transition&lt;/a&gt; from &lt;a href="https://vimeo.com/user37593906"&gt;Will Paul&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id="supplies"&gt;Supplies&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Small Arduino, we used a Flora&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;3 * 3D prints for the coaster&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Adafruit RGB Sensor&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;16 Adafruit Neopixels in a strip&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Stuff to make a Force Resistance Sensor, we used:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;2 Sheets of aluminum foil&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;2 Sheets of laminate&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;1 sheet of Velostat/Polymer&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Solder&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Glue / Electrical Tape&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Resistors / Wires&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="construction"&gt;Construction&lt;/h2&gt;
+
+&lt;p&gt;Inside of the coaster:&lt;/p&gt;
+
+&lt;p&gt;&lt;img alt="Inside of the coaster" src="https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/inside.JPG" /&gt;&lt;/p&gt;
+
+&lt;p&gt;The coaster itself consists of three 3D printed parts, the bottom (which has the sides, a ledge for the other two parts just large enough for the strand of LEDS, and a custom fit whole/dip for our RGB sensor), the middle part (which was just a small sheet of plastic for the FSR to set on) and the top (which was cut to fit right on the ledge and a special cutout so that the wire from connecting to the FSR didn’t cause it to bulge). In the end we also added little bits of cardboard for extra support against the FSR (so that it would be more responsive), and this should probably be added to the print for future additions. Also the FSR ended up being thicker than we thought, so in future prints we would make that divot a little deeper so that it fits together a bit tighter.&lt;/p&gt;
+
+&lt;p&gt;All the internal connections were soldered and since there wasn’t really room for a breadboard all the circuits were made with just wires and resistors. To keep everything insulated we made extensive use of electrical tape and hot glue (for stuff that electrical tape wouldn’t stick to).&lt;/p&gt;
+
+&lt;h2 id="code"&gt;Code&lt;/h2&gt;
+
+&lt;p&gt;We had communication in both directions between the Arduino (potentially multiple) and the Express Node Server using the Serial port and communicated between the server and the (potentially multiple) clients using web sockets so that the page didn’t have to be refreshed to display updates.&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Arduino(s) &amp;lt;-&amp;gt; Node Server &amp;lt;-&amp;gt; Clients
+         Serial         Socket.io
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We used the Node &lt;a href="https://github.com/voodootikigod/node-serialport"&gt;&lt;code&gt;serialport&lt;/code&gt;&lt;/a&gt; library to handle communication between the server and Arduino. It worked by polling the clients serial ports for any device that was sending the message ‘Connect’, which was what our coaster sends out until it gets the “$” sign response from the server (we chose “$” because it was single byte ASCII character that signifies end of string in Regex, so it seemed an appropriate way to close a message).&lt;/p&gt;
+
+&lt;p&gt;Since there is always a high possibility of data getting lost/missed in Serial communication we implemented a UDP-esque approach where we just keep sending the message until the receiver tells us they have received it.&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;Arduino &amp;lt;-&amp;gt; Server &amp;lt;-&amp;gt; Clients
+
+# Sends 'Connect' until server responds
+A -&amp;gt; S  "Connect"
+...
+"$" A &amp;lt;- S
+
+# Sends a drink JSON string after the user selects their drink
+# Sends until server responds
+A -&amp;gt; S "{\"drink\": [0,0]}" -&amp;gt; C
+...
+"$" A &amp;lt;- S
+
+# Send a message that the bartender has started the drink
+"start" A &amp;lt;- S &amp;lt;- C
+...
+"$" S -&amp;gt; A -&amp;gt; C
+
+# Send a message that their drink is on its way
+"ready" A &amp;lt;- S &amp;lt;- C
+...
+"$" S -&amp;gt; A -&amp;gt; C
+
+# Sends a message to the server that the drink has arrived
+A -&amp;gt; S  "Done"
+...
+"$" A &amp;lt;- S
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Obviously, a wired coaster isn’t going to work in a real world environment, but the proof-of-concept is there. With a Wifi module, a 5 volt Arduino (instead of our 3.3v Flora), and a small battery pack along with some slight modifications to the model we think it could work pretty well.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>rtasklib first release</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/rtasklib-first-release/"/>
+    <id>http://dropofwill.herokuapp.com/2015/rtasklib-first-release/</id>
+    <published>2015-05-19T10:31:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;So the semester has come to a close and I’ve made the first ‘official’ release of &lt;code&gt;rtasklib&lt;/code&gt;. Install the gem &lt;a href="https://rubygems.org/gems/rtasklib"&gt;from RubyGems.org&lt;/a&gt; (&lt;code&gt;gem install rtasklib&lt;/code&gt;) or &lt;a href="https://github.com/dropofwill/rtasklib/tree/master/rpms"&gt;install the RPM on your Fedora system if you prefer&lt;/a&gt;. I reached out to the TaskWarrior devs and they also are adding &lt;code&gt;rtasklib&lt;/code&gt; to the list of &lt;a href="http://taskwarrior.org/tools/#libraries"&gt;available libraries on the TaskWarrior main website in the next few days&lt;/a&gt;, which is pretty cool.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, I was unable to finish &lt;code&gt;task_time&lt;/code&gt; for the end of the semester. That said the pieces are in place and I hope to get something out over the summer.&lt;/p&gt;
+
+&lt;p&gt;All in all it was good learning experience. I don’t often tread that far away from Web Dev, despite the fact that I spend a good part of my day on the command line. It’s also the first time I’ve went through the process of actually releasing one of the gems I’ve made to RubyGems, so that was a good experience. Packaging for RPMs was a lot less easy and made appreciate the Ruby system a lot more than I did previously.&lt;/p&gt;
+
+&lt;p&gt;If anyone in the future needs to package up a Ruby Gem, I stumbled upon this random post on &lt;a href="https://gitlab.com/fedora-ruby/gitlab-rpm/wikis/rubygem-packaging"&gt;Fedora’s GitLab&lt;/a&gt;, which was invaluable in just understanding the process from someone that obviously has done this quite a bit (and also not a first page Google result). Also, the &lt;a href="https://github.com/fedora-ruby/gem2rpm"&gt;gem2rpm&lt;/a&gt; gem (from Fedora) is pretty good at extracting as much meta data as it can from the Ruby .gemspec, but you have to do quite a bit more to get a working RPM (especially if you have many Gem dependencies).&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>rtasklib update</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/rtasklib-update/"/>
+    <id>http://dropofwill.herokuapp.com/2015/rtasklib-update/</id>
+    <published>2015-04-20T10:36:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;In the Ruby world the most common way to generate documentation is with &lt;a href="http://yardoc.org"&gt;Yardocs&lt;/a&gt;. It basically generates documentation by scraping the code comments and provides a structured API for writing comments that it can interpret. For example to annotate that a parameter of a certain method is a duck type that responds to &lt;code&gt;#to_s&lt;/code&gt; (to string), you would simply make a comment above the method definition that says: &lt;code&gt;# @param parameter_name [#to_s] a parameter that responds to #to_s&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I’ve started the process of documenting everything (currently at 45.76% documented, according to Yard’s statistics) and posting it to the Github page for the rtasklib repo, which you can access &lt;a href="http://will-paul.com/rtasklib/"&gt;here&lt;/a&gt; or from the readme. Here’s the documentation for the &lt;a href="http://will-paul.com/rtasklib/Rtasklib/Taskrc.html"&gt;Taskrc class for example&lt;/a&gt;. To speed up this process I found a Python utility that does the generation, called &lt;code&gt;ghp-import&lt;/code&gt;, which switches to the gh-pages branch, generates the docs, makes a commit, and pushes it to the repo.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>rtasklib update: Ruby and external tools</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/rtasklib-update-ruby-and-external-tools/"/>
+    <id>http://dropofwill.herokuapp.com/2015/rtasklib-update-ruby-and-external-tools/</id>
+    <published>2015-04-05T22:22:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;It turns out that one of the reasons Ruby was popular before the advent of Rails was because it was so easy to integrate with 3rd party tools through subprocesses. In fact Ruby has at least 7 ways of executing processes either in the core or the standard libraries and many more user implemented varieties. Since &lt;code&gt;rtasklib&lt;/code&gt; is at its core concerned with interacting with a subprocess having a solid understanding of the available options is important. Below I summarize the results of my research for several of Ruby’s subprocess methods.&lt;/p&gt;
+
+&lt;h2 id="kernelexec-exececho-exec"&gt;Kernel#exec, &lt;code&gt;exec('echo exec')&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;Exec works by actually changing the current process into whatever its parameter is. So anything that comes after an &lt;code&gt;exec&lt;/code&gt; call in a Ruby program will never execute. This is useful for tasks where that call is the last action the program takes as well as acting as the basic building block off of which all the other commands are implemented.&lt;/p&gt;
+
+&lt;h2 id="kernel--echo-backticks--exit-code"&gt;Kernel#`, &lt;code&gt;`echo backticks` =&amp;gt; exit code&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;The one I often used before researching this was the ‘backtick’ methd, where every statement between backticks is passed to a subprocess (using &lt;code&gt;Kernel#fork&lt;/code&gt; and &lt;code&gt;Kernel#exec&lt;/code&gt; under the hood) and returns the exit code. This looks like a special statement in Ruby, but really its just a little syntactic sugar around a kernel method. Obviously, for &lt;code&gt;rtasklib&lt;/code&gt; I’m interested in the actual output of the process, not just whether it was successful, so another technique is needed.&lt;/p&gt;
+
+&lt;h2 id="kernelsystem-systemecho-system--stdout"&gt;Kernel#system, &lt;code&gt;system('echo system') =&amp;gt; STDOUT&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;A slightly different kernel method is &lt;code&gt;system&lt;/code&gt;, which works the same under the hood as the backticks method, but instead of returning the exit code it returns STDOUT. This is more useful, but both are necessary for my purposes.&lt;/p&gt;
+
+&lt;h2 id="open3popen3"&gt;Open3#popen3&lt;/h2&gt;
+
+&lt;p&gt;Open3 is a module included in the standard libraries that offers a little bit more control over the process along with a Ruby-style block DSL. It has a number of methods available for various levels of control and piping processes together. The closest to what I want is &lt;code&gt;Open3#popen3&lt;/code&gt;, which offers the most control. A simple used case would look like the following:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;~~~
+Open3.popen3('echo popen3') do |stdin, stdout, stderr, wait_thread|
+  pid = wait_thread.pid
+  # Process::Status object returned.
+  exit_status = wait_thread.value
+end
+~~~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is closer to what I want, but managing interactive sessions (which does happen occasionally with &lt;code&gt;task&lt;/code&gt;) starts to get messy, is their a better way?&lt;/p&gt;
+
+&lt;h2 id="pty-and-rubyexpect"&gt;PTY and ruby_expect&lt;/h2&gt;
+
+&lt;p&gt;Enter the standard library PTY and the external gem &lt;code&gt;ruby_expect&lt;/code&gt; both of these work similarly to Open3, but allow you to work with interactive sessions cleanly by implementing an interface similar to the UNIX tool Expect. The syntax of the two are slightly different, but the basic idea is that you create a subprocess and provide a way to respond to a given regex. An example of &lt;code&gt;ruby_expects&lt;/code&gt; syntax is shown below.&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;~~~
+exp = RubyExpect::Expect.spawn(some_cmd)
+exp.procedure do
+  any do
+    expect /\(yes/no\)/ do
+      if respond
+        send "yes"
+      else
+        send "no"
+      end
+    end
+  end
+end
+~~~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Right now I’m using the &lt;code&gt;ruby_expect&lt;/code&gt; gem, but I’ve also implemented the PTY version as well and have been switching back and forth between the two. They both do what I want, but lack good documentation. The benefit of using the pure Ruby gem is that it is much easier to read than the C implementation, though I haven’t checked out the Rubinius version (the Ruby interpreter written in Ruby), which might have a Ruby version of PTY.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Review of: the Quantifying the Value of Open Source Hardware Development</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/"/>
+    <id>http://dropofwill.herokuapp.com/2015/lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/</id>
+    <published>2015-03-30T23:45:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;He presents three different equations to evaluate the value of an open source hardware project and several ways to extrapolate into long term predictions. He then shows how to use these as a case study on open hardware, a syringe pump. In the end he predicted the value of the pump to be between 240k to 800,000k.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Who:&lt;/strong&gt; &lt;a href="http://www.mtu.edu/ece/department/faculty/full-time/pearce/"&gt;Joshua M. Pearce, Phd&lt;/a&gt;, professor of material and computer engineering at Michigan Tech University.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; An academic paper making the economic case for investing in Free and Open Source Hardware (FOSH). Pearce, J.M. (2015) Quantifying the Value of Open Source Hardware Development. Modern Economy, 6, 1-11. &lt;a href="http://dx.doi.org/10.4236/me.2015.61001"&gt;http://dx.doi.org/10.4236/me.2015.61001&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Where:&lt;/strong&gt; &lt;a href="http://bizlegfoss-ritigm.rhcloud.com/static/books/ME_2015011215185288-Value-OSHW.pdf"&gt;Available on the RIT BizLeg website&lt;/a&gt;.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;When:&lt;/strong&gt; December 2014&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="the-good"&gt;The Good&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;More technical, economic exploration of the implication of FOSH (and FOSS) work is important, so that we have more material to argue with.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The analysis in the advantages and disadvantages section is a great summary of the paper.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I like that the conclusion makes such a strong statement about the value of Open Source. Though I’m not qualified to comment on the quality of the methodology.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="the-bad"&gt;The Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;As he mentions on page 2, the data for turning a download into a product and just the idea of tracking downloads in itself is really and impossible task, with the ubiquity of P2P distribution (especially in technical communities) and the amount of downloads that just don’t result in anything being actually made. This isn’t a bad thing, in fact it’s one of the things that makes this so exciting. However, it does limit the usefulness of his equations, since at their foundation they rely on this data (littered throughout at &lt;em&gt;P&lt;/em&gt;).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I also have a bit of a problem with macroeconomics that focuses on trying to deterministically measure things like ‘value to society’. That’s not to say we can’t model these processes to some degree of accuracy, but at the very least these require actual data to train a stochastic process on. Anything else is too brittle to be of much use.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I think some graphs would help demonstrate the conclusion, especially with the extrapolated dataset.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;This is published in the &lt;em&gt;Modern Economy&lt;/em&gt; is an economics journal, but it’s unclear to me how respected it is in the economics community. &lt;a href="http://www.scirp.org/journal/Journalcitationdetails.aspx?JournalID=163"&gt;Its Google Impact Factor is 0.57&lt;/a&gt; and &lt;a href="http://www.scirp.org/journal/AimScope.aspx?JournalID=163"&gt;is aimed at short reports on preliminary data, but not yet complete research.&lt;/a&gt; So, I would like to know how complete does Pearce think this research and what do people from the economics field think about it?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;With value ranges from 200k to 800,000k how useful are these calculations in practice?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Are these deterministic equations commonly used for prediction in macroeconomics?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id="final-thoughts"&gt;Final Thoughts&lt;/h1&gt;
+
+&lt;p&gt;A technical (and it is very technical) look at the economics of FOSH, it breaks new, necessary ground in the field.&lt;/p&gt;
+
+&lt;p&gt;Rating 0.7&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Review of: Market power and regulation</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/review-of-market-power-and-regulation/"/>
+    <id>http://dropofwill.herokuapp.com/2015/review-of-market-power-and-regulation/</id>
+    <published>2015-03-17T23:42:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;Regulation of public services produced by monopolies or oligopolies in a way that balances production, innovation, and performance is a really, really hard problem. Jean Tirole has spent most of his academic career studying the ways these power relationships interact generally and then exploring specific industries to give actual advice.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Who:&lt;/strong&gt; About &lt;a href="http://en.wikipedia.org/wiki/Jean_Tirole"&gt;Jean Tirole&lt;/a&gt;, French professor of economics who focuses on industrial organization and game theory.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; A pop-sci introduction to the research that won the 2014 Nobel Prize in Economics&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Where:&lt;/strong&gt; &lt;a href="http://bizlegfoss-ritigm.rhcloud.com/static/books/nobel-popular-economicsciences2014.pdf"&gt;Available on the RIT BizLeg website&lt;/a&gt;.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;When:&lt;/strong&gt; 2014&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="the-good"&gt;The Good&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The owner, foreman, worker example does a good job of clarifying the problem, which is quite abstract from a real world point of view.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;This bit about game theory seems to follow the trend we have been seeing in the legal documentation: “it depends.” Different markets behave differently and need to be analyzed individually.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Software is one of the key markets that it uses as an example of monopolies taking over a supply chain by holding the keys to just one piece. This (to my FOSS tuned brain) points to the importance of having complete control of every level of your infrastructure. That means open all the way down to the OS and hardware level.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="the-bad"&gt;The Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;This needs some useful visualizations. I know, who doesn’t love a half page Monopoly man? But this is an example where all the illustrations have a very low ink to data ratio and this is document on a topic where that is not acceptable.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I realize this was a pop-sci piece, but a little more detail into the actual work and some non-hypothetical examples would have been nice.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;So all this was being implemented sometime soon after I was born in 1993. Where exactly has this been successful? It sounds good, but the major problem with a micro-economic or game-theory outlook on problems that I’ve noticed is that they make too many simplifying assumptions to necessarily play out like it does in theories or models.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A lot of this sounds like Tirole and his colleagues are hand exploring data from a number of industries and discussing results. Is this an efficient way to analyze fast moving, global, and diverse markets? Is it possible to develop a model that can automatically produce ‘good enough’ results?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Why should we mix private contractors with public goods in the first place? It seems like that would simplify this interaction substantially.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id="final-thoughts"&gt;Final Thoughts&lt;/h1&gt;
+
+&lt;p&gt;Nice introduction to the work of an influential economist I had never heard of before, good use some real life examples, meaningful visualizations, and a little more game theory depth. But it’s just a 6-page pop-sci article, so that’s probably too much to expect.&lt;/p&gt;
+
+&lt;p&gt;Rating: 0.7&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Open Source Business Models and Implications</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/open-source-business-models-and-implications/"/>
+    <id>http://dropofwill.herokuapp.com/2015/open-source-business-models-and-implications/</id>
+    <published>2015-03-04T23:02:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;The GPL doesn’t actually care what enterprise companies do with the code internally, even if they make changes, distribution only counts if it happens outside of their immediate company. There are four major business models built around open source software: Support Sellers (e.g. give away the recipe, open a restaurant), Loss Leader (e.g. give it away to speed up or help out your prop project), Widget Frosting (e.g. sell the hardware, give away the software), and Accesorizing (e.g. sell books, t-shirts, penguin dolls, etc.).&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Who:&lt;/strong&gt; The Open Source Initiative and the Free Software Foundation&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; Chapter 12, Section 1 of the book &lt;em&gt;Copyleft and the GNU General Public License: A Comprehensive Tutorial and Guide&lt;/em&gt; and an article on the OSI’s website titled &lt;em&gt;Open Source Case for Business&lt;/em&gt;.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Where:&lt;/strong&gt; &lt;a href="http://bizlegfoss-ritigm.rhcloud.com/static/books/comprehensive-gpl-guide.pdf#section.12.1"&gt;available for free on RIT’s Business and Legal issues in FOSS course website&lt;/a&gt; and on &lt;a href="http://opensource.org/advocacy/case_for_business.php"&gt;the OSI’s website&lt;/a&gt; respectively.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;When:&lt;/strong&gt; The OSI article was last update in 2014, but is probably much older (Netscape anyone?). First version of the FSF book was released in 2003, but has had consistent updates from then until the latest change in 2014.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="good"&gt;Good&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Glad to see the FSF encouraging the distribution of software in a corporate environment (even with modifications!).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Feeding yourself with open source contributions.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="bad"&gt;Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Netscape shouldn’t be used as an example of what to do anymore, it didn’t work out in the end.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A bunch of these links are 404’ing, which leads to kind of a bigger question in web archival: since link rot is such a real and pervasive problem is linking an uncontrolled, brittle source a good form of attribution?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The whole OSI article is just a load of [citation needed]s, I love Open Source as much as anyone, but some of these items are just ridiculous.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Does the Chapter 12 section 1 imply that one does not need to supply the source to the users if it is in a corporate environment? If so why is that considered a different form of distribution than say a download link on a website?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;See question above in Bad item 2.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Review of Common FOSS Organizational Issues</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/review-of-common-foss-organizational-issues/"/>
+    <id>http://dropofwill.herokuapp.com/2015/review-of-common-foss-organizational-issues/</id>
+    <published>2015-03-02T21:40:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;This chapter gives an overview of ways that a FOSS organization can limit their individual liability, primarily through various means of incorporation. It serves as a guide to the various options available and clairifies some general (but not case specific) requirements to maintain a nonprofit status.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Who:&lt;/strong&gt;,&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Richard_Fontana"&gt;Richard Fontana&lt;/a&gt; (lawyer, worked on GPLv3, LGPLv3, AGPL, director of OSI),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Bradley_M._Kuhn"&gt;Bradley M. Kuhn&lt;/a&gt; (free software activist, president of Software Freedom Conservancy, previously worked for the SFLC and FSF),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Eben_Moglen"&gt;Eben Moglen&lt;/a&gt; (law and legal history professor at Columbia University and director-counsel and chairman of the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://www.linkedin.com/pub/matt-norwood/5/770/a39"&gt;Matthew Norwood&lt;/a&gt; (IP lawyer, previously was counsel at the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://www.ravicher.com/"&gt;Daniel B. Ravicher&lt;/a&gt; (lawyer and law professor),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Karen_Sandler"&gt;Karen Sandler&lt;/a&gt; (executive director of the SFC, former director of the GNOME Foundation, former general counsel at the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://twitter.com/jamesvasile"&gt;James Vasile&lt;/a&gt; (director of Open Internet Tools Project),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://torekeland.com/about/aaron-williamson"&gt;Aaron Williamson&lt;/a&gt; (IP lawyer for Tor Ekeland).&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; Chapter 5 of the book &lt;em&gt;A Legal Issues Primer for Open Source and Free Software Projects&lt;/em&gt; put out by the &lt;a href="https://www.softwarefreedom.org/"&gt;Software Freedom Law Center (SFLC).&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Where:&lt;/strong&gt; &lt;a href="http://bizlegfoss-ritigm.rhcloud.com/static/books/foss-primer.pdf"&gt;available for free on RIT’s Business and Legal issues in FOSS course website&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;When:&lt;/strong&gt; Latest edition (1.5.2) published June 2008&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="the-good"&gt;The Good&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The Software Freedom Conservancy is an awesome organization, I love that they don’t charge their member projects anything to join and don’t restrict projects to any one FOSS license or require reassigning copyright.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;blockquote&gt;
+      &lt;p&gt;The IRS has regularly organizations created for the promotion of free and open source software projects as having charitable purposes.&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;Which means that not only do 501c3 FOSS projects get tax exemption at the federal and state level, but people can make deductions off of their own taxes for any donations made to one of these organizations.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Some Formation Documents mentioned in the text:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;A &lt;strong&gt;certificate of incorporation&lt;/strong&gt;, a standard document describing how the incorportation will be formed, most FOSS organizations will organize as a non-stock nonprofit corporation, meaning no one will ‘own’ the organization.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;A set of &lt;strong&gt;by-laws&lt;/strong&gt;, which describe facts about the organization like membership, board of directors, officers, and what all their roles will entail.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;An &lt;strong&gt;Employer Identification Number&lt;/strong&gt;, or EIN, from the IRS, which is required in order to have employees and open a bank account, sort of like a SSN for corporate entities.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="the-bad"&gt;The Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;New York treats out of state corporations as if they were incorporated in a foreign country! And along with it comes all the added requirements, fees, and administrative hoops to jump through.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Apparently IRC may not qualify as a board meeting in a lot of states (legally ambiguous at least). Once again the law is struggling to keep pace with technology.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;All of the work and cost required for an organization or developer to limit their liability puts larger corporations in a much safer position just because they can afford these things as part of their operational costs.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;What protections does incorporation give compared to say the final liability clause in the BSD or MIT licenses?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;With all this incorporation information being so US, and even further, state specific, how does one deal with the inherently global nature of open source projects? I’m thinking in particular of projects like Ruby and Rails which have major contributors on every continent minus Africa.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="final-thoughts"&gt;Final Thoughts&lt;/h2&gt;
+
+&lt;p&gt;Covers the material as thoroughly as can be expected for a topic that varies so much from state to state. Personally I think that this chapter really drove home the importance of umbrella organizations to handle all the hassles of incorporation for these FOSS projects. Personally I don’t forsee any of my projects getting to that stage anytime soon, but its nice to have an overview anyways.&lt;/p&gt;
+
+&lt;p&gt;7/10&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Review of Trademarks and Your FOSS Project</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/review-of-trademarks-and-your-foss-project/"/>
+    <id>http://dropofwill.herokuapp.com/2015/review-of-trademarks-and-your-foss-project/</id>
+    <published>2015-02-21T15:26:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;Karen’s talk covers a lot of the same ground as the chapter in FOSS Legal Primer that I &lt;a href="2015-02-21-foss-legal-primer-common-trademark-issues.html.markdown"&gt;reviewed previously&lt;/a&gt;, but does so in a way that motivates, persuades, and explains with consistent use of examples, which I found much more persuasive and engaging.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Who:&lt;/strong&gt; &lt;em&gt;&lt;a href="http://en.wikipedia.org/wiki/Karen_Sandler"&gt;Karen Sandler&lt;/a&gt;&lt;/em&gt; (Executive Director of the &lt;a href="http://en.wikipedia.org/wiki/Software_Freedom_Conservancy"&gt;Software Freedom Conservancy&lt;/a&gt;, formerly Executive Director of the &lt;a href="http://en.wikipedia.org/wiki/GNOME_Foundation"&gt;GNOME Foundation&lt;/a&gt;, an attorney, and former general counsel at the &lt;a href="http://en.wikipedia.org/wiki/Software_Freedom_Law_Center"&gt;Software Freedom Law Center&lt;/a&gt;).&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; A 45 minute talk given at the &lt;a href="http://allthingsopen.org"&gt;&lt;em&gt;All Things Open&lt;/em&gt; Conference 2014&lt;/a&gt;.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Where:&lt;/strong&gt; &lt;a href="http://youtu.be/JY6AtbtAuts"&gt;Available on YouTube&lt;/a&gt;.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;When:&lt;/strong&gt; Given 10/22/2014 and Published on 11/14/2014.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="the-good"&gt;The Good&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;She gives the following key factors to consider in trademark cases:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;How similar are the marks?&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Are they in the same market?&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;What is a user’s impression?&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Is there any actual confusion?&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;What is the community impact?&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Is it really just “nominative use” (parallel to “fair use” in copyright cases)&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;She made a clear distinction between copyright and trademarks:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Trademark is a word or picture that preserve brand recognition and earned through use.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Whereas copyright you earn through creation and is intrinsic once you establish it a tangible medium.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It was really cool how a logo can both be freely licensed for modifications while still being trademarked and she gave a really good example of that with the GNOME logo where another company that did fish pedicures took the GNOME foot and turned it into a fish. Since they are in a completely different domain and there is no opportunity for actual confusion (as well as made changes) they are actually completely fine with this. Which is awesome example of open source design.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It was good to hear her say that anti-disparagment clauses probably won’t stand up in court at lest in US jurisdictions, because of free speech laws.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;She gave several strong examples of cases where trademarks have actually protected consumers, whether that be driving people away from free software to proprietary versions by using the same mark or making malicious versions of free software and marketing it as if it was the same product.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Examples! Examples everywhere. This what I’m always looking for in legal matters like this.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="the-bad"&gt;The Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Unrelated to trademark talk she almost went on a free software rant after a guy made the empirically true statement that copyleft is more difficult to integrate into a business than a permissive license. This should be obvious just by the name (it’s permissive after all), but is also true by definition just by the sublicensing clause in most permissive licenses. There are certainly a number hoops to jump through to maintain a copyleft license by design and the pervasiveness of the Linux kernel does nothing to change this fact.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Also a number of large external companies to refuse to use copyleft code, whether this is because of misunderstanding or not, this is the case (Apple for instance only uses software with MIT or BSD like licenses).&lt;/p&gt;
+
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Was anyone able to find the starter kit she referred to in the talk? I did a cursory search, but came up without much luck.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Both trademark reading we did were completely US-centric, how do trademarks work globally in comparison? I think this is especially important for free software, because the internet is a global community without country boundaries. If you decide trademarks are mission critical for your software it seems like you should be concerned with more than just the country you happen to be in at the time.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id="final-thoughts"&gt;Final Thoughts&lt;/h1&gt;
+
+&lt;p&gt;I thought this talk meshed really well with the previous reading, it actually answered several of the questions I came away with from the reading and gave me the examples that I needed to really be persuaded of the relevancy of trademarks and FOSS projects.&lt;/p&gt;
+
+&lt;p&gt;Really liked it, highly recommend: 9/10.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>FOSS Legal Primer: Common Trademark Issues</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/foss-legal-primer-common-trademark-issues/"/>
+    <id>http://dropofwill.herokuapp.com/2015/foss-legal-primer-common-trademark-issues/</id>
+    <published>2015-02-21T14:21:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;Common Trademark Issues gives an overview of how trademark law in the US works and what that means to you as a FOSS developer. It explains the registration process, how you can lose your registration, and how to handle licensing agreements and enforcement.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Who:&lt;/strong&gt;,&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Richard_Fontana"&gt;Richard Fontana&lt;/a&gt; (lawyer, worked on GPLv3, LGPLv3, AGPL, director of OSI),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Bradley_M._Kuhn"&gt;Bradley M. Kuhn&lt;/a&gt; (free software activist, president of Software Freedom Conservancy, previously worked for the SFLC and FSF),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Eben_Moglen"&gt;Eben Moglen&lt;/a&gt; (law and legal history professor at Columbia University and director-counsel and chairman of the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://www.linkedin.com/pub/matt-norwood/5/770/a39"&gt;Matthew Norwood&lt;/a&gt; (IP lawyer, previously was counsel at the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://www.ravicher.com/"&gt;Daniel B. Ravicher&lt;/a&gt; (lawyer and law professor),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Karen_Sandler"&gt;Karen Sandler&lt;/a&gt; (executive director of the SFC, former director of the GNOME Foundation, former general counsel at the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://twitter.com/jamesvasile"&gt;James Vasile&lt;/a&gt; (director of Open Internet Tools Project),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://torekeland.com/about/aaron-williamson"&gt;Aaron Williamson&lt;/a&gt; (IP lawyer for Tor Ekeland).&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; Chapter 5 of the book &lt;em&gt;A Legal Issues Primer for Open Source and Free Software Projects&lt;/em&gt; put out by the &lt;a href="https://www.softwarefreedom.org/"&gt;Software Freedom Law Center (SFLC).&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Where:&lt;/strong&gt; &lt;a href="http://bizlegfoss-ritigm.rhcloud.com/static/books/foss-primer.pdf"&gt;available for free on RIT’s Business and Legal issues in FOSS course website&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;When:&lt;/strong&gt; Latest edition (1.5.2) published June 2008&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="the-good"&gt;The Good&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Unlike patent law, trademark law is first come first serve. So even if you don’t register a mark you are allowed to continue using it if you made it first. This means you should do your research first to understand what is already out there, since it can’t be used against you in court.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I didn’t realize that the &lt;super&gt;TM&lt;/super&gt; doesn’t mean it’s registered and anyone can use that to assert their common law right.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Trademarks aren’t indefinite, you can lose a trademark through genericide and abandonment. The term genericide refers to when consumers start using your trademark to represent general class of products (Kleenex and Xerox perhaps?). And abandonment means that you stop actively using a mark (usually for a period of three years).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="the-bad"&gt;The Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It is stupid to try and prevent language from modifying your trademark into a verb, in English if enough people use your product it is going to happen, no matter what you want. Seriously this process is a linguistic process called &lt;em&gt;conversion&lt;/em&gt; and is the most common word-formation process in English. You have no hope in stopping it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Perhaps you can design the original name in such a way that it is awkward to use as a verb, but even then people will be creative and come up with a way to use it anyways. Example: Twitter is an example of conversion of a verb to a noun so it is awkward to convert it back, so people just use tweet in its stead. Given enough usage this will happen, no matter what you want.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;I think the issue of trademarks in FOSS development is a great example of how to get non-programmers involved in open source. Often programmers are not the best designers and understanding the subtlety involved in logo design takes a lot of effort that most of us don’t want to embark on (personally I’ve designed a bunch of logos out of necessity, and they work out fine because I have some design background, but it’s not what &lt;em&gt;I want to spend my time working on&lt;/em&gt;). I think making open source projects more inviting to designers (and writers, users, etc.) is an important step for any widely used project and one that is rarely ever considered seriously in my experience.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Unregistered marks still stand up under common law, but only to their geographic scope of influence, which doesn’t translate well to the global world of the internet, leaving unregistered marks distributed primarily on the web in unknown territory. Which means in FOSS cases we have really have to pay the federal fee of $275 for registration, which is yet another example of the legal system not applying to the new global ecosystem of the web.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Non-commercial and non-confusing public use is unenforcable under trademark law. How then can FOSS licenses enforce their clauses about trademark abuse? If I fork a project can I continue to use their trademarked logo on the project if it remains open and non-commercial? I know it talks about forks and that seems to contradict what is said above about non-commercial uses.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;As a corollary to the above question, how is non-commercial defined here? Does this mean I need to register my project as a non-profit? Or is this by default if my project is not making a profit?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="final-thoughts"&gt;Final Thoughts&lt;/h2&gt;
+
+&lt;p&gt;Trademarks seem to me the least evil of all IP rights, but also the least important to worry about as an open source project. These issues will really only effect you if your project reaches a certain size and to be honest on the internet we have better ways for consumers to find out what is legitimate: sha keys and links.&lt;/p&gt;
+
+&lt;p&gt;Interesting read, learned a lot about TM, don’t really see the point of them for anything I’ll be working on in the future, but good to know about. As always in this text I wish there were more motivating examples, but I understand why they might consider that out of scope.&lt;/p&gt;
+
+&lt;p&gt;6/10&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Review of Patent Defense for FOSS Developers</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/review-of-patent-defense-for-foss-developers/"/>
+    <id>http://dropofwill.herokuapp.com/2015/review-of-patent-defense-for-foss-developers/</id>
+    <published>2015-02-14T23:47:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;This is a review of Chapter 4 of the &lt;em&gt;SFLC Legal Primer&lt;/em&gt;, &lt;em&gt;Patent Defense for FOSS Developers&lt;/em&gt;, inside it describes the anatomy of a patent, how to deal with claims brought against you, and why you, as a FOSS developer, should not bother with patenting your software, even as a protective measure.&lt;/p&gt;
+
+&lt;p&gt;Anatomy of a Patent:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1. Title,&lt;/strong&gt; which has no legal bearing.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2. 7-digit uniquie identifier and an application identifier.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;3. Abstract,&lt;/strong&gt; a short summary that rarely has any impact on the proceedings.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;4. Drawings,&lt;/strong&gt; in software these are usually just architecture diagrams or flowcharts.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;5. Related patent applications,&lt;/strong&gt; ‘related’ here can mean a number of things from continuation of old patents to patents that were originally filed jointly that are now separate.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;6. Background of the invention,&lt;/strong&gt; gives the applcants view of prior art, though often left out for fear it might limit the scope of the patent more than the applicant wants.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;7. Summary of the invention,&lt;/strong&gt; a summary of the patent (that again should not be considered in a vacuum).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;8. Detailed description,&lt;/strong&gt; the part of the patent that should give a “person having ordinary skill in the art” the ability to replicate the invention described above without “undue experimentation”.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;9. Claims,&lt;/strong&gt; this is actually the most important part of the patent, the SFLC actually recommends one read a patent from back to front to make sure you understand what the patent wants before moving on.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Who:&lt;/strong&gt;,&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Richard_Fontana"&gt;Richard Fontana&lt;/a&gt; (lawyer, worked on GPLv3, LGPLv3, AGPL, director of OSI),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Bradley_M._Kuhn"&gt;Bradley M. Kuhn&lt;/a&gt; (free software activist, president of Software Freedom Conservancy, previously worked for the SFLC and FSF),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Eben_Moglen"&gt;Eben Moglen&lt;/a&gt; (law and legal history professor at Columbia University and director-counsel and chairman of the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://www.linkedin.com/pub/matt-norwood/5/770/a39"&gt;Matthew Norwood&lt;/a&gt; (IP lawyer, previously was counsel at the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://www.ravicher.com/"&gt;Daniel B. Ravicher&lt;/a&gt; (lawyer and law professor),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Karen_Sandler"&gt;Karen Sandler&lt;/a&gt; (executive director of the SFC, former director of the GNOME Foundation, former general counsel at the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://twitter.com/jamesvasile"&gt;James Vasile&lt;/a&gt; (director of Open Internet Tools Project),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://torekeland.com/about/aaron-williamson"&gt;Aaron Williamson&lt;/a&gt; (IP lawyer for Tor Ekeland).&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; Chapter 4 of the book &lt;em&gt;A Legal Issues Primer for Open Source and Free Software Projects&lt;/em&gt; put out by the &lt;a href="https://www.softwarefreedom.org/"&gt;Software Freedom Law Center (SFLC).&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Where:&lt;/strong&gt; &lt;a href="http://bizlegfoss-ritigm.rhcloud.com/static/books/foss-primer.pdf"&gt;available for free on RIT’s Business and Legal issues in FOSS course website&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;When:&lt;/strong&gt; Latest edition (1.5.2) published June 2008&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="the-good"&gt;The Good&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;There are three major ways to handle patent claims brought against you:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;Show that you were given the rights to use the patent, probably through a FOSS license (especially the Apache license, which explicitly grants this) or royalty free agreement with the patent holder.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Show that you have not infringed on the claimed patent by working your way backwards through the patents claims.&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Show that the patent is actually invalid and thus not enforcible.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A good way to understand how to invalidate a patent claim is to understand how it is claimed to be valid in the first place.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Under patent law, in order for a patent to be valid, the claimed invention must have been &lt;em&gt;useful&lt;/em&gt;, &lt;em&gt;reducible to practice&lt;/em&gt;, &lt;em&gt;novel&lt;/em&gt;, and &lt;em&gt;non-obvious&lt;/em&gt; to a “person having ordinary skill in the art” at the time that the invention was made.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="the-bad"&gt;The Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;I’ve said this before about this book, but I think anything this theoretical needs to be tied down and motivated with some concrete examples, which I’m sure exist later in the book part III, but from what I see in the syllabus we will not be getting to that section in the near future if at all. Maybe I’ll get a chance to review it on my own time and make a post about my findings here.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The idea that while you are still liable if you didn’t know of a patents existence, you are held under a stricter set of rules (up to 3 times the original punishment!) if they prove you violated the patent knowingly. That’s completely messed up.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The concept of patents as a whole is so messed up right now. I’m not a fan of copyright in general, but at least that is an inclusive IP, patents by their nature require a lot of money to back them and basically set up the playing field for corporations only.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;I personally don’t like some of the requirements brought forward by the Apache license (mainly the state changes clause), but it also seems like the only OSI license that includes a patent grant. If I was concerned about something in a code base being patentable, what are my best options besides the Apache license? Should I take out the parts of the Apache that I don’t want (and notify the user that it is a modified license) or add a patent grant to or alongside another permissive license?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The reason why the Creative Commons Zero dedication with license fallback was rejected by the OSI was because of this clause in the limitation’s section:&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;ol&gt;
+        &lt;li&gt;a. No trademark or patent rights held by Affirmer are waived, abandoned, surrendered, licensed or otherwise affected by this document.&lt;/li&gt;
+      &lt;/ol&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;If deleted, this dedication/license seems like it would have been accepted by the OSI, based on the mailing list discussion, is that a good idea to do in practice? What if I added a patent grant like is in the Apache license? Would that fulfill the goals of the question I raised above?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In the text it says:&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;A patent holder providing code under a FOSS license without an explicit patent license grant, such as GPLv2, would nonetheless probably be held to have granted a license implicitly to recipients of the code, though the scope and coverage of such an implied license would be difficult to establish.&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;Has this ever been played out in court? How well has the Apache patent grant worked vs. this “implicit” grant from license without a patent grant (GPL, MIT, etc.)?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="final-thoughts"&gt;Final Thoughts&lt;/h2&gt;
+
+&lt;p&gt;Very informative on a topic I initially knew almost nothing about. It both scared and reassured me about the state of patent law in the US. In reality probably next to nothing I write as a developer will be patentable, but just that possibility scares me a lot all the same.&lt;/p&gt;
+
+&lt;p&gt;I give it &lt;strong&gt;19/20th’s&lt;/strong&gt;, just wish it included some examples inline and maybe touched on the international issue a little bit, but this is a big topic and they covered it well in as concise fashion and I respect that.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Writing Command Line Tools with Ruby</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/commnad-line-tools-with-ruby/"/>
+    <id>http://dropofwill.herokuapp.com/2015/commnad-line-tools-with-ruby/</id>
+    <published>2015-02-13T12:16:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;I’ve written a lot of Ruby code over the years from web applications, to rack frameworks, to rake tasks, even packaged a few up as gems, but one thing I’ve never done is write a command line tool directly in ruby. This post just sums up my initial foray into making Ruby cli tools, as usual with Ruby it’s not nearly as hard as it sounds.&lt;/p&gt;
+
+&lt;h2 id="the-basics"&gt;The Basics&lt;/h2&gt;
+
+&lt;p&gt;Typically when you write a ruby script you execute it with the Ruby command followed by a file path, like so:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ ruby ../path/to/some_example.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But that puts a lot of weight on the user, they need to know 1) this is a Ruby program, 2) where it was ‘installed’, and 3) the file extension for Ruby. The API we want is this:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ some_example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To accomplish this we first need to add a ‘shebang’ to the top of our main entry point to the application, like this:&lt;/p&gt;
+
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This line tells the shell how we want the following file interpreted. We could hard code a path to ruby, but by using the env dir we let the user’s shell decide what ruby is, this way people can install ruby however they want and our program will still run. To run the program directly we also need to make it executable:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ chmod +x ../path/to/some_example.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And now the program can be run without specifying Ruby:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ ../path/to/some_example.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or we can optionally leave off the Ruby extension (.rb) and run it without any knowledge that it is Ruby under the hood:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ mv ../path/to/some_example.rb ../path/to/some_example
+$ ../path/to/some_example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But what about that annoying &lt;code&gt;../path/to/&lt;/code&gt; nonsense, the user shouldn’t have to even know, much less have to type the full path to the program to run it. To solve this we have two main options (though there are certainly a number of ways to accomplish this).&lt;/p&gt;
+
+&lt;p&gt;The first and ‘easiest’ approach is to simply add the executable to the users PATH either in the shell, a init script, or by typing it right in the shell:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ export PATH=/abs/path/to/some_example:$PATH
+$ some_example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This prepends our code to the lookup PATH ($PATH is a variable for the current PATH, the colon separates different parts of the PATH) so that we don’t need to know where the code is located in order to execute it.&lt;/p&gt;
+
+&lt;p&gt;This meets our original requirements, but comes with a number of problems. Are we going to make the user manage the PATH themselves? Is this run with an install shell script? What it the users’ shell of choice doesn’t use the &lt;code&gt;export&lt;/code&gt; API? What if they want to move where the install directory is on their computer? All these questions lead us to believe there must be a better or at least more standardized approach to this.&lt;/p&gt;
+
+&lt;p&gt;And as it turns out there is! The people behind RubyGems have put a lot of thought into this, so that when you create a gem you can define a set of files that can be used as executables and it then copies them to &lt;code&gt;#{ruby-prefix}/bin/{#gem_name}&lt;/code&gt;, which is already added to their PATH during the installation of Ruby and is managed by tools like rbenv, chruby, or RVM so that you don’t have to.&lt;/p&gt;
+
+&lt;p&gt;The downside to this is that their is a bit of extra boilerplate needed to comply with the whole gemspec standard, but in the long run this is well worth the extra startup time. Luckily the bundler gem, a popular gem manager (that itself is a gem), comes with a scaffold-er to keep the amount of boilerplate you need to write to a minimum as well as giving you a set of best-practices/conventions that the rest of the Ruby community often follows. To create a new project run &lt;code&gt;bundler gem #{your_gem_name_here}&lt;/code&gt;, which initializes a git repo and gives us the following file structure:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ tree
+├── Gemfile
+├── LICENSE.txt
+├── README.md
+├── Rakefile
+├── gem_cli.gemspec
+└── lib
+    ├── gem_cli
+    │   └── version.rb
+    └── gem_cli.rb
+
+2 directories, 7 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default it gives you a copy of the MIT license, this is by far the most popular license within the Ruby community, but you are free to change it to whatever you like (just make sure you update those changes in your gemspec as well). You should also add your dependencies in the Gemfile (if you have any), add your code to the &lt;code&gt;lib/&lt;/code&gt; dir, and then create a new &lt;code&gt;bin/&lt;/code&gt; dir with the cli code (which hopefully require’s whatever the rest of your lib does for DRY purposes). Then it’s just a matter of updating the &lt;code&gt;*.gemspec&lt;/code&gt; file to meet your requirements. The key bit that bundler gives us by default is what does the making &lt;code&gt;bin/&lt;/code&gt; executable business:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first line adds only files tracked by git (a classic error is not adding changes to git before building if you leave this line in), you can of course use any other Ruby/shell code to grab the paths you want. The second line does the job of telling RubyGems what files to add to the users path, basically it looks through the list of files regex-ing for the bin and adding the files in that dir. Of course if you don’t want to put your executables in &lt;code&gt;bin/&lt;/code&gt;, you could rename that dir and regex for that something different here. Bin is just a convention of course and the &lt;code&gt;*.gemspec&lt;/code&gt; file is just a plain old Ruby file, so anything you want to add here will work just fine.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Initial thoughts for an MPD project</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/source-code-review-of-mpd-and-mpd-wrappers/"/>
+    <id>http://dropofwill.herokuapp.com/2015/source-code-review-of-mpd-and-mpd-wrappers/</id>
+    <published>2015-02-05T16:30:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;For my Software Development in Linux class we are making one large project over the course of the class and then packaging it up for distribution at the end (probably Debian, RPM, and AUR).  This is a little bit of a paradigm shift for me personally, as for most of my projects distribution means pushing to a Heroku instance, so I’ve had to brain storm some new non-web-based projects. I’ve come up with two basic trains of thought either a better time-tracking/Freshbooks integration for taskwarrior (the current ones are all bare-bones) or any number of music/analytics ideas for the music players, specifically MPD.&lt;/p&gt;
+
+&lt;p&gt;For now I’ve decided to just review MPD, its current state, and what options are available to me in terms of wrappers (preferably Ruby wrappers, my scripting language of choice). The goal here is to just establish what the MPD landscape looks like so that I can effectively scope an 11-12 week project.&lt;/p&gt;
+
+&lt;h2 id="the-music-player-daemon"&gt;The Music Player Daemon&lt;/h2&gt;
+
+&lt;p&gt;First off it’s important to establish what MPD is and isn’t. It is a music player that works with a server-client architecture. It plays music, organizes playlists, and maintains a database of music. What it isn’t is a client to play with, you need anyone of many clients to do this from ncurses-command line based players to GUI players that resemble iTunes. In this way it does one thing well and very efficiently, which is why I’ve decided to target it as the home for any music-based apps I want to create.&lt;/p&gt;
+
+&lt;p&gt;So where to start? There is extensive documentation of the C++ inner workings of &lt;a href="http://www.musicpd.org/doc/user/"&gt;MPD here&lt;/a&gt;. One important part of any integration with other music programs is playlist formats, MPD supports &lt;a href="http://www.musicpd.org/doc/user/playlist_plugins.html"&gt;&lt;code&gt;embcue&lt;/code&gt;, &lt;code&gt;m3u&lt;/code&gt;, &lt;code&gt;extm3u&lt;/code&gt;, &lt;code&gt;pls&lt;/code&gt;, and &lt;code&gt;xspf&lt;/code&gt;&lt;/a&gt; through a plugin system. It uses m3u by default, which is an extremely simple format consisting of only the time in seconds, the artist, the name, and the file path.&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;#EXTM3U
+
+#EXTINF:123, Sample artist - Sample title
+~/music/sample_artist/sample_song.mp3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is nice from a readability standpoint, but there is problem, it hard codes all the file paths, which makes it hard to port from one platform to another. That’s one thing that &lt;code&gt;.xspf&lt;/code&gt; &lt;a href="http://xspf.org/xspf-v1.html"&gt;tries to remedy.&lt;/a&gt;, it uses a unique identifier (mbid from MusicBrainz for example) to resolve different file locations to the same unique identifier, here’s a basic example file:&lt;/p&gt;
+
+&lt;pre class="highlight xml"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;?xml version="1.0" encoding="UTF-8"?&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;playlist&lt;/span&gt; &lt;span class="na"&gt;version=&lt;/span&gt;&lt;span class="s"&gt;"1"&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;"http://xspf.org/ns/0/"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;trackList&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;track&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Song Title&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;identifier&amp;gt;&lt;/span&gt;http://musicbrainz.org/track/7fe96b15-5608-430e-ad25-77a01353c5d9.html&lt;span class="nt"&gt;&amp;lt;/identifier&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;location&amp;gt;&lt;/span&gt;music/foo.mp3&lt;span class="nt"&gt;&amp;lt;/location&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;location&amp;gt;&lt;/span&gt;alternate/music/foo.mp3&lt;span class="nt"&gt;&amp;lt;/location&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/track&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/trackList&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/playlist&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So what libraries are already out there to further investigate?&lt;/p&gt;
+
+&lt;h3 id="ruby-libraries"&gt;Ruby Libraries&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/marcransome/Spfy"&gt;Spfy&lt;/a&gt; - a Ruby Xspf parser (last commit 03/2014)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://rubygems.org/gems/xspf/versions/0.4.1.1"&gt;Xspf&lt;/a&gt; - a Ruby Xspf parser (last commit 04/2007), source code forge is down, so this one is fairly rusty.&lt;/p&gt;
+
+&lt;p&gt;Since the .xspf spec is simple, well formed XML, is using one of these Ruby wrappers necessary? Or could I just use the great, built in XML support?&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/robinst/taglib-ruby"&gt;taglib-ruby&lt;/a&gt; a wrapper around the C++ library &lt;a href="https://github.com/taglib/taglib"&gt;TagLib&lt;/a&gt; - meta data manager for audio files (last commit 08/2014 &amp;amp; 02/2015 respectively)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/archSeer/ruby-mpd"&gt;ruby-mpd&lt;/a&gt; a ruby wrapper around MPD, which itself was the fork librmpd (last commit 12/2014)&lt;/p&gt;
+
+&lt;p&gt;[mpd_client(https://github.com/mamantoha/mpd_client) a ruby wrapper around MPD, a port of the python-mpd library (last commit 12/2014)&lt;/p&gt;
+
+&lt;h3 id="other-stuff"&gt;Other Stuff&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href="http://soundiiz.com"&gt;Soundiiz&lt;/a&gt; is doing something similar to what I want to, though it seems to be completely web based and closed source, which is sad to see.&lt;/p&gt;
+
+&lt;p&gt;The web api’s for &lt;a href="https://developer.spotify.com/web-api/endpoint-reference/"&gt;Spotify&lt;/a&gt;, &lt;a href="http://developer.echonest.com"&gt;Echonest&lt;/a&gt;, &lt;a href="http://www.last.fm/api/show/user.getTopTracks"&gt;Last.fm&lt;/a&gt;, &lt;a href="http://www.last.fm/api/show/user.getTopTracks"&gt;Grooveshark&lt;/a&gt;, &lt;a href="https://developers.google.com/youtube/v3/docs/playlists"&gt;YouTube&lt;/a&gt;, &lt;a href="http://www.rdio.com/developers/docs/"&gt;Rdio&lt;/a&gt;, &lt;a href="https://musicbrainz.org/doc/Beginners_Guide"&gt;MusicBrainz&lt;/a&gt;, and how to resolve content between them.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Initial Review of a FOSS Primer</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/initial-review-of-a-foss-primer/"/>
+    <id>http://dropofwill.herokuapp.com/2015/initial-review-of-a-foss-primer/</id>
+    <published>2015-02-03T20:25:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;This section of the book is focused on copyrights and licensing issues facing FOSS projects. It starts at a high level explaining why a license is necessary and then works its way down to the details of choosing the correct license, dealing with copyright in teams and organizations, and finally how to deal with copyright violations from a FOSS perspective.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Who:&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Richard_Fontana"&gt;Richard Fontana&lt;/a&gt; (lawyer, worked on GPLv3, LGPLv3, AGPL, director of OSI),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Bradley_M._Kuhn"&gt;Bradley M. Kuhn&lt;/a&gt; (free software activist, president of Software Freedom Conservancy, previously worked for the SFLC and FSF),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Eben_Moglen"&gt;Eben Moglen&lt;/a&gt; (law and legal history professor at Columbia University and director-counsel and chairman of the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://www.linkedin.com/pub/matt-norwood/5/770/a39"&gt;Matthew Norwood&lt;/a&gt; (IP lawyer, previously was counsel at the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://www.ravicher.com/"&gt;Daniel B. Ravicher&lt;/a&gt; (lawyer and law professor),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="http://en.wikipedia.org/wiki/Karen_Sandler"&gt;Karen Sandler&lt;/a&gt; (executive director of the SFC, former director of the GNOME Foundation, former general counsel at the SFLC),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://twitter.com/jamesvasile"&gt;James Vasile&lt;/a&gt; (director of Open Internet Tools Project),&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;a href="https://torekeland.com/about/aaron-williamson"&gt;Aaron Williamson&lt;/a&gt; (IP lawyer for Tor Ekeland).&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; Foreward - Chapter 2 of the book &lt;em&gt;A Legal Issues Primer for Open Source and Free Software Projects&lt;/em&gt; put out by the &lt;a href="https://www.softwarefreedom.org/"&gt;Software Freedom Law Center (SFLC).&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Where:&lt;/strong&gt; &lt;a href="http://bizlegfoss-ritigm.rhcloud.com/static/books/foss-primer.pdf"&gt;available for free on RIT’s Business and Legal issues in FOSS course website&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;When:&lt;/strong&gt; Latest edition (1.5.2) published June 2008&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="the-good"&gt;The Good&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;This cleared up some of my confusions with the GPL, especially around the server/client relationship? Say my backend runs on GPL’d code, does that mean it has to serve a static copy of the code on the site somewhere? It turns out if you do not distribute the software, you do not have to distribute the source code.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The description of copyright enforcement was interesting. Something I’ve always wondered is how one enforce GPL restrictions, especially when the violation occurs in proprietary code (how does one know for sure the binaries contain your code? See Berkeley v. FSF).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Deciding how to transfer copyright of code in a project with multiple people seems almost important than the choice of license (what good is your license if it you didn’t have the rights to it to begin with?). It’s important to remember that your employer may own everything you create, even on your own time and on your own computer.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="the-bad"&gt;The Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The sections on the general GPL and BSD/permissive licenses were too short, I guess since this is just a primer they didn’t want to go line by line or anything like that. However, as someone already aware of the basics of copyleft/permissive, I was hoping for a little more in the way of details and use cases, which seemed to me what was given when talking about the specific licenses of LGPL and AGPL.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It seemed pretty dismissive of Permissive licenses. Yes, it does make sense to group them together, but are patent, trademark, attribution, changelog rules really equivalent to saying they “differ in only minor ways”? I realize copyleft people only think about preserving freedom, but there are a ton of other issues involved with license choice.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;It could use more motivating examples, most legal systems are fundamentally built on past rulings, so understanding past issues related to licensing differences could shape a developer’s opinion on what is important for their particular project.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Copyright expires after X-years. Doesn’t that mean that copyleft licenses also expire after that amount of years as well? Why then is it called a “&lt;em&gt;forever&lt;/em&gt; free” license?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A footnote in the section on the AGPL mentions that client side code (via JavaScript, CSS, and HTML) is distribution of software “in the strictest sense”. As the creation of frontend code becomes more and more complex the result sent to the end user begins to look more and more like binaries, complete with a build or compilation step (via preprocessors, templating systems, dependency managers, minfiers, and the like). What this means is the code sent to the browser is much less usable than the source the developer used to make, while not as difficult as reverse engineering a binary, figuring out a complex program with 2 letter variables and function inlining is no easy task. So I guess my question is what counts as “source code” when it comes to frontend code under the GPL?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The OSI and FSF disagree on what are valid open source licenses, I’m thinking specifically about the Creative Commons 0 here (which generated a lot of discussion on the OSI mailing list, here, here, and here, before it was eventually rejected). Why should I trust one source over the other in matters of such disagreement?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;What rights do you have in an employee/employer relationship? Can they really own everything you create? Are there ways to circumvent this, like say anonymous contributions?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="final-thoughts"&gt;Final Thoughts&lt;/h2&gt;
+
+&lt;p&gt;Informative and I look forward to reading the rest of the book, especially the patents and trademark sections. I think a few more motivating examples and a little more depth in the explanations could really improve this guide in terms of usefulness. That said it did answer a lot of unanswered questions I’ve had as is, so it certainly is worth taking a look at if these things are relevant to what you do or you find this stuff interesting.&lt;/p&gt;
+
+&lt;p&gt;4.75/5&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Review of Everything is a Remix</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/review-of-everything-is-a-remix/"/>
+    <id>http://dropofwill.herokuapp.com/2015/review-of-everything-is-a-remix/</id>
+    <published>2015-02-03T20:24:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;em&gt;Everything is a Remix&lt;/em&gt; is a documentary that explores the source of creativity by looking at examples from our past: music, movies, computers, and more. It takes the stand that everything (even down to our biology) is the result of remix, a metaphor taken from music sampling that the documentary defines as an amalgamation of copying, transforming, and combining.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Who:&lt;/strong&gt; &lt;a href="https://twitter.com/remixeverything"&gt;Kirby Ferguson&lt;/a&gt;, a New York based film-maker&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;What:&lt;/strong&gt; A 4-part documentary that clocks in at just over half an hour.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Where:&lt;/strong&gt; There are lots of places to watch this on the web (along with a bunch of remixes), but this is &lt;a href="https://www.youtube.com/watch?v=coGpmA4saEk"&gt;a link to the full film on youtube.&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;When:&lt;/strong&gt; First part was released in 2010, last part was released in 2012.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id="the-good"&gt;The Good&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;While the film definitely has a thesis it argues for, when necessary it shows the other side of the story. I’m thinking especially in the case of the history of patents, instead of setting up a straw man to burn down, he makes the best case for patents I’ve heard in a while, showing the historical reasoning behind them and then shows how the situation today has strayed from those original goals. This makes the film stronger as a whole.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The film emphasizes attribution, especially Zeppelin’s lack of it in a lot of their music, even in straight up covers. This parallels with what Remy is always talking about, “attribution is the coin of FOSS”. Like it said in the film at least they didn’t try to sue everyone else who did the same to them, something that is not always the case, he mentions especially Paul Allen and Steve Jobs, people who openly admit to copying other people’s work, but also viciously went after every law suit possible when the shoe was on the other foot.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The parallels between Darwinian and social evolution, along with the mantra of ‘copy, combine, transform” were the strongest part of the film, at least in terms of presenting his argument.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="the-bad"&gt;The Bad&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Well, at least when taken literally everything isn’t a remix, because remix is a technical term. Whenever something “new” is recorded it is not a remix, even if new just means webcam footage of a bedroom rendition of &lt;a href="http://www.guitarnick.com/smoke-on-the-water-deep-purple-guitar-lesson-tab.html"&gt;&lt;em&gt;Smoke on the Water&lt;/em&gt;&lt;/a&gt;. A remix without samples is not a remix no matter how unoriginal it may be. Led Zeppelin and Girl Talk are fundamentally different in that respect. I get that he is really using remix as a metaphor, but I think it weakens the argument, because he never really makes that explicit.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I think a stronger thesis statement would look like the following bold text (which is a quote from Gilberto Gill, from &lt;a href="/2014-10-22-rip-a-remix-manifesto"&gt;&lt;em&gt;RiP: A Remix Manifesto&lt;/em&gt;&lt;/a&gt;:&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;Sharing is the nature of creation, it doesn’t happen in isolation. &lt;strong&gt;No one creates in a vacuum, everything comes from something else.&lt;/strong&gt; It’s a chain reaction.&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;p&gt;This idea of chain reaction covers situations with new work as well, because “no one creates in a vacuum”, what we create is shaped by where we’re from, our culture, the people we know, and the media we consume. Even is someone is not directly sampling a track, it’s not possible to create something without influences. I think the film would have been stronger if it explored the differences and similarities between influences, covers, and remixes. I think there is no fundamental ethical distinction, but there is a technical one, and the film fails to notice this, which I think makes it weaker as a whole.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;I wish it explored some topics more in depth, I realize this is a short/episodic documentary format and he wanted to cover a lot of ground, but in order to cover music, movies, technology, and biology all in 30 minutes is a tough task and the ending left me wanting more.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="questions"&gt;Questions&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Is some form of patent law (or intellectual property) fundamental to funding R&amp;amp;D?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;How does the rest of the class feel about copyright and patent laws? Are they necessary for progress? Personally I feel like they are unnecessary, but I’d like to hear more arguments.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Are the Zeppelin and Tarantino examples fundamentally different? And do you think they are positive or negative examples of “remix”? Basically how important is attribution in creative contexts?&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="final-thoughts"&gt;Final Thoughts&lt;/h2&gt;
+
+&lt;p&gt;Well put together, makes a point without making a preach to the choir type presentation. I would have changed some of the basic rhetoric and moved it a little different direction (see The Bad), but really I’m being quite nit-picky and it is certainly worth a half hour of your time to sit down and watch it.&lt;/p&gt;
+
+&lt;p&gt;4/5&lt;/p&gt;
+</content>
+  </entry>
+</feed>

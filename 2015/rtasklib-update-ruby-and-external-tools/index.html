@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - rtasklib update: Ruby and external tools</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../stylesheets/main-aec3cd83.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class=""><a href="/posts">blog</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>rtasklib update: Ruby and external tools</h1>
+		<p>It turns out that one of the reasons Ruby was popular before the advent of Rails was because it was so easy to integrate with 3rd party tools through subprocesses. In fact Ruby has at least 7 ways of executing processes either in the core or the standard libraries and many more user implemented varieties. Since <code>rtasklib</code> is at its core concerned with interacting with a subprocess having a solid understanding of the available options is important. Below I summarize the results of my research for several of Ruby’s subprocess methods.</p>
+
+<h2 id="kernelexec-exececho-exec">Kernel#exec, <code>exec('echo exec')</code></h2>
+
+<p>Exec works by actually changing the current process into whatever its parameter is. So anything that comes after an <code>exec</code> call in a Ruby program will never execute. This is useful for tasks where that call is the last action the program takes as well as acting as the basic building block off of which all the other commands are implemented.</p>
+
+<h2 id="kernel--echo-backticks--exit-code">Kernel#`, <code>`echo backticks` =&gt; exit code</code></h2>
+
+<p>The one I often used before researching this was the ‘backtick’ methd, where every statement between backticks is passed to a subprocess (using <code>Kernel#fork</code> and <code>Kernel#exec</code> under the hood) and returns the exit code. This looks like a special statement in Ruby, but really its just a little syntactic sugar around a kernel method. Obviously, for <code>rtasklib</code> I’m interested in the actual output of the process, not just whether it was successful, so another technique is needed.</p>
+
+<h2 id="kernelsystem-systemecho-system--stdout">Kernel#system, <code>system('echo system') =&gt; STDOUT</code></h2>
+
+<p>A slightly different kernel method is <code>system</code>, which works the same under the hood as the backticks method, but instead of returning the exit code it returns STDOUT. This is more useful, but both are necessary for my purposes.</p>
+
+<h2 id="open3popen3">Open3#popen3</h2>
+
+<p>Open3 is a module included in the standard libraries that offers a little bit more control over the process along with a Ruby-style block DSL. It has a number of methods available for various levels of control and piping processes together. The closest to what I want is <code>Open3#popen3</code>, which offers the most control. A simple used case would look like the following:</p>
+
+<pre class="highlight plaintext"><code>~~~
+Open3.popen3('echo popen3') do |stdin, stdout, stderr, wait_thread|
+  pid = wait_thread.pid
+  # Process::Status object returned.
+  exit_status = wait_thread.value
+end
+~~~
+</code></pre>
+
+<p>This is closer to what I want, but managing interactive sessions (which does happen occasionally with <code>task</code>) starts to get messy, is their a better way?</p>
+
+<h2 id="pty-and-rubyexpect">PTY and ruby_expect</h2>
+
+<p>Enter the standard library PTY and the external gem <code>ruby_expect</code> both of these work similarly to Open3, but allow you to work with interactive sessions cleanly by implementing an interface similar to the UNIX tool Expect. The syntax of the two are slightly different, but the basic idea is that you create a subprocess and provide a way to respond to a given regex. An example of <code>ruby_expects</code> syntax is shown below.</p>
+
+<pre class="highlight plaintext"><code>~~~
+exp = RubyExpect::Expect.spawn(some_cmd)
+exp.procedure do
+  any do
+    expect /\(yes/no\)/ do
+      if respond
+        send "yes"
+      else
+        send "no"
+      end
+    end
+  end
+end
+~~~
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Right now I’m using the <code>ruby_expect</code> gem, but I’ve also implemented the PTY version as well and have been switching back and forth between the two. They both do what I want, but lack good documentation. The benefit of using the pure Ruby gem is that it is much easier to read than the C implementation, though I haven’t checked out the Rubinius version (the Ruby interpreter written in Ruby), which might have a Ruby version of PTY.</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../pacing-and-character-in-mcconaugheys-performance-in-mud/">Pacing and character in McConaughey’s performance in Mud</a> <span>Nov 19</span>
+        </li>
+        <li>
+          <a href="../leitmotif-in-dr-strangelove/">Leitmotif and comedic relief in Kubrick's Dr. Strangelove</a> <span>Oct 29</span>
+        </li>
+        <li>
+          <a href="../establishing-narrative-control-in-freers-high-fidelity/">Establishing narrative control in Freer's High Fidelity</a> <span>Sep 30</span>
+        </li>
+        <li>
+          <a href="../a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="./">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/bizleg/">BizLeg (15)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/hfoss/">HFOSS (4)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/film/">Film (3)</a></li>
+        <li><a href="/tags/cinematography/">Cinematography (1)</a></li>
+        <li><a href="/tags/review/">Review (10)</a></li>
+        <li><a href="/tags/trademark/">Trademark (2)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/legal/">Legal (1)</a></li>
+        <li><a href="/tags/licenses/">Licenses (1)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/business/">Business (1)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/foss/">FOSS (1)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/patents/">Patents (1)</a></li>
+        <li><a href="/tags/ip/">IP (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/video/">Video (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (28)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+  </body>
+</html>

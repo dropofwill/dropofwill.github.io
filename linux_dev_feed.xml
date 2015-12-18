@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Dropofwill's Blog</title>
+  <subtitle>Linux Development Posts</subtitle>
+  <id>http://dropofwill.herokuapp.com/</id>
+  <link href="http://dropofwill.herokuapp.com/"/>
+  <link href="http://dropofwill.herokuapp.com/linux_dev_feed.xml" rel="self"/>
+  <updated>2015-11-19T13:09:00-05:00</updated>
+  <author>
+    <name>Will Paul</name>
+  </author>
+  <entry>
+    <title>rtasklib first release</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/rtasklib-first-release/"/>
+    <id>http://dropofwill.herokuapp.com/2015/rtasklib-first-release/</id>
+    <published>2015-05-19T10:31:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;So the semester has come to a close and I’ve made the first ‘official’ release of &lt;code&gt;rtasklib&lt;/code&gt;. Install the gem &lt;a href="https://rubygems.org/gems/rtasklib"&gt;from RubyGems.org&lt;/a&gt; (&lt;code&gt;gem install rtasklib&lt;/code&gt;) or &lt;a href="https://github.com/dropofwill/rtasklib/tree/master/rpms"&gt;install the RPM on your Fedora system if you prefer&lt;/a&gt;. I reached out to the TaskWarrior devs and they also are adding &lt;code&gt;rtasklib&lt;/code&gt; to the list of &lt;a href="http://taskwarrior.org/tools/#libraries"&gt;available libraries on the TaskWarrior main website in the next few days&lt;/a&gt;, which is pretty cool.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, I was unable to finish &lt;code&gt;task_time&lt;/code&gt; for the end of the semester. That said the pieces are in place and I hope to get something out over the summer.&lt;/p&gt;
+
+&lt;p&gt;All in all it was good learning experience. I don’t often tread that far away from Web Dev, despite the fact that I spend a good part of my day on the command line. It’s also the first time I’ve went through the process of actually releasing one of the gems I’ve made to RubyGems, so that was a good experience. Packaging for RPMs was a lot less easy and made appreciate the Ruby system a lot more than I did previously.&lt;/p&gt;
+
+&lt;p&gt;If anyone in the future needs to package up a Ruby Gem, I stumbled upon this random post on &lt;a href="https://gitlab.com/fedora-ruby/gitlab-rpm/wikis/rubygem-packaging"&gt;Fedora’s GitLab&lt;/a&gt;, which was invaluable in just understanding the process from someone that obviously has done this quite a bit (and also not a first page Google result). Also, the &lt;a href="https://github.com/fedora-ruby/gem2rpm"&gt;gem2rpm&lt;/a&gt; gem (from Fedora) is pretty good at extracting as much meta data as it can from the Ruby .gemspec, but you have to do quite a bit more to get a working RPM (especially if you have many Gem dependencies).&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Packaging Ruby gems</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/packaging-ruby-gems/"/>
+    <id>http://dropofwill.herokuapp.com/2015/packaging-ruby-gems/</id>
+    <published>2015-05-10T11:46:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;In the Ruby community the most common way to distribute software is in a packaged format cutely named gems (similar to the Python concept of Eggs). This manages dependencies and meta data much like the other packaging platforms, but with Ruby syntax in a file called ‘#{you_gems_name}.gemspec’. This process is completely automated through the Ruby gems, &lt;code&gt;gem&lt;/code&gt; (installation/RubyGems.org integration), &lt;code&gt;bundler&lt;/code&gt; (dependency management and boiler plate code), and &lt;code&gt;rake&lt;/code&gt; (Ruby make, to streamline the process). So the release process is as simple as updating the metadata (version number, and any changelog, or whatever) and running &lt;code&gt;rake build&lt;/code&gt;, &lt;code&gt;rake release&lt;/code&gt;. From there anyone with a working Ruby install and internet connection can simply run &lt;code&gt;gem install #{your_gem_name}&lt;/code&gt;. They could also take the local gem created by &lt;code&gt;rake build&lt;/code&gt; and &lt;code&gt;gem install #{path/to/gem}&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;This makes sense for my &lt;code&gt;rtasklib&lt;/code&gt; library, because it is really only useful for people who are already using Ruby and are familiar with its conventions. But what about for &lt;code&gt;task_time&lt;/code&gt;? In an ideal world users wouldn’t even have to know that it runs on Ruby. Luckily Fedora has &lt;a href="https://fedoraproject.org/wiki/Packaging:Ruby?rd=Packaging/Ruby"&gt;an extensive guide&lt;/a&gt; for packaging gems into RPMs. It makes the distinction between gems used as libraries (like &lt;code&gt;rtasklib&lt;/code&gt;), gems used as applications (like &lt;code&gt;task_time&lt;/code&gt;), Ruby scripts not in the gem format. The plan is to release both libraries on &lt;a href="https://rubygems.org/profiles/dropofwill"&gt;RubyGems.org/profiles/dropofwill&lt;/a&gt; so that they will be internet accessible, as well as a library RPM package for &lt;code&gt;rtasklib&lt;/code&gt; and an application RPM package for &lt;code&gt;task_time&lt;/code&gt;.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>rtasklib update</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/rtasklib-update/"/>
+    <id>http://dropofwill.herokuapp.com/2015/rtasklib-update/</id>
+    <published>2015-04-20T10:36:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;In the Ruby world the most common way to generate documentation is with &lt;a href="http://yardoc.org"&gt;Yardocs&lt;/a&gt;. It basically generates documentation by scraping the code comments and provides a structured API for writing comments that it can interpret. For example to annotate that a parameter of a certain method is a duck type that responds to &lt;code&gt;#to_s&lt;/code&gt; (to string), you would simply make a comment above the method definition that says: &lt;code&gt;# @param parameter_name [#to_s] a parameter that responds to #to_s&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I’ve started the process of documenting everything (currently at 45.76% documented, according to Yard’s statistics) and posting it to the Github page for the rtasklib repo, which you can access &lt;a href="http://will-paul.com/rtasklib/"&gt;here&lt;/a&gt; or from the readme. Here’s the documentation for the &lt;a href="http://will-paul.com/rtasklib/Rtasklib/Taskrc.html"&gt;Taskrc class for example&lt;/a&gt;. To speed up this process I found a Python utility that does the generation, called &lt;code&gt;ghp-import&lt;/code&gt;, which switches to the gh-pages branch, generates the docs, makes a commit, and pushes it to the repo.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>rtasklib update: Ruby and external tools</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/rtasklib-update-ruby-and-external-tools/"/>
+    <id>http://dropofwill.herokuapp.com/2015/rtasklib-update-ruby-and-external-tools/</id>
+    <published>2015-04-05T22:22:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;It turns out that one of the reasons Ruby was popular before the advent of Rails was because it was so easy to integrate with 3rd party tools through subprocesses. In fact Ruby has at least 7 ways of executing processes either in the core or the standard libraries and many more user implemented varieties. Since &lt;code&gt;rtasklib&lt;/code&gt; is at its core concerned with interacting with a subprocess having a solid understanding of the available options is important. Below I summarize the results of my research for several of Ruby’s subprocess methods.&lt;/p&gt;
+
+&lt;h2 id="kernelexec-exececho-exec"&gt;Kernel#exec, &lt;code&gt;exec('echo exec')&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;Exec works by actually changing the current process into whatever its parameter is. So anything that comes after an &lt;code&gt;exec&lt;/code&gt; call in a Ruby program will never execute. This is useful for tasks where that call is the last action the program takes as well as acting as the basic building block off of which all the other commands are implemented.&lt;/p&gt;
+
+&lt;h2 id="kernel--echo-backticks--exit-code"&gt;Kernel#`, &lt;code&gt;`echo backticks` =&amp;gt; exit code&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;The one I often used before researching this was the ‘backtick’ methd, where every statement between backticks is passed to a subprocess (using &lt;code&gt;Kernel#fork&lt;/code&gt; and &lt;code&gt;Kernel#exec&lt;/code&gt; under the hood) and returns the exit code. This looks like a special statement in Ruby, but really its just a little syntactic sugar around a kernel method. Obviously, for &lt;code&gt;rtasklib&lt;/code&gt; I’m interested in the actual output of the process, not just whether it was successful, so another technique is needed.&lt;/p&gt;
+
+&lt;h2 id="kernelsystem-systemecho-system--stdout"&gt;Kernel#system, &lt;code&gt;system('echo system') =&amp;gt; STDOUT&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;A slightly different kernel method is &lt;code&gt;system&lt;/code&gt;, which works the same under the hood as the backticks method, but instead of returning the exit code it returns STDOUT. This is more useful, but both are necessary for my purposes.&lt;/p&gt;
+
+&lt;h2 id="open3popen3"&gt;Open3#popen3&lt;/h2&gt;
+
+&lt;p&gt;Open3 is a module included in the standard libraries that offers a little bit more control over the process along with a Ruby-style block DSL. It has a number of methods available for various levels of control and piping processes together. The closest to what I want is &lt;code&gt;Open3#popen3&lt;/code&gt;, which offers the most control. A simple used case would look like the following:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;~~~
+Open3.popen3('echo popen3') do |stdin, stdout, stderr, wait_thread|
+  pid = wait_thread.pid
+  # Process::Status object returned.
+  exit_status = wait_thread.value
+end
+~~~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is closer to what I want, but managing interactive sessions (which does happen occasionally with &lt;code&gt;task&lt;/code&gt;) starts to get messy, is their a better way?&lt;/p&gt;
+
+&lt;h2 id="pty-and-rubyexpect"&gt;PTY and ruby_expect&lt;/h2&gt;
+
+&lt;p&gt;Enter the standard library PTY and the external gem &lt;code&gt;ruby_expect&lt;/code&gt; both of these work similarly to Open3, but allow you to work with interactive sessions cleanly by implementing an interface similar to the UNIX tool Expect. The syntax of the two are slightly different, but the basic idea is that you create a subprocess and provide a way to respond to a given regex. An example of &lt;code&gt;ruby_expects&lt;/code&gt; syntax is shown below.&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;~~~
+exp = RubyExpect::Expect.spawn(some_cmd)
+exp.procedure do
+  any do
+    expect /\(yes/no\)/ do
+      if respond
+        send "yes"
+      else
+        send "no"
+      end
+    end
+  end
+end
+~~~
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="conclusion"&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Right now I’m using the &lt;code&gt;ruby_expect&lt;/code&gt; gem, but I’ve also implemented the PTY version as well and have been switching back and forth between the two. They both do what I want, but lack good documentation. The benefit of using the pure Ruby gem is that it is much easier to read than the C implementation, though I haven’t checked out the Rubinius version (the Ruby interpreter written in Ruby), which might have a Ruby version of PTY.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>rtasklib update march 16th</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/rtasklib-update-march-16th/"/>
+    <id>http://dropofwill.herokuapp.com/2015/rtasklib-update-march-16th/</id>
+    <published>2015-03-16T00:02:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;Over the last couple of weeks the overall architecture has been in a state of flux as I have been swapping pieces in out to see what will work best. Now as I approach my original milestone for having this in a working condition things are starting to fall into place. Models for tasks and configuration are pretty much stable, initialization of the configuration is done, and validation and serialization of tasks are coming along. The main bit of work left to do is writing the controllers to hook all of the components together and will effectively make up the public interface for the library.&lt;/p&gt;
+
+&lt;h2 id="a-little-implementation-detail"&gt;A little implementation detail&lt;/h2&gt;
+
+&lt;p&gt;For the configuration file I decided to effectively store it as a shallow hash structure before converting it to a Virtus domain object. The config will be immutable because there should not be a need to both permanently and dynamically change the users configurations, the latter alone can be configured on a per call basis with the &lt;code&gt;rc:&lt;/code&gt; flag. Because of this we only have to go in one direction, which makes the serialization layer less restrictive. As I mentioned last week &lt;code&gt;taskw&lt;/code&gt; implemented a deep nested hash like this:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rc["color"]["label"]["sort"] = 'gray10'
+# which makes this (a default config) impossible to store as well
+rc["color"] = 'on'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I went with the simplest solution I could come up with, which was to treat each of the paths as unique keys in a shallow hash (while converting periods to underscores to follow a Ruby convention), something like this (using Ruby symbols, instead of strings for the keys):&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;rc[:color_label_sort] = 'gray10'
+rc[:color] = 'on'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From there its just a matter of converting the hash to a Virtus object. Usually a Virtus attribute has a set type so that it knows what to coerce to, but in this case there are over 200 configurations in the default config and of course a config can contain arbitrary stuff from the user or another plugin, so there is no way to set this all up before hand. Luckily Virtus comes metaprogramming ready and it was easy enough to add attributes on the fly, I simply checked for booleans (including TW’s idea of “yes”/”no” and “on”/”off”), floats, integers, and the finally just said everything else was a string and to just keep it like it is.&lt;/p&gt;
+
+&lt;h2 id="moving-forward"&gt;Moving forward&lt;/h2&gt;
+
+&lt;p&gt;I plan to have a basic controller implementation in place by the end of next week or sometime during Spring Break. Once that’s in place I’ll be able to start splitting time between &lt;code&gt;task_time&lt;/code&gt; and &lt;code&gt;rtasklib&lt;/code&gt; again.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>task_time and rtasklib updates March 8th</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/task_time-and-rtasklib-updates-march-8th/"/>
+    <id>http://dropofwill.herokuapp.com/2015/task_time-and-rtasklib-updates-march-8th/</id>
+    <published>2015-03-08T21:10:00-04:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;Last week I talked about how all existing &lt;code&gt;TaskWarrior&lt;/code&gt; wrappers were not going to satisfy the requirements for &lt;code&gt;task_time&lt;/code&gt;, so I decided to roll my own Ruby wrapper &lt;code&gt;rtasklib&lt;/code&gt; and started working on the JSON to domain object marshalling and vice versa. I realized that I was reinventing the wheel a bit with the domain objects and to some extent with the data type coercions (though obviously some custom coercions will be necessary).&lt;/p&gt;
+
+&lt;p&gt;I want to implement a familiar interface for developers to interact with the TW database, like the guys behind the Python &lt;code&gt;taskllb&lt;/code&gt; tried to do with Django’s QuerySet. So I looked into writing it as a simple adapter for one of the major Ruby ORMs, &lt;a href="https://rubygems.org/gems/activerecord"&gt;ActiveRecord&lt;/a&gt;, &lt;a href="http://datamapper.org"&gt;DataMapper&lt;/a&gt;, and &lt;a href="http://rom-rb.org"&gt;ROM (Ruby Object Mapper)&lt;/a&gt;. The ActiveRecord implementation is not particularly friendly to non-SQL data stores and has been quite a bit of work for people using NoSQL to write adapters for. Datamapper had several plain text adapters written (YAML, CSV, etc.), but the whole project had been pretty much been abandoned for ROM. I spent the most time messing around with ROM, it really is a new paradigm for an ORM (the developers might argue it isn’t actually an ORM), but it has not yet hit its 1.0 release and the API keeps changing. So even though they had several plaintext data store adapters implemented, they no longer worked with the current release. And while I think I could probably get it working with a little work, I realized I was spending too much time on it for the value it would bring to this particular project.&lt;/p&gt;
+
+&lt;p&gt;However, the time spent with ROM was not a complete loss, because the people working on it have also released part of its core as a separate gem, &lt;a href="https://github.com/solnic/virtus"&gt;Virtus&lt;/a&gt;, specifically for working with domain objects and providing a framework for coercing data types (as well as handling finalization and circular dependencies).&lt;/p&gt;
+
+&lt;p&gt;For the validation layer I’m test driving the &lt;a href="https://github.com/kodio/veto"&gt;Veto&lt;/a&gt; gem, I was considering using ActiveModel and just including the validations submodule, but if Veto can do the trick that would remove a fairly heavy dependency.&lt;/p&gt;
+
+&lt;p&gt;For reading in the config I was thinking about just using just a simple Hash data structure, which is what the Python wrapper &lt;code&gt;taskw&lt;/code&gt; did. One downfall of this approach is that TW doesn’t configs don’t actually work like that internally, so we end up with situations like this:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;color = on
+color.label.sort = gray10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Which cannot be stored as a hash, &lt;code&gt;taskw&lt;/code&gt; admits this and prefers child configs to parent ones. That’s why I’m going to treat the &lt;code&gt;.taskrc&lt;/code&gt; file as its own read-only domain object, perhaps generated by the &lt;code&gt;task show&lt;/code&gt; command or by reading the &lt;code&gt;~/.taskrc&lt;/code&gt; with something like &lt;a href="https://github.com/datafolklabs/ruby-parseconfig"&gt;&lt;code&gt;parseconfig&lt;/code&gt;&lt;/a&gt;, though since TW uses dot syntax it might be just as simple to implement it myself (something like &lt;a href="https://gist.github.com/potatosalad/760726"&gt;this quick and dirty gist&lt;/a&gt;).&lt;/p&gt;
+
+&lt;h2 id="big-picture"&gt;Big Picture&lt;/h2&gt;
+
+&lt;p&gt;Here’s a broad sweeping overview of my currently planned architecture. The following shows the modules, classes, as well as inheritance and composition and some of the class methods. Of course all this is subject to change, but this is where I am at right now.&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;# Public interface, only part of the application a user should interact with
+Rtasklib::TW
+# Loads .taskrc in on intialization, finds the data store and custom UDAs
+::new(rc="~/.taskrc", config_override={})
+
+# Glue that holds everything together
+Rtasklib::Controller
+
+# Domain objects &amp;lt;=&amp;gt; JSON for import/export
+Rtasklib::Models
+include Virtus.model
+::Task
+::Taskrc
+
+# Connected with each relevant attribute in the model
+Rtasklib::Validations
+include Veto.validator
+::UUID
+::String
+::StringArray
+::Numeric
+::Date
+::Duration
+
+# Runs the actual shell commands (using Open3)
+Rtasklib::Exectute
+include Open3
+::write(filter, data)
+::read(filter)
+::execute(args*)
+
+Rtasklib::ParseConfig
+# or possibly
+Rtasklib::ParseConfig &amp;lt; ParseConfig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="moving-forward"&gt;Moving Forward&lt;/h2&gt;
+
+&lt;p&gt;I hope to have the models ‘done’ by next week and hopefully enough of the architecture around it done so that I can begin building &lt;code&gt;task_time&lt;/code&gt; against it as quickly as possible, so I can figure out the design flaws earlier rather than later.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>task_time update March 1st</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/task_time-update-march-1st/"/>
+    <id>http://dropofwill.herokuapp.com/2015/task_time-update-march-1st/</id>
+    <published>2015-03-01T21:16:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;a href="/2015/02/22/a-comparison-of-task-warrior-wrappers.html.markdown"&gt;Last week&lt;/a&gt; I talked about picking an appropriate TaskWarrior wrapper for my &lt;code&gt;task_time&lt;/code&gt; project. A rundown of the options are &lt;code&gt;taskw&lt;/code&gt; (Python, GPL, low on documentation, durations not implemented yet), &lt;code&gt;tasklib&lt;/code&gt; (Python, BSD, good documentation, durations not implemented, does not read in users &lt;code&gt;.taskrc&lt;/code&gt;), and &lt;code&gt;taskwarrior&lt;/code&gt; (Ruby, MIT, just does JSON marshalling/unmarshalling). In the end I decided none of these were actually going to cut it, since none implemented duration features, so my choices were to either Fork and implement durations and whatever other features were needed or to roll my own. In the end I really would rather use Ruby for this so I decided that it would be good to write the wrapper from scratch, while taking cues from each of the other implementations. I named the repo &lt;code&gt;rtasklib&lt;/code&gt; in following with the ruby convention of naming wrappers with lib and either a leading &lt;code&gt;r&lt;/code&gt; or trailing &lt;code&gt;_ruby&lt;/code&gt; (dashes imply a subclass and are only used when your’re gem extends an existing gem not an external program). You can find the repo at &lt;a href="http://github.com/dropofwill/rtasklib"&gt;&lt;code&gt;dropofwill/rtasklib&lt;/code&gt;&lt;/a&gt; and the &lt;code&gt;task_time&lt;/code&gt; repo at &lt;a href="http://github.com/dropofwill/task_time"&gt;dropofwill/task_time&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So far I’ve been working on the data conversion process and setting up a sandboxed testing environment (I don’t want to run these tests on my local database of tasks after all :) ). Luckily with TaskWarrior you can just point it to a separate &lt;code&gt;.taskrc&lt;/code&gt; and it will create a database wherever its told, so I have it setting one up inside my spec’s data directory. I’ve setup &lt;a href="https://coveralls.io/r/dropofwill/rtasklib?branch=master"&gt;Coveralls&lt;/a&gt; (for test coverage monitoring) and &lt;a href="https://travis-ci.org/dropofwill/rtasklib"&gt;Travis-Ci&lt;/a&gt; (for continuous integration) on both projects (though &lt;code&gt;task_time&lt;/code&gt; isn’t being tested in a meaningful way at the moment). One problem I ran into was installing TaskWarrior on Travis Ubuntu machine, it turns out the Ubuntu repos are 4 minor versions behind, which is a lot of missing TaskWarrior functionality (including stuff that &lt;code&gt;task_time&lt;/code&gt; will require to work), so I had to figure out how to install it from source, which took a few tries to get working right (see the .travis.yml). I don’t know how Ubuntu users can stand that sort of turn around on repo updates, but that’s another gripe for another time.&lt;/p&gt;
+
+&lt;p&gt;As far as data conversions go, the TaskWarrior data is subtlely more complicated than it seems. There are supposedly only 4 data types: string, numeric, date, and duration. In Ruby numerics should be represented as Fixnum (ints), Floats, or Bigdecimal/Bignum if need be. It also turns out that the string data type in the TaskWarrior world can also mean array of strings and these are used interchangeably internally. Dates and Durations can be represented with varying levels of precision, precise versions are represented in the standard ISO8601 format, no matter how the user inputs it (though they add their own idea of negative durations to the spec for things that are past due…). But there are also &lt;a href="http://taskwarrior.org/docs/named_dates.html"&gt;named dates&lt;/a&gt; like &lt;code&gt;mon&lt;/code&gt; or &lt;code&gt;eoww&lt;/code&gt; (end of work week), as well as the interesting &lt;code&gt;someday&lt;/code&gt; and &lt;code&gt;later&lt;/code&gt; that represent January 18th, 2038. Luckily the source code is available so I should be able to figure this out (as you can tell by the badge on the repo, I’m not there yet). From what I can tell the other repos just choke on the named dates, so there’s not a lot of help to be had there. My current approach is to extend (internally, Ruby lets you modify everything at runtime) the &lt;a href="http://www.rubydoc.info/gems/iso8601/0.8.5/ISO8601"&gt;ISO8601 ruby gem&lt;/a&gt; to support these weird formats as well.&lt;/p&gt;
+
+&lt;h2 id="features-i-like-from-other-implementations"&gt;Features I like from other implementations&lt;/h2&gt;
+
+&lt;h3 id="taskw"&gt;&lt;code&gt;taskw&lt;/code&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Reads in the users &lt;code&gt;.taskrc&lt;/code&gt; to make sure it handles data manipulation correctly. &lt;code&gt;Tasklib&lt;/code&gt; implements a config object, but does not create this from the user’s config.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="tasklib"&gt;&lt;code&gt;tasklib&lt;/code&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Makes the API follow Django’s &lt;code&gt;QuerySet&lt;/code&gt;, I’m going to try to do the same with Ruby’s &lt;code&gt;ActiveRecord&lt;/code&gt;. Following an existing API makes the onboarding process for new developers easier and makes sense for this project since TW is really just a plain text DB.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Kind of a minor thing, but messing around with it I think it validates user input way too late in the process, if a process is going to fail it should do so as early as possible, not just the moment before it saves to the db.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;All the code is thrown into a single file, which is kind of ridiculous.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id="taskwarrior"&gt;&lt;code&gt;taskwarrior&lt;/code&gt;&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Uses &lt;code&gt;ActiveModel&lt;/code&gt; to handle validating user input, which makes the implementation super clean. No need to reinvent the wheel here.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Has an examples section along with his Gantt chart plugin, which I think is crucial. Obviously, I’m going to have &lt;code&gt;task_time&lt;/code&gt; as one major example, but I think it’s important to design the wrapper against a few different use cases so that they don’t end up getting too tightly coupled.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id="moving-forward"&gt;Moving Forward&lt;/h2&gt;
+
+&lt;p&gt;My goal is to get &lt;code&gt;rtasklib&lt;/code&gt; to a point where I can start working on &lt;code&gt;task_time&lt;/code&gt; in 2 weeks, that doesn’t mean stable or feature complete or anything like that, just that it has implemented basic import/export functionality (so Open3 cmdline implementation, data-type conversions, and basic filtering). Once I get to that point I should be able to continue to develop them in parallel. In the meantime I’ve started to hash out the public interfaces for &lt;code&gt;task_time&lt;/code&gt;, for now I’ve put it on the README.md, but I’m probably going to move it to PLAN.md in the near future.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>A Comparison of Task Warrior Wrappers</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/a-comparison-of-task-warrior-wrappers/"/>
+    <id>http://dropofwill.herokuapp.com/2015/a-comparison-of-task-warrior-wrappers/</id>
+    <published>2015-02-22T15:54:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;So as it turns out there were 3 main libraries written to interact with the TaskWarrior database (I think there is also a Perl and maybe a PHP wrapper as well, but I couldn’t find them again and let’s face it: I’m not interested in using either of those languages anyways).&lt;/p&gt;
+
+&lt;h2 id="python-taskwhttpsgithubcomralphbeantaskw-gpl-v3"&gt;Python: &lt;a href="https://github.com/ralphbean/taskw"&gt;taskw&lt;/a&gt;, GPL v3&lt;/h2&gt;
+
+&lt;p&gt;A project developed by Rochester’s own Ralph Bean with help from 12 other devs, it is by far the most actively developed wrapper available and had a new commit just 3 days ago. It is developed by a dev who talks at rocpy every month and is the #rit-foss channel all the time, so that’s a big plus. The current build status has an error, but it looks like maybe some sort of &lt;a href="https://travis-ci.org/ralphbean/taskw"&gt;network connection problem?&lt;/a&gt; Will have to look into that further.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, it is licensed under the v3 GPL license, which is going to make things annoying because the taskwarrior community primarily uses permissive licenses (the MIT in particular) and I prefer permissive licenses in general. However, using a copyleft non-LGPL licensed library with a compatible OSI license &lt;a href="http://en.wikipedia.org/wiki/GNU_General_Public_License#Compatibility_and_multi-licensing"&gt;is legally ambiguous&lt;/a&gt;, which puts me in an awkward situation. Probably going to talk to Remy about this in our next BizLeg class and report back here with some thoughts on the situation.&lt;/p&gt;
+
+&lt;p&gt;On my first run through it did not appear to have filter passing ability, which is problematic for my planned API.&lt;/p&gt;
+
+&lt;p&gt;File structure:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;├── CHANGELOG.rst
+├── LICENSE.txt
+├── MANIFEST.in
+├── README.rst
+├── requirements.txt
+├── setup.cfg
+├── setup.py
+├── taskw
+│   ├── __init__.py
+│   ├── exceptions.py
+│   ├── fields
+│   │   ├── __init__.py
+│   │   ├── annotationarray.py
+│   │   ├── array.py
+│   │   ├── base.py
+│   │   ├── choice.py
+│   │   ├── commaseparateduuid.py
+│   │   ├── date.py
+│   │   ├── duration.py
+│   │   ├── numeric.py
+│   │   ├── string.py
+│   │   └── uuid.py
+│   ├── task.py
+│   ├── taskrc.py
+│   ├── test
+│   │   ├── __init__.py
+│   │   ├── data
+│   │   │   ├── default.taskrc
+│   │   │   └── included.taskrc
+│   │   ├── test_datas.py
+│   │   ├── test_fields.py
+│   │   ├── test_task.py
+│   │   ├── test_taskrc.py
+│   │   └── test_utils.py
+│   ├── utils.py
+│   └── warrior.py
+├── test_requirements.txt
+└── tox.ini
+
+4 directories, 34 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="python-tasklibhttpsgithubcomrobgolding63tasklib-bsd-3-clause"&gt;Python: &lt;a href="https://github.com/robgolding63/tasklib"&gt;tasklib&lt;/a&gt;, BSD 3 Clause&lt;/h2&gt;
+
+&lt;p&gt;A project developed by two authors: &lt;code&gt;robgolding63&lt;/code&gt; and &lt;code&gt;tbabej&lt;/code&gt;, it’s under fairly active development with the latest commit being two days ago. It tries to mirror the API of a Django ORM and seems to have complete read and write functionality, including a filtering class that &lt;code&gt;taskw&lt;/code&gt; appears to be missing.&lt;/p&gt;
+
+&lt;p&gt;File Structure:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;├── AUTHORS
+├── LICENSE
+├── MANIFEST.in
+├── README.rst
+├── docs
+│   ├── Makefile
+│   ├── conf.py
+│   └── index.rst
+├── setup.py
+└── tasklib
+    ├── __init__.py
+    ├── task.py
+    └── tests.py
+
+2 directories, 11 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="ruby-taskwarriorhttpsgithubcomdropofwilltaskwarrior-mit"&gt;Ruby: &lt;a href="https://github.com/dropofwill/taskwarrior"&gt;taskwarrior&lt;/a&gt;, MIT&lt;/h2&gt;
+
+&lt;p&gt;And last, but not least the only Ruby library available. Unfortunately, it currently only supports read operations, which means it would require heavy modifications on my end to be usable for the &lt;code&gt;task_time&lt;/code&gt; project. It also hasn’t seen active development since 2013. That said it is written Ruby and MIT licensed, so it is basically what I’m looking for.&lt;/p&gt;
+
+&lt;p&gt;On closer look though, this project works with the JSON export, so it doesn’t actually interact with the TaskWarrior database at all, which is almost entirely the point of using a wrapper at all. It’s looking more like if I want to do this in Ruby I’m going to be doing it on my own.&lt;/p&gt;
+
+&lt;p&gt;File Structure:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;├── Gemfile
+├── Guardfile
+├── LICENSE
+├── README.md
+├── Rakefile
+├── examples
+│   └── finished-early
+├── lib
+│   ├── taskwarrior
+│   │   ├── annotation.rb
+│   │   ├── annotation_mapper.rb
+│   │   ├── attributes.rb
+│   │   ├── priority_mapper.rb
+│   │   ├── project.rb
+│   │   ├── repository.rb
+│   │   ├── tag.rb
+│   │   ├── task.rb
+│   │   ├── task_mapper.rb
+│   │   ├── validations.rb
+│   │   └── version.rb
+│   └── taskwarrior.rb
+├── taskwarrior.gemspec
+└── test
+    ├── fixtures
+    │   ├── no_deps.json
+    │   ├── party.json
+    │   ├── party2.json
+    │   └── party_taxes.json
+    ├── test_helper.rb
+    └── unit
+        ├── test_annotation.rb
+        ├── test_priority_mapper.rb
+        ├── test_project.rb
+        ├── test_repository.rb
+        ├── test_tag.rb
+        ├── test_tag_habtm.rb
+        └── test_task.rb
+
+6 directories, 31 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id="final-thoughts"&gt;Final Thoughts&lt;/h2&gt;
+
+&lt;p&gt;As much as I hate to admit it, I might have to pivot to using Python for this project, because the library wrapper is basically unusable. My options are to remake &lt;code&gt;tasklib&lt;/code&gt; or &lt;code&gt;taskw&lt;/code&gt; in Ruby (or at least get them to working condition). Licensing problems and the lack of a filter feature are problematic for &lt;code&gt;taskw&lt;/code&gt;, which means my current top option is &lt;code&gt;tasklib&lt;/code&gt;. My current plan of attack is to finalize my public API and goals for the project in parallel and finish research on dependencies by the end of next week.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Taskwarrior timesheet plugin plan</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/taskwarrior-timesheet-plugin-plan/"/>
+    <id>http://dropofwill.herokuapp.com/2015/taskwarrior-timesheet-plugin-plan/</id>
+    <published>2015-02-16T14:36:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;&lt;a href="http://github.com/dropofwill/task_time"&gt;Repo: dropofwill/task_time&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This is a plan for a project that will act as a plugin for the application Taskwarrior that allows the users to use &lt;code&gt;task&lt;/code&gt; to keep track of their time involved with tasks. I chose task_time as the name because the original program is run with the &lt;code&gt;task&lt;/code&gt; command and in Ruby underscores are used to denote spaces (dashes imply some sort of class hierarchy).&lt;/p&gt;
+
+&lt;h2 id="abstract"&gt;Abstract&lt;/h2&gt;
+
+&lt;p&gt;Taskwarrior is a lightweight command-line applications that makes managing/filtering/reporting/understanding of your todos easier. One aspect that it is missing is time-tracking the developers say that this feature is out of scope and should be remedied with a plugin, the currently available plugins don’t mirror Taskwarrior’s attention to detail or polish and seem to be fairly minimal (no offense to those maintainers).&lt;/p&gt;
+
+&lt;h2 id="detailed-description"&gt;Detailed Description&lt;/h2&gt;
+
+&lt;p&gt;The interface for this project will be that of a simple command line tool, at some point I want to write or extend a current ncurses layout to use this as well, but that is out of scope for this phase of the project. I’m thinking that the entry point will be &lt;code&gt;task_time &amp;lt;filter&amp;gt;&lt;/code&gt; with an optional shell script for users that want a more seamless integration that will take &lt;code&gt;task &amp;lt;filter&amp;gt; time&lt;/code&gt; just like you would use it if it was built into Taskwarrior itself. All the task filtering will be passed on to &lt;code&gt;task&lt;/code&gt; behind the scenes, so I won’t have to reimplement that.&lt;/p&gt;
+
+&lt;p&gt;The user will probably be something like &lt;code&gt;start&lt;/code&gt; and &lt;code&gt;stop&lt;/code&gt; for keeping track of the raw data, &lt;code&gt;est&lt;/code&gt; for estimating how long a task is going to take, and then some other commands for generating the reports based on the previous time spent (filtering by project, task, tag, whatever). Another feature I would like to implement is a Kanban workflow. For all the reports I want to be able to export them to the command line to view and export to a number of formats (json, csv, xml, etc) like for all the other Taskwarrior reports, but also a PDF export from any Tilt-based template.&lt;/p&gt;
+
+&lt;h2 id="excitement-or-why-do-you-care-about-a-todo-app"&gt;Excitement (or why do you care about a todo app)&lt;/h2&gt;
+
+&lt;p&gt;Taskwarrior is an tool I use everyday, but as is I have to use another app (Freshbooks, Teamwork, etc.) to track my time spent on tasks for work and I end up not tracking my time for anything else. An important part of being a productive developer is understanding the end-to-end process: how long should this take? How long did it take? And why? Having actual data and reporting about this should make this process easier to understand.&lt;/p&gt;
+
+&lt;p&gt;Plus all I write these days are web apps, yet most of what I use day-to-day is in the terminal, it will be nice to work on something where I’m the target audience for once. :)&lt;/p&gt;
+
+&lt;h2 id="scope"&gt;Scope&lt;/h2&gt;
+
+&lt;p&gt;Nothing is ever finished, but I think the scope of this project is such that I can make an initial release by the end of the class (see Milestones). As this is something I plan on using a lot, I imagine I will continue working on it after class is over.&lt;/p&gt;
+
+&lt;h2 id="license"&gt;License&lt;/h2&gt;
+
+&lt;p&gt;My license of choice is the Creative Commons 0, because I prefer to be as permissive as possible (and I don’t care about attribution). But since that is not OSI approved (and it needs to be for this class), my backup is the MIT, which is fairly permissive and the default license for Ruby projects and the license that Taskwarrior is released under, so it probably makes the most sense anyways.&lt;/p&gt;
+
+&lt;h2 id="milestones"&gt;Milestones&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Initial functionality: internals work and public API finalized. Rough due date: March 16th, may shift back if I need to spend more time on implementing functionality in the wrapper.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Reporting and external integration: all the charts and reporting features are working and any integration with external services are finalized. Rough due date: April 27th&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Initial Release: full to near full test coverage and packaged and submitted to at a minimum: RubyGems, AUR, and Debian (possibly also RPM as time permits). Rough due date: May 14th&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id="programming-languages"&gt;Programming languages&lt;/h2&gt;
+
+&lt;p&gt;This shouldn’t be a resource heavy project, all the heavy lifting will be done by taskwarrior itself (written in C++), for that reason I want to use Ruby, which is my interpreted language goto. If speed becomes an issue pivoting to Rust or C is always an option, but I do not foresee that as a problem.&lt;/p&gt;
+
+&lt;p&gt;That said right now the Ruby library for interacting with Taskwarrior is a little out of date (missing a couple major Taskwarrior updates), so I’m going to have to either fork that project to add the functionality I need or pivot and write the project in Python, which has a more actively developed wrapper that seems to be up to date. I’ll have to make that decision pretty soon, I’m reviewing my options now.&lt;/p&gt;
+
+</content>
+  </entry>
+  <entry>
+    <title>Writing Command Line Tools with Ruby</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/commnad-line-tools-with-ruby/"/>
+    <id>http://dropofwill.herokuapp.com/2015/commnad-line-tools-with-ruby/</id>
+    <published>2015-02-13T12:16:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;I’ve written a lot of Ruby code over the years from web applications, to rack frameworks, to rake tasks, even packaged a few up as gems, but one thing I’ve never done is write a command line tool directly in ruby. This post just sums up my initial foray into making Ruby cli tools, as usual with Ruby it’s not nearly as hard as it sounds.&lt;/p&gt;
+
+&lt;h2 id="the-basics"&gt;The Basics&lt;/h2&gt;
+
+&lt;p&gt;Typically when you write a ruby script you execute it with the Ruby command followed by a file path, like so:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ ruby ../path/to/some_example.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But that puts a lot of weight on the user, they need to know 1) this is a Ruby program, 2) where it was ‘installed’, and 3) the file extension for Ruby. The API we want is this:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ some_example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To accomplish this we first need to add a ‘shebang’ to the top of our main entry point to the application, like this:&lt;/p&gt;
+
+&lt;pre class="highlight ruby"&gt;&lt;code&gt;&lt;span class="c1"&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This line tells the shell how we want the following file interpreted. We could hard code a path to ruby, but by using the env dir we let the user’s shell decide what ruby is, this way people can install ruby however they want and our program will still run. To run the program directly we also need to make it executable:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ chmod +x ../path/to/some_example.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And now the program can be run without specifying Ruby:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ ../path/to/some_example.rb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or we can optionally leave off the Ruby extension (.rb) and run it without any knowledge that it is Ruby under the hood:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ mv ../path/to/some_example.rb ../path/to/some_example
+$ ../path/to/some_example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But what about that annoying &lt;code&gt;../path/to/&lt;/code&gt; nonsense, the user shouldn’t have to even know, much less have to type the full path to the program to run it. To solve this we have two main options (though there are certainly a number of ways to accomplish this).&lt;/p&gt;
+
+&lt;p&gt;The first and ‘easiest’ approach is to simply add the executable to the users PATH either in the shell, a init script, or by typing it right in the shell:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ export PATH=/abs/path/to/some_example:$PATH
+$ some_example
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This prepends our code to the lookup PATH ($PATH is a variable for the current PATH, the colon separates different parts of the PATH) so that we don’t need to know where the code is located in order to execute it.&lt;/p&gt;
+
+&lt;p&gt;This meets our original requirements, but comes with a number of problems. Are we going to make the user manage the PATH themselves? Is this run with an install shell script? What it the users’ shell of choice doesn’t use the &lt;code&gt;export&lt;/code&gt; API? What if they want to move where the install directory is on their computer? All these questions lead us to believe there must be a better or at least more standardized approach to this.&lt;/p&gt;
+
+&lt;p&gt;And as it turns out there is! The people behind RubyGems have put a lot of thought into this, so that when you create a gem you can define a set of files that can be used as executables and it then copies them to &lt;code&gt;#{ruby-prefix}/bin/{#gem_name}&lt;/code&gt;, which is already added to their PATH during the installation of Ruby and is managed by tools like rbenv, chruby, or RVM so that you don’t have to.&lt;/p&gt;
+
+&lt;p&gt;The downside to this is that their is a bit of extra boilerplate needed to comply with the whole gemspec standard, but in the long run this is well worth the extra startup time. Luckily the bundler gem, a popular gem manager (that itself is a gem), comes with a scaffold-er to keep the amount of boilerplate you need to write to a minimum as well as giving you a set of best-practices/conventions that the rest of the Ruby community often follows. To create a new project run &lt;code&gt;bundler gem #{your_gem_name_here}&lt;/code&gt;, which initializes a git repo and gives us the following file structure:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;$ tree
+├── Gemfile
+├── LICENSE.txt
+├── README.md
+├── Rakefile
+├── gem_cli.gemspec
+└── lib
+    ├── gem_cli
+    │   └── version.rb
+    └── gem_cli.rb
+
+2 directories, 7 files
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;By default it gives you a copy of the MIT license, this is by far the most popular license within the Ruby community, but you are free to change it to whatever you like (just make sure you update those changes in your gemspec as well). You should also add your dependencies in the Gemfile (if you have any), add your code to the &lt;code&gt;lib/&lt;/code&gt; dir, and then create a new &lt;code&gt;bin/&lt;/code&gt; dir with the cli code (which hopefully require’s whatever the rest of your lib does for DRY purposes). Then it’s just a matter of updating the &lt;code&gt;*.gemspec&lt;/code&gt; file to meet your requirements. The key bit that bundler gives us by default is what does the making &lt;code&gt;bin/&lt;/code&gt; executable business:&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first line adds only files tracked by git (a classic error is not adding changes to git before building if you leave this line in), you can of course use any other Ruby/shell code to grab the paths you want. The second line does the job of telling RubyGems what files to add to the users path, basically it looks through the list of files regex-ing for the bin and adding the files in that dir. Of course if you don’t want to put your executables in &lt;code&gt;bin/&lt;/code&gt;, you could rename that dir and regex for that something different here. Bin is just a convention of course and the &lt;code&gt;*.gemspec&lt;/code&gt; file is just a plain old Ruby file, so anything you want to add here will work just fine.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Initial thoughts for an MPD project</title>
+    <link rel="alternate" href="http://dropofwill.herokuapp.com/2015/source-code-review-of-mpd-and-mpd-wrappers/"/>
+    <id>http://dropofwill.herokuapp.com/2015/source-code-review-of-mpd-and-mpd-wrappers/</id>
+    <published>2015-02-05T16:30:00-05:00</published>
+    <updated>2015-12-17T15:51:37-05:00</updated>
+    <author>
+      <name>Will Paul</name>
+    </author>
+    <content type="html">&lt;p&gt;For my Software Development in Linux class we are making one large project over the course of the class and then packaging it up for distribution at the end (probably Debian, RPM, and AUR).  This is a little bit of a paradigm shift for me personally, as for most of my projects distribution means pushing to a Heroku instance, so I’ve had to brain storm some new non-web-based projects. I’ve come up with two basic trains of thought either a better time-tracking/Freshbooks integration for taskwarrior (the current ones are all bare-bones) or any number of music/analytics ideas for the music players, specifically MPD.&lt;/p&gt;
+
+&lt;p&gt;For now I’ve decided to just review MPD, its current state, and what options are available to me in terms of wrappers (preferably Ruby wrappers, my scripting language of choice). The goal here is to just establish what the MPD landscape looks like so that I can effectively scope an 11-12 week project.&lt;/p&gt;
+
+&lt;h2 id="the-music-player-daemon"&gt;The Music Player Daemon&lt;/h2&gt;
+
+&lt;p&gt;First off it’s important to establish what MPD is and isn’t. It is a music player that works with a server-client architecture. It plays music, organizes playlists, and maintains a database of music. What it isn’t is a client to play with, you need anyone of many clients to do this from ncurses-command line based players to GUI players that resemble iTunes. In this way it does one thing well and very efficiently, which is why I’ve decided to target it as the home for any music-based apps I want to create.&lt;/p&gt;
+
+&lt;p&gt;So where to start? There is extensive documentation of the C++ inner workings of &lt;a href="http://www.musicpd.org/doc/user/"&gt;MPD here&lt;/a&gt;. One important part of any integration with other music programs is playlist formats, MPD supports &lt;a href="http://www.musicpd.org/doc/user/playlist_plugins.html"&gt;&lt;code&gt;embcue&lt;/code&gt;, &lt;code&gt;m3u&lt;/code&gt;, &lt;code&gt;extm3u&lt;/code&gt;, &lt;code&gt;pls&lt;/code&gt;, and &lt;code&gt;xspf&lt;/code&gt;&lt;/a&gt; through a plugin system. It uses m3u by default, which is an extremely simple format consisting of only the time in seconds, the artist, the name, and the file path.&lt;/p&gt;
+
+&lt;pre class="highlight plaintext"&gt;&lt;code&gt;#EXTM3U
+
+#EXTINF:123, Sample artist - Sample title
+~/music/sample_artist/sample_song.mp3
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is nice from a readability standpoint, but there is problem, it hard codes all the file paths, which makes it hard to port from one platform to another. That’s one thing that &lt;code&gt;.xspf&lt;/code&gt; &lt;a href="http://xspf.org/xspf-v1.html"&gt;tries to remedy.&lt;/a&gt;, it uses a unique identifier (mbid from MusicBrainz for example) to resolve different file locations to the same unique identifier, here’s a basic example file:&lt;/p&gt;
+
+&lt;pre class="highlight xml"&gt;&lt;code&gt;&lt;span class="cp"&gt;&amp;lt;?xml version="1.0" encoding="UTF-8"?&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;playlist&lt;/span&gt; &lt;span class="na"&gt;version=&lt;/span&gt;&lt;span class="s"&gt;"1"&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;"http://xspf.org/ns/0/"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;trackList&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;track&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Song Title&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;identifier&amp;gt;&lt;/span&gt;http://musicbrainz.org/track/7fe96b15-5608-430e-ad25-77a01353c5d9.html&lt;span class="nt"&gt;&amp;lt;/identifier&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;location&amp;gt;&lt;/span&gt;music/foo.mp3&lt;span class="nt"&gt;&amp;lt;/location&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;location&amp;gt;&lt;/span&gt;alternate/music/foo.mp3&lt;span class="nt"&gt;&amp;lt;/location&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/track&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/trackList&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/playlist&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So what libraries are already out there to further investigate?&lt;/p&gt;
+
+&lt;h3 id="ruby-libraries"&gt;Ruby Libraries&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/marcransome/Spfy"&gt;Spfy&lt;/a&gt; - a Ruby Xspf parser (last commit 03/2014)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://rubygems.org/gems/xspf/versions/0.4.1.1"&gt;Xspf&lt;/a&gt; - a Ruby Xspf parser (last commit 04/2007), source code forge is down, so this one is fairly rusty.&lt;/p&gt;
+
+&lt;p&gt;Since the .xspf spec is simple, well formed XML, is using one of these Ruby wrappers necessary? Or could I just use the great, built in XML support?&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/robinst/taglib-ruby"&gt;taglib-ruby&lt;/a&gt; a wrapper around the C++ library &lt;a href="https://github.com/taglib/taglib"&gt;TagLib&lt;/a&gt; - meta data manager for audio files (last commit 08/2014 &amp;amp; 02/2015 respectively)&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/archSeer/ruby-mpd"&gt;ruby-mpd&lt;/a&gt; a ruby wrapper around MPD, which itself was the fork librmpd (last commit 12/2014)&lt;/p&gt;
+
+&lt;p&gt;[mpd_client(https://github.com/mamantoha/mpd_client) a ruby wrapper around MPD, a port of the python-mpd library (last commit 12/2014)&lt;/p&gt;
+
+&lt;h3 id="other-stuff"&gt;Other Stuff&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href="http://soundiiz.com"&gt;Soundiiz&lt;/a&gt; is doing something similar to what I want to, though it seems to be completely web based and closed source, which is sad to see.&lt;/p&gt;
+
+&lt;p&gt;The web api’s for &lt;a href="https://developer.spotify.com/web-api/endpoint-reference/"&gt;Spotify&lt;/a&gt;, &lt;a href="http://developer.echonest.com"&gt;Echonest&lt;/a&gt;, &lt;a href="http://www.last.fm/api/show/user.getTopTracks"&gt;Last.fm&lt;/a&gt;, &lt;a href="http://www.last.fm/api/show/user.getTopTracks"&gt;Grooveshark&lt;/a&gt;, &lt;a href="https://developers.google.com/youtube/v3/docs/playlists"&gt;YouTube&lt;/a&gt;, &lt;a href="http://www.rdio.com/developers/docs/"&gt;Rdio&lt;/a&gt;, &lt;a href="https://musicbrainz.org/doc/Beginners_Guide"&gt;MusicBrainz&lt;/a&gt;, and how to resolve content between them.&lt;/p&gt;
+</content>
+  </entry>
+</feed>

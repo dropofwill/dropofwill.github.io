@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - Setting up a nice UNIX Ruby dev env</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../stylesheets/main-aec3cd83.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class=""><a href="/posts">blog</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>Setting up a nice UNIX Ruby dev env</h1>
+		<p>Setting up a Ruby environment is deceptively simple. Easy to do, hard to maintain. The two major players, RVM and rbenv, offer more than the typical user needs or can possibly understand. Here I walk you through my setup using tools that do one thing and do it well. Coincidently all these tools that I use were written by the same guy/girl who goes by the handle Postmodern.</p>
+
+<p>So what are our goals coming out of this setup?</p>
+
+<ol>
+  <li>
+    <p>A way to easily install new versions of Ruby without conflicting with and system versions or each other.</p>
+  </li>
+  <li>
+    <p>A way to easily switch between versions on a per project basis, preferably automatically so we can set it and forget it.</p>
+  </li>
+  <li>
+    <p>(Optional) A way to manage where Gems (libraries) are being installed to eliminate any weird conflicts that may occur again on a per project basis.</p>
+  </li>
+</ol>
+
+<p>Luckily, Postmodern has written a single app for each of these tasks.</p>
+
+<ol>
+  <li>
+    <p><code>ruby-install</code></p>
+  </li>
+  <li>
+    <p><code>chruby</code> (a.k.a. change-ruby)</p>
+  </li>
+  <li>
+    <p><code>gem_home</code> (formerly <code>chgems</code>)</p>
+  </li>
+</ol>
+
+<p>The great thing about this division of concerns is that even if you don’t like how one part of the system works you can always swap it out for another. For instance, if you like <code>chruby</code>, but want to still install a bleeding edge ruby versions (not supported by design w/ruby-install) and want to use something else like RVM (or MRVM, M for mini), that will just work no questions asked.</p>
+
+<p>Let’s get started!</p>
+
+<h3 id="install-new-versions-of-ruby-with-ruby-install">Install new versions of ruby with <code>ruby-install</code></h3>
+
+<p>Ruby-install comes with great package manger support, and of course you could just install it with <code>wget</code> or <code>curl</code> as well. Their <a href="https://github.com/postmodern/ruby-install">github page</a> covers installation pretty well, so I’ll just leave that and say that I used the <code>brew</code> version without incident:</p>
+
+<pre class="highlight plaintext"><code>brew install ruby-install
+</code></pre>
+
+<p>To view available rubies to install automatically just run it without arguments</p>
+
+<pre class="highlight plaintext"><code>$ ruby-install
+$ Known ruby versions:
+  ruby:
+    1:      1.9.3-p545
+    1.9:    1.9.3-p545
+    1.9.3:  1.9.3-p545
+    2.0:    2.0.0-p451
+    2.0.0:  2.0.0-p451
+    2:      2.1.2
+    2.1:    2.1.2
+    stable: 2.1.2
+  jruby:
+    1.7:    1.7.12
+    stable: 1.7.12
+  rbx:
+    2.1:    2.1.1
+    2.2:    2.2.6
+    stable: 2.2.6
+  maglev:
+    1.0:    1.0.0
+    1.1:    1.1RC1
+    stable: 1.0.0
+  mruby:
+    1.0:    1.0.0
+    stable: 1.0.0
+</code></pre>
+
+<p>You can then install them with varying levels of specificity. For example to install the stable version just run <code>ruby-install rbx</code> replacing rbx with whatever flavor of ruby you’re interested in. Or if you want the latest major version of 1, just run <code>ruby-install ruby-1</code>, or <code>ruby-install ruby-2.0</code> for the latest non 2.1 version. You get the idea, it’s pretty intelligent at figuring out what you want to do.</p>
+
+<p>Want to install a ruby not listed yet, or no longer supported by default? No problem just pass the MD5 of the latest release or a path to a ruby-lang.org download, <code>ruby-install --md5 MD5_OF_TAR_BZ2 ruby 2.3.4</code> or <code>$ ruby-install -M https://ftp.ruby-lang.org/pub/ruby ruby 2.0.0-p247</code> respectively.</p>
+
+<p>You can also change where it installs and who it installs under (e.g. root or you).</p>
+
+<h3 id="manage-active-version-of-ruby-with-chruby">Manage active version of ruby with <code>chruby</code></h3>
+
+<p>So we’ve installed a bunch of flavors of ruby to play with, but if you run <code>which ruby</code> in all likelihood something like <code>/usr/bin/ruby</code> will still show up. So how do we actually use these? We could manage the $PATH ourselves, but that is an annoying, error prone, and is the opposite of automatic.</p>
+
+<p>That’s where <a href="https://github.com/postmodern/chruby">chruby</a> comes in, installation and usage mirrors ruby-install nicely. So we can run <code>chruby</code> to get a list of rubies to use and marking the current one with an *, and select them in the same way that we did to install them (e.g. <code>chruby rbx</code>, <code>chruby ruby-1</code>, etc.). To go back to the system ruby just run <code>chruby stable</code>.</p>
+
+<p>To automatically switch on a per-project basis all we need to do is make a file named .ruby-version with the contents of whatever we would pass <code>chruby</code>:</p>
+
+<pre class="highlight plaintext"><code>file: .ruby-version
+rbx-2.2
+</code></pre>
+
+<h3 id="optional-manage-the-gem-path-with-gemhome">(Optional) Manage the gem path with <code>gem_home</code></h3>
+
+<p>While <code>chruby</code> manages your $GEM_PATH on a per ruby basis, sometimes you want a more sandboxed environment, like when you need to incompatible versions of the same gem for different projects. That’s the purpose <code>gem_home</code> serves.</p>
+
+<p>It doesn’t have quite as good of package manager support, but is still easy enough to install, just follow the instructions on <a href="https://github.com/postmodern/gem_home#readme">github</a>.</p>
+
+<p>The typical use case for me would be to change into the project’s directory and then run:</p>
+
+<pre class="highlight plaintext"><code>gem_home .
+bundle install
+</code></pre>
+
+<p>This will install your Gems to $PWD/.gem/ unless they are already installed, in which case it will just use those.</p>
+
+<p>That’s it! You’re all set to make your ruby apps without giving version management a second thought.</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../../2015/pacing-and-character-in-mcconaugheys-performance-in-mud/">Pacing and character in McConaughey’s performance in Mud</a> <span>Nov 19</span>
+        </li>
+        <li>
+          <a href="../../2015/leitmotif-in-dr-strangelove/">Leitmotif and comedic relief in Kubrick's Dr. Strangelove</a> <span>Oct 29</span>
+        </li>
+        <li>
+          <a href="../../2015/establishing-narrative-control-in-freers-high-fidelity/">Establishing narrative control in Freer's High Fidelity</a> <span>Sep 30</span>
+        </li>
+        <li>
+          <a href="../../2015/a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../../2015/packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../../2015/playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../../2015/lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/bizleg/">BizLeg (15)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/hfoss/">HFOSS (4)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/film/">Film (3)</a></li>
+        <li><a href="/tags/cinematography/">Cinematography (1)</a></li>
+        <li><a href="/tags/review/">Review (10)</a></li>
+        <li><a href="/tags/trademark/">Trademark (2)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/legal/">Legal (1)</a></li>
+        <li><a href="/tags/licenses/">Licenses (1)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/business/">Business (1)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/foss/">FOSS (1)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/patents/">Patents (1)</a></li>
+        <li><a href="/tags/ip/">IP (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/video/">Video (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (28)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+  </body>
+</html>

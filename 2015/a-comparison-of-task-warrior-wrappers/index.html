@@ -1,0 +1,270 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - A Comparison of Task Warrior Wrappers</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../stylesheets/main-aec3cd83.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class=""><a href="/posts">blog</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>A Comparison of Task Warrior Wrappers</h1>
+		<p>So as it turns out there were 3 main libraries written to interact with the TaskWarrior database (I think there is also a Perl and maybe a PHP wrapper as well, but I couldn’t find them again and let’s face it: I’m not interested in using either of those languages anyways).</p>
+
+<h2 id="python-taskwhttpsgithubcomralphbeantaskw-gpl-v3">Python: <a href="https://github.com/ralphbean/taskw">taskw</a>, GPL v3</h2>
+
+<p>A project developed by Rochester’s own Ralph Bean with help from 12 other devs, it is by far the most actively developed wrapper available and had a new commit just 3 days ago. It is developed by a dev who talks at rocpy every month and is the #rit-foss channel all the time, so that’s a big plus. The current build status has an error, but it looks like maybe some sort of <a href="https://travis-ci.org/ralphbean/taskw">network connection problem?</a> Will have to look into that further.</p>
+
+<p>Unfortunately, it is licensed under the v3 GPL license, which is going to make things annoying because the taskwarrior community primarily uses permissive licenses (the MIT in particular) and I prefer permissive licenses in general. However, using a copyleft non-LGPL licensed library with a compatible OSI license <a href="http://en.wikipedia.org/wiki/GNU_General_Public_License#Compatibility_and_multi-licensing">is legally ambiguous</a>, which puts me in an awkward situation. Probably going to talk to Remy about this in our next BizLeg class and report back here with some thoughts on the situation.</p>
+
+<p>On my first run through it did not appear to have filter passing ability, which is problematic for my planned API.</p>
+
+<p>File structure:</p>
+
+<pre class="highlight plaintext"><code>├── CHANGELOG.rst
+├── LICENSE.txt
+├── MANIFEST.in
+├── README.rst
+├── requirements.txt
+├── setup.cfg
+├── setup.py
+├── taskw
+│   ├── __init__.py
+│   ├── exceptions.py
+│   ├── fields
+│   │   ├── __init__.py
+│   │   ├── annotationarray.py
+│   │   ├── array.py
+│   │   ├── base.py
+│   │   ├── choice.py
+│   │   ├── commaseparateduuid.py
+│   │   ├── date.py
+│   │   ├── duration.py
+│   │   ├── numeric.py
+│   │   ├── string.py
+│   │   └── uuid.py
+│   ├── task.py
+│   ├── taskrc.py
+│   ├── test
+│   │   ├── __init__.py
+│   │   ├── data
+│   │   │   ├── default.taskrc
+│   │   │   └── included.taskrc
+│   │   ├── test_datas.py
+│   │   ├── test_fields.py
+│   │   ├── test_task.py
+│   │   ├── test_taskrc.py
+│   │   └── test_utils.py
+│   ├── utils.py
+│   └── warrior.py
+├── test_requirements.txt
+└── tox.ini
+
+4 directories, 34 files
+</code></pre>
+
+<h2 id="python-tasklibhttpsgithubcomrobgolding63tasklib-bsd-3-clause">Python: <a href="https://github.com/robgolding63/tasklib">tasklib</a>, BSD 3 Clause</h2>
+
+<p>A project developed by two authors: <code>robgolding63</code> and <code>tbabej</code>, it’s under fairly active development with the latest commit being two days ago. It tries to mirror the API of a Django ORM and seems to have complete read and write functionality, including a filtering class that <code>taskw</code> appears to be missing.</p>
+
+<p>File Structure:</p>
+
+<pre class="highlight plaintext"><code>├── AUTHORS
+├── LICENSE
+├── MANIFEST.in
+├── README.rst
+├── docs
+│   ├── Makefile
+│   ├── conf.py
+│   └── index.rst
+├── setup.py
+└── tasklib
+    ├── __init__.py
+    ├── task.py
+    └── tests.py
+
+2 directories, 11 files
+</code></pre>
+
+<h2 id="ruby-taskwarriorhttpsgithubcomdropofwilltaskwarrior-mit">Ruby: <a href="https://github.com/dropofwill/taskwarrior">taskwarrior</a>, MIT</h2>
+
+<p>And last, but not least the only Ruby library available. Unfortunately, it currently only supports read operations, which means it would require heavy modifications on my end to be usable for the <code>task_time</code> project. It also hasn’t seen active development since 2013. That said it is written Ruby and MIT licensed, so it is basically what I’m looking for.</p>
+
+<p>On closer look though, this project works with the JSON export, so it doesn’t actually interact with the TaskWarrior database at all, which is almost entirely the point of using a wrapper at all. It’s looking more like if I want to do this in Ruby I’m going to be doing it on my own.</p>
+
+<p>File Structure:</p>
+
+<pre class="highlight plaintext"><code>├── Gemfile
+├── Guardfile
+├── LICENSE
+├── README.md
+├── Rakefile
+├── examples
+│   └── finished-early
+├── lib
+│   ├── taskwarrior
+│   │   ├── annotation.rb
+│   │   ├── annotation_mapper.rb
+│   │   ├── attributes.rb
+│   │   ├── priority_mapper.rb
+│   │   ├── project.rb
+│   │   ├── repository.rb
+│   │   ├── tag.rb
+│   │   ├── task.rb
+│   │   ├── task_mapper.rb
+│   │   ├── validations.rb
+│   │   └── version.rb
+│   └── taskwarrior.rb
+├── taskwarrior.gemspec
+└── test
+    ├── fixtures
+    │   ├── no_deps.json
+    │   ├── party.json
+    │   ├── party2.json
+    │   └── party_taxes.json
+    ├── test_helper.rb
+    └── unit
+        ├── test_annotation.rb
+        ├── test_priority_mapper.rb
+        ├── test_project.rb
+        ├── test_repository.rb
+        ├── test_tag.rb
+        ├── test_tag_habtm.rb
+        └── test_task.rb
+
+6 directories, 31 files
+</code></pre>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>As much as I hate to admit it, I might have to pivot to using Python for this project, because the library wrapper is basically unusable. My options are to remake <code>tasklib</code> or <code>taskw</code> in Ruby (or at least get them to working condition). Licensing problems and the lack of a filter feature are problematic for <code>taskw</code>, which means my current top option is <code>tasklib</code>. My current plan of attack is to finalize my public API and goals for the project in parallel and finish research on dependencies by the end of next week.</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../pacing-and-character-in-mcconaugheys-performance-in-mud/">Pacing and character in McConaughey’s performance in Mud</a> <span>Nov 19</span>
+        </li>
+        <li>
+          <a href="../leitmotif-in-dr-strangelove/">Leitmotif and comedic relief in Kubrick's Dr. Strangelove</a> <span>Oct 29</span>
+        </li>
+        <li>
+          <a href="../establishing-narrative-control-in-freers-high-fidelity/">Establishing narrative control in Freer's High Fidelity</a> <span>Sep 30</span>
+        </li>
+        <li>
+          <a href="../a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/bizleg/">BizLeg (15)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/hfoss/">HFOSS (4)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/film/">Film (3)</a></li>
+        <li><a href="/tags/cinematography/">Cinematography (1)</a></li>
+        <li><a href="/tags/review/">Review (10)</a></li>
+        <li><a href="/tags/trademark/">Trademark (2)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/legal/">Legal (1)</a></li>
+        <li><a href="/tags/licenses/">Licenses (1)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/business/">Business (1)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/foss/">FOSS (1)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/patents/">Patents (1)</a></li>
+        <li><a href="/tags/ip/">IP (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/video/">Video (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (28)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+  </body>
+</html>

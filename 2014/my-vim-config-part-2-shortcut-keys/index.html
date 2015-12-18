@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - My Vim Config Part 2: Shortcut Keys</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../stylesheets/main-aec3cd83.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class=""><a href="/posts">blog</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>My Vim Config Part 2: Shortcut Keys</h1>
+		<p>This is a continuation of my short series (<a href="/2014/11/02/my-vim-config-part-1-the-basics/">part 1</a>) on how I setup Vim to be a little more fully featured looking at the custom shortcuts. By no means is my setup the best, but there are a few neat things I’ve stumbled upon and my thought is that by aggregating them here someone else might find something new to add. Or maybe someone knows a better way to do something and lets me know. So let’s get started!</p>
+
+<p>First you’ll want to start by remapping the leader key to something you’re comfortable with. In case you are not familiar, the leader key is the key that you press and release before (‘leads’) you send a custom key command to Vim. Personally I don’t have any custom commands that make sense in insert mode, so I remap it to space. By default it is /, pick your poison and let’s get started.</p>
+
+<pre class="highlight plaintext"><code>map &lt;Space&gt; &lt;Leader&gt;
+</code></pre>
+
+<p>In Vim one of the keys to moving around efficiently, besides just avoiding the arrow keys, is using regex search to your advantage. There are four different types of regex in Vim that you can set by leading your regex with an escaped flag. These represent different levels of ‘magic’, which sounds scary, but really just controls what symbols need to be escaped when you’re writing them (check out :help magic for a detailed overview). In general I prefer the very magic mode (\v), which let’s you write a regex in a mostly Perl compatible way, which is probably what you’re familiar with. To use that by default I just remap <code>/</code> to <code>/\v</code>. That way if I actually want one of the other modes I can always just backspace two characters and we’re back to magic mode.</p>
+
+<pre class="highlight plaintext"><code>" default regex to very magic
+nnoremap / /\v
+vnoremap / /\v
+</code></pre>
+
+<p>After searching Vim will highlight results, which are great while you’re looking for them, but are distracting if your done searching. To clear this we can run <code>:noh</code>. Since I do this so often I remap it to double tap space.</p>
+
+<pre class="highlight plaintext"><code>nnoremap &lt;leader&gt;&lt;space&gt; :noh&lt;cr&gt;
+</code></pre>
+
+<p>If you ever turn on word wrapping you might have noticed that the j/k movements don’t work with visual lines, but code lines. That’s not usually what I want (consistency of visual units is more important to me personally), so I remap them to their display line counterparts gj/gk:</p>
+
+<pre class="highlight plaintext"><code>" Move screen lines not actual ones
+nnoremap j gj
+nnoremap k gk
+</code></pre>
+
+<p>I use bracket jumping a lot (e.g. moving between matching (), {}, etc.), by default this uses the %, but that’s an awkward two key press, so I remap it to the tab key.</p>
+
+<pre class="highlight plaintext"><code>" Jump around brackets with tab as well
+nnoremap &lt;tab&gt; %
+vnoremap &lt;tab&gt; %
+</code></pre>
+
+<p>Buffer movement by default is a little bit awkward at first, though it gets better with familiarity. Often you just want to jump around linearly between files, so I made shortcuts for previous and next buffer (bp and bn) that line up with &lt; &gt; keys so that makes a bit of visual sense.</p>
+
+<pre class="highlight plaintext"><code>" Leader , or . (think &lt; &gt;) for previous/next buffer
+map &lt;leader&gt;, :bp&lt;CR&gt;
+map &lt;leader&gt;. :bn&lt;CR&gt;
+</code></pre>
+
+<p>Getting out of insert mode early and often is a key to being productive in Vim, because of that there are a lot of ways to send the escape signal (<esc>, <ctrl-c>, and &lt;ctrl-[&gt;), but in case any of those aren't fast enough for you, you can always remap it to some obscure combo of home rule keys. I like the kj combo, but others use jj or jk as well.</ctrl-c></esc></p>
+
+<pre class="highlight plaintext"><code>inoremap kj &lt;Esc&gt;
+</code></pre>
+
+<p>If you use Vim windows (think window <em>splits</em>) frequently, then I think it makes sense to remap creation and movement between them to something less verbose. I use leader w for vertical splits and leader e for horizontal ones. I also in the same command move the cursor there because rarely do I create a split and then do nothing with it. Movement while intuitive, takes one to many key presses for my taste, so I get rid of the <code>w</code> and just move with &lt;ctrl-h,j,kl&gt;.</p>
+
+<pre class="highlight plaintext"><code>" Jump to new split with &lt;space&gt;w
+nnoremap &lt;leader&gt;w &lt;C-w&gt;v&lt;C-w&gt;l
+nnoremap &lt;leader&gt;e &lt;C-w&gt;s&lt;C-w&gt;j
+
+" Move around splits with ctrl movement keys
+nnoremap &lt;C-h&gt; &lt;C-w&gt;h
+nnoremap &lt;C-j&gt; &lt;C-w&gt;j
+nnoremap &lt;C-k&gt; &lt;C-w&gt;k
+nnoremap &lt;C-l&gt; &lt;C-w&gt;l
+</code></pre>
+
+<p>Closing a buffer without closing a split is a lot harder than you would expect. The following command does some previous/next buffer magic to make it work. One limitation of this approach is that you need a few buffers to make it work, but since that’s usually when you would want it, that’s not too big of a deal.</p>
+
+<pre class="highlight plaintext"><code>map &lt;leader&gt;v :bp&lt;bar&gt;sp&lt;bar&gt;bn&lt;bar&gt;bd&lt;CR&gt;
+</code></pre>
+
+<p>In the last four I remap my arrow keys, which you may or may not be ready to give up yet. The first two are my left and right arrow keys to bring up the previous regex search or command mode run. These only save one key stroke, but are something I do often enough that I think its worthwhile, YMMV.</p>
+
+<pre class="highlight plaintext"><code>" Open last Vim command
+nnoremap &lt;Right&gt; :&lt;Up&gt;
+" Open last search result
+nnoremap &lt;Left&gt; /\v&lt;Up&gt;
+</code></pre>
+
+<p>The next one is pretty cool, it moves the current line or selection up or down a single line based on the arrow key you use.</p>
+
+<pre class="highlight plaintext"><code>" Bubble single lines
+nnoremap &lt;Up&gt; ddkP
+nnoremap &lt;Down&gt; ddp
+
+" Bubble multiple lines
+vnoremap &lt;Up&gt; xkP`[V`]
+vnoremap &lt;Down&gt; xp`[V`]
+</code></pre>
+
+<p>And that’s it for now.</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../../2015/pacing-and-character-in-mcconaugheys-performance-in-mud/">Pacing and character in McConaughey’s performance in Mud</a> <span>Nov 19</span>
+        </li>
+        <li>
+          <a href="../../2015/leitmotif-in-dr-strangelove/">Leitmotif and comedic relief in Kubrick's Dr. Strangelove</a> <span>Oct 29</span>
+        </li>
+        <li>
+          <a href="../../2015/establishing-narrative-control-in-freers-high-fidelity/">Establishing narrative control in Freer's High Fidelity</a> <span>Sep 30</span>
+        </li>
+        <li>
+          <a href="../../2015/a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../../2015/packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../../2015/playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../../2015/lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/bizleg/">BizLeg (15)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/hfoss/">HFOSS (4)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/film/">Film (3)</a></li>
+        <li><a href="/tags/cinematography/">Cinematography (1)</a></li>
+        <li><a href="/tags/review/">Review (10)</a></li>
+        <li><a href="/tags/trademark/">Trademark (2)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/legal/">Legal (1)</a></li>
+        <li><a href="/tags/licenses/">Licenses (1)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/business/">Business (1)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/foss/">FOSS (1)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/patents/">Patents (1)</a></li>
+        <li><a href="/tags/ip/">IP (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/video/">Video (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (28)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+  </body>
+</html>

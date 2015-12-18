@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - Bugfix: FooTable</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../stylesheets/main-aec3cd83.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class=""><a href="/posts">blog</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>Bugfix: FooTable</h1>
+		<p>Everyone in the frontend community likes to hate on tables, it’s like Comic Sans in the design community. And this is for mostly good reasons, tables for layouts are pretty much unnecessary in this day in age (unless you’re looking to center something vertically, <a target="_blank" href="http://css-tricks.com/centering-in-the-unknown/">then <em>maybe</em> you can use it in your CSS, not the markup</a>), but there are still actually legitimate uses of tables. You know like for tabular data.</p>
+
+<p>Unfortunately the default HTML tables aren’t really that great from a UX perspective. From a functional standpoint there’s no way to sort or filter data and from a design perspective it definitely still looks like something from the 90s. Now try loading that 90s era table of data with more than four columns of data on your phone, things start to get bad fast.</p>
+
+<p>That’s where <a target="_blank" href="https://github.com/bradvin/FooTable">FooTables</a> comes in. It’s a <a target="_blank" href="https://github.com/jquery/jquery">JQuery</a> plugin that makes your data tables responsive with custom breakpoints, gives you some default styles that don’t suck if you want them, and offers tons of new functionality, like filtering, sorting, pagination, and more. I’ve used on numerous occasions with great success, so when I got a job that needed to display a lot of tabular data to users (a lot of which who were mobile users), I decided to use FooTables.</p>
+
+<h3 id="a-tale-of-two-bugs">A Tale of Two Bugs</h3>
+
+<p>But when I went to include it on my page nothing happened, I just had the same old ugly table. Pop open the console and there were a bunch of <code>ReferenceErrors</code> coming from the FooTables source. After digging around in the source code a bit I noticed a number of instances where variables were being defined without the <code>var</code> keyword, like so:</p>
+
+<pre class="highlight plaintext"><code>function someScope() {
+  newVar = foo;
+}
+</code></pre>
+
+<p>In most cases this is no big deal, newVar will still be given the value foo. However, it will be added to the global scope instead of inside the scope it was defined in. So the above is the equivalent to:</p>
+
+<pre class="highlight plaintext"><code>// Assuming this isn't nested in another function
+var newVar;
+function someScope() {
+  newVar = foo;
+}
+</code></pre>
+
+<p>That’s usually not what you intend and if it is, you should probably be doing it explicitly so that other readers can understand what your doing:</p>
+
+<pre class="highlight plaintext"><code>// Again assuming no nesting
+// `this` in the top-level refers to the window/global object
+var global = this;
+function someScope() {
+  global.newVar = foo;
+}
+</code></pre>
+
+<p>But anyways, back to FooTables, it worked before, right? Why was it failing now? Well, this part was my fault. You see with <a target="_blank" href="http://kangax.github.io/compat-table/es5/">ECMAScript</a> 5 came a <a target="_blank" href="http://perldoc.perl.org/strict.html">Perl like convention of “strict”</a> mode, <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">this does a lot of things</a>, but the gist of it is things that worked before or failed silently would no longer be allowed in the interest of a more stable software platform. One of the items that changed was that global variables could only be assigned like the third example, and when you use that first method, yep, you guessed it, JavaScript throws a <code>ReferenceError</code>.</p>
+
+<p>At first this may seem like a terrible mistake, now perfectly good programs will fail. That might not sound like much of a stability boost to you. But the folks working on the spec thought of that as well. It turns out that setting strict mode works just like variables, <em>it only applies to the scope it’s defined in.</em> So:</p>
+
+<pre class="highlight plaintext"><code>// Strict mode for all the things!
+"use strict";
+function someScope() {
+  // This will be strict as well
+}
+-----
+// Not strict
+function someScope() {
+  "use strict";
+  // items in this scope and nested below will be treated with strict mode
+}
+// Not strict
+</code></pre>
+
+<p>So best JavaScript practice is to define strict mode only in scopes that you are responsible for, otherwise you might break third party libraries. And that’s exactly the route I took on the aforementioned project (which you can see the relevant table bits for <a target="_blank" href="http://www.demandingjustice.org/states/new-york/">here</a>).</p>
+
+<h3 id="a-wild-bugfix-appears">A Wild Bugfix Appears</h3>
+
+<p>But why not fix the other problem too? There’s no reason FooTables shouldn’t be strict mode compliant and it seemed like a pretty easy fix. So I forked the repo and dove in.</p>
+
+<p>Looking around a bit I found that it was managed with <a target="_blank" href="https://www.npmjs.org/doc/">npm</a>, distributed with <a target="_blank" href="http://bower.io/">Bower</a>, and used <a target="_blank" href="http://gruntjs.com/">Grunt</a> to run the build and testing step. The files I need to edit were going to be located in the <code>js/</code> directory, but first before I started messing around with the project internals I figured I better install the project’s dependencies.</p>
+
+<pre class="highlight plaintext"><code>$ npm install
+
+npm ERR! install Couldn't read dependencies
+npm ERR! Darwin 13.3.0
+npm ERR! argv "node" "/usr/local/bin/npm" "install"
+npm ERR! node v0.10.32
+npm ERR! npm  v2.0.0
+
+npm ERR! Invalid version: "2.0.1.5"
+npm ERR!
+npm ERR! If you need help, you may report this error at:
+npm ERR!     &lt;http://github.com/npm/npm/issues&gt;
+</code></pre>
+
+<p>Ah, the classic npm err. I’ve spent countless hours debugging npm dependency errors in the past and a lot of times the solution is just to reinstall npm. So without even bothering to read the error messages I blindly upgraded npm:</p>
+
+<pre class="highlight plaintext"><code>$ brew info npm
+...
+$ brew upgrade npm
+==&gt; Upgrading 1 outdated package, with result:
+...
+$ npm install
+</code></pre>
+
+<p>But to no avail. I decided to check the error log a little closer:</p>
+
+<pre class="highlight plaintext"><code>npm ERR! Invalid version: "2.0.1.5"
+</code></pre>
+
+<p>Ahah! npm requires <a target="_blank" href="http://semver.org/">semantic versioning</a>, which means version numbers must follows the pattern: MAJOR.MINOR.PATCH-pre-release-label. After taking a look at the git history of the <code>package.json</code> file where npm defines the version, it seemed like an appropriate semantic version would be 2.0.2 instead of 2.0.1.5. I edited the <code>package.json</code> and <code>bower.json</code> to reflect this and submitted a <a target="_blank" href="https://github.com/bradvin/FooTable/pull/276">pull request</a>.</p>
+
+<p>Since <a target="_blank" href="https://travis-ci.org/">Travis.ci</a> was setup on the project I went to watch my pull request be tested. Once it passed I went back to the pull requests page to review my submission. But it was no where to be found. Confused I hopped around from issues to pull requests wondering what happened. Finally I clicked on the “Closed” link on the pull requests page only to find he had already merged my pull request. A mere two minutes after I made it, at 1am on a Wednesday. Talk about a responsive upstream!</p>
+
+<p>With that bug squashed I returned to my original mission. Finding all the violations of strict mode was as simple as running <a target="_blank" href="https://github.com/jshint/jshint/">JSHint</a> in my editor (<a target="_blank" href="https://github.com/scrooloose/syntastic">Vim, Syntastic plugin</a>) and exploring the context of each warning to make sure what I was doing wasn’t actually breaking anything. That done, I looked at the Gruntfile to see what sort of build tasks were setup. Turns out the default task ran everything, so I just ran <code>grunt</code> and all the js tests passed and the builds completed. Strangely the LESS didn’t compile to the same as the prior CSS (even though I hadn’t changed anything) and the CSS linter threw a couple of errors. But that’s a bug fix for another day. I committed just the JavaScript files to another feature branch and submitted my <a target="_blank" href="https://github.com/bradvin/FooTable/pull/277">second pull request of the evening.</a></p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../../2015/pacing-and-character-in-mcconaugheys-performance-in-mud/">Pacing and character in McConaughey’s performance in Mud</a> <span>Nov 19</span>
+        </li>
+        <li>
+          <a href="../../2015/leitmotif-in-dr-strangelove/">Leitmotif and comedic relief in Kubrick's Dr. Strangelove</a> <span>Oct 29</span>
+        </li>
+        <li>
+          <a href="../../2015/establishing-narrative-control-in-freers-high-fidelity/">Establishing narrative control in Freer's High Fidelity</a> <span>Sep 30</span>
+        </li>
+        <li>
+          <a href="../../2015/a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../../2015/packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../../2015/playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../../2015/lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/bizleg/">BizLeg (15)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/hfoss/">HFOSS (4)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/film/">Film (3)</a></li>
+        <li><a href="/tags/cinematography/">Cinematography (1)</a></li>
+        <li><a href="/tags/review/">Review (10)</a></li>
+        <li><a href="/tags/trademark/">Trademark (2)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/legal/">Legal (1)</a></li>
+        <li><a href="/tags/licenses/">Licenses (1)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/business/">Business (1)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/foss/">FOSS (1)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/patents/">Patents (1)</a></li>
+        <li><a href="/tags/ip/">IP (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/video/">Video (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (28)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+  </body>
+</html>

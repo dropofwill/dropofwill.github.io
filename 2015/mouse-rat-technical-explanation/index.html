@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - Mouse Rat: Technical explanation</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../stylesheets/main-aec3cd83.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class=""><a href="/posts">blog</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>Mouse Rat: Technical explanation</h1>
+		<p>Technical explanation for a wearable gesture based mouse glove. It used the Arduino Flora, the wearable LSM9DSO accelerometer, and MPR121 capacitive touch breakout, all from Adafruit.</p>
+
+<p></p>
+
+<p>Source code available on Github: <a href="http://github.com/dropofwill/mouse_rat">dropofwill/mouse_rat</a></p>
+
+<blockquote>
+  <p><strong>Team</strong></p>
+
+  <ul>
+    <li>
+      <p><a href="https://github.com/JosephCoppola">Joe Coppola</a>: Production Manager</p>
+    </li>
+    <li>
+      <p><a href="https://github.com/Petroochio">Peter Gyory</a>: Electrical Engineer</p>
+    </li>
+    <li>
+      <p><a href="https://github.com/dropofwill">Will Paul</a>: Lead Programmer</p>
+    </li>
+  </ul>
+</blockquote>
+
+<h2 id="supplies">Supplies</h2>
+
+<ul>
+  <li>
+    <p>Adafruit Flora (Gemma should also work)</p>
+  </li>
+  <li>
+    <p>Adafruit Wearable LSM9DSO</p>
+  </li>
+  <li>
+    <p>Adafruit Breakout MPR121 (no wearable version available)</p>
+  </li>
+  <li>
+    <p>Conductive/regular thread and needle</p>
+  </li>
+  <li>
+    <p>Conductive fabric (just a little bit for the fingers)</p>
+  </li>
+  <li>
+    <p>Flexible wire</p>
+  </li>
+  <li>
+    <p>Soldering tools &amp; supplies</p>
+  </li>
+</ul>
+
+<h2 id="schematic">“Schematic”</h2>
+
+<p>Here is a rough schematic of how to wire up all the sensors. The key point to note here is that we actually are just using SDA/SCL and chaining the capacitive and touch sensor together. This works fine because that’s how the Flora wearables were designed, with one caveat you have to make sure the two sensors have different ids internally.</p>
+
+<p><img alt="Rough Schematic" src="https://raw.githubusercontent.com/dropofwill/mouse_rat/master/mouse_rat-schematic.jpg" /></p>
+
+<h2 id="what-it-looks-like">What it looks like</h2>
+
+<p><img alt="Top Down" src="https://raw.githubusercontent.com/dropofwill/mouse_rat/master/mouse_rat-top-down.jpg" /></p>
+
+<p><img alt="Bottom Down" src="https://raw.githubusercontent.com/dropofwill/mouse_rat/master/mouse_rat-bottom-down.jpg" /></p>
+
+<p><img alt="Close Up" src="https://raw.githubusercontent.com/dropofwill/mouse_rat/master/mouse_rat-close-up.jpg" /></p>
+
+<h2 id="code">Code</h2>
+
+<p>My main role on the project was programming (and the occasional soldering venture when Peter got lightheaded from being bad at soldering), so I’ll talk a little bit about the code. Interacting with the mouse on the screen was pretty simple because Arduino provides a library for moving, clicking, and scrolling the mouse.</p>
+
+<p>The capacitive touch was simple to setup, except for the aforementioned I2C id issue. As the project came to a close we ended up tweaking some internal values in the library to make the touch a little less sensitive. We actually experienced a lot of crashes before we soldered the connections, even though are connections were tightly wound. Afterwards that problem completely went away (yay!).</p>
+
+<p>Most of my time then was spent converting accelerometer data into mouse movements. The first problem to consider is that people hold their hand in different positions and elevations, which change the values we get. To handle this we added a calibration loop on startup to get a range of min/max values that should be treated as stationary. We then took the mean value of this range and subtracted it from any accelerometer inputs to make sure input wasn’t weighted in a particular direction. We also clamped inputs to between 20 and -20 m/s^2 to keep violent motions from going too crazy. We polled the accelerometer about 120 times a second for these values and mapped them to between -30 and 30 pixels relative to the current position of the mouse.</p>
+
+<h2 id="wrap-up">Wrap up</h2>
+
+<p>In the end the glove mouse wasn’t as effective as we had hoped. Accelerometer input is even more fuzzy then optical and it became clear to us why you don’t see that many acceleration based mice on the market. The glove we used had conductive finger tips, which contrary to what we thought, actually hinders the capacitive touch sensors (it raises the baseline current so that it takes a lot of pressure to register a touch), so we had to move the clicking mechanism to below the finger tips. The glove itself is sort of fragile (lots of components sewed on to stretch material) and an aspect of using a glove that we didn’t consider was that it gets fairly warm inside after a bit of use.</p>
+
+<p>If we did it again some changes we would make from the construction side of things would be to use a lighter weight glove (maybe even just mesh) as we only really need three fingers and a place to put the sensor components we could probably even cut the idea of using a glove down to just caps on the finger tips connected with flexible wire to deal with the heat and discomfort.</p>
+
+<p>From a programming stand point this could definitely benefit from a more advanced calibration process, right now our sensor has 9 degrees of freedom and we are really only calibrating using 3. Movement is still kind of awkward (reminiscent of the Lenovo ThinkPads joystick in the middle of the keyboard), we could probably improve this through using a more advanced acceleration to pixels conversion system.</p>
+
+<p>All that aside we ended up with a somewhat usable mouse that is actually a lot of fun to mess around with. So not ready for production at all, but a fun project and we all learned a lot.</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../pacing-and-character-in-mcconaugheys-performance-in-mud/">Pacing and character in McConaughey’s performance in Mud</a> <span>Nov 19</span>
+        </li>
+        <li>
+          <a href="../leitmotif-in-dr-strangelove/">Leitmotif and comedic relief in Kubrick's Dr. Strangelove</a> <span>Oct 29</span>
+        </li>
+        <li>
+          <a href="../establishing-narrative-control-in-freers-high-fidelity/">Establishing narrative control in Freer's High Fidelity</a> <span>Sep 30</span>
+        </li>
+        <li>
+          <a href="../a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/bizleg/">BizLeg (15)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/hfoss/">HFOSS (4)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/film/">Film (3)</a></li>
+        <li><a href="/tags/cinematography/">Cinematography (1)</a></li>
+        <li><a href="/tags/review/">Review (10)</a></li>
+        <li><a href="/tags/trademark/">Trademark (2)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/legal/">Legal (1)</a></li>
+        <li><a href="/tags/licenses/">Licenses (1)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/business/">Business (1)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/foss/">FOSS (1)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/patents/">Patents (1)</a></li>
+        <li><a href="/tags/ip/">IP (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/video/">Video (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (28)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+  </body>
+</html>

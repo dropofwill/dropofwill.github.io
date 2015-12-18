@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - Initial Review of a FOSS Primer</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../stylesheets/main-aec3cd83.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class=""><a href="/posts">blog</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>Initial Review of a FOSS Primer</h1>
+		<p>This section of the book is focused on copyrights and licensing issues facing FOSS projects. It starts at a high level explaining why a license is necessary and then works its way down to the details of choosing the correct license, dealing with copyright in teams and organizations, and finally how to deal with copyright violations from a FOSS perspective.</p>
+
+<blockquote>
+  <p><strong>Who:</strong></p>
+
+  <ul>
+    <li>
+      <p><a href="http://en.wikipedia.org/wiki/Richard_Fontana">Richard Fontana</a> (lawyer, worked on GPLv3, LGPLv3, AGPL, director of OSI),</p>
+    </li>
+    <li>
+      <p><a href="http://en.wikipedia.org/wiki/Bradley_M._Kuhn">Bradley M. Kuhn</a> (free software activist, president of Software Freedom Conservancy, previously worked for the SFLC and FSF),</p>
+    </li>
+    <li>
+      <p><a href="http://en.wikipedia.org/wiki/Eben_Moglen">Eben Moglen</a> (law and legal history professor at Columbia University and director-counsel and chairman of the SFLC),</p>
+    </li>
+    <li>
+      <p><a href="https://www.linkedin.com/pub/matt-norwood/5/770/a39">Matthew Norwood</a> (IP lawyer, previously was counsel at the SFLC),</p>
+    </li>
+    <li>
+      <p><a href="http://www.ravicher.com/">Daniel B. Ravicher</a> (lawyer and law professor),</p>
+    </li>
+    <li>
+      <p><a href="http://en.wikipedia.org/wiki/Karen_Sandler">Karen Sandler</a> (executive director of the SFC, former director of the GNOME Foundation, former general counsel at the SFLC),</p>
+    </li>
+    <li>
+      <p><a href="https://twitter.com/jamesvasile">James Vasile</a> (director of Open Internet Tools Project),</p>
+    </li>
+    <li>
+      <p><a href="https://torekeland.com/about/aaron-williamson">Aaron Williamson</a> (IP lawyer for Tor Ekeland).</p>
+    </li>
+  </ul>
+
+  <p><strong>What:</strong> Foreward - Chapter 2 of the book <em>A Legal Issues Primer for Open Source and Free Software Projects</em> put out by the <a href="https://www.softwarefreedom.org/">Software Freedom Law Center (SFLC).</a></p>
+
+  <p><strong>Where:</strong> <a href="http://bizlegfoss-ritigm.rhcloud.com/static/books/foss-primer.pdf">available for free on RIT’s Business and Legal issues in FOSS course website</a></p>
+
+  <p><strong>When:</strong> Latest edition (1.5.2) published June 2008</p>
+</blockquote>
+
+<h2 id="the-good">The Good</h2>
+
+<ul>
+  <li>
+    <p>This cleared up some of my confusions with the GPL, especially around the server/client relationship? Say my backend runs on GPL’d code, does that mean it has to serve a static copy of the code on the site somewhere? It turns out if you do not distribute the software, you do not have to distribute the source code.</p>
+  </li>
+  <li>
+    <p>The description of copyright enforcement was interesting. Something I’ve always wondered is how one enforce GPL restrictions, especially when the violation occurs in proprietary code (how does one know for sure the binaries contain your code? See Berkeley v. FSF).</p>
+  </li>
+  <li>
+    <p>Deciding how to transfer copyright of code in a project with multiple people seems almost important than the choice of license (what good is your license if it you didn’t have the rights to it to begin with?). It’s important to remember that your employer may own everything you create, even on your own time and on your own computer.</p>
+  </li>
+</ul>
+
+<h2 id="the-bad">The Bad</h2>
+
+<ul>
+  <li>
+    <p>The sections on the general GPL and BSD/permissive licenses were too short, I guess since this is just a primer they didn’t want to go line by line or anything like that. However, as someone already aware of the basics of copyleft/permissive, I was hoping for a little more in the way of details and use cases, which seemed to me what was given when talking about the specific licenses of LGPL and AGPL.</p>
+  </li>
+  <li>
+    <p>It seemed pretty dismissive of Permissive licenses. Yes, it does make sense to group them together, but are patent, trademark, attribution, changelog rules really equivalent to saying they “differ in only minor ways”? I realize copyleft people only think about preserving freedom, but there are a ton of other issues involved with license choice.</p>
+  </li>
+  <li>
+    <p>It could use more motivating examples, most legal systems are fundamentally built on past rulings, so understanding past issues related to licensing differences could shape a developer’s opinion on what is important for their particular project.</p>
+  </li>
+</ul>
+
+<h2 id="questions">Questions</h2>
+
+<ul>
+  <li>
+    <p>Copyright expires after X-years. Doesn’t that mean that copyleft licenses also expire after that amount of years as well? Why then is it called a “<em>forever</em> free” license?</p>
+  </li>
+  <li>
+    <p>A footnote in the section on the AGPL mentions that client side code (via JavaScript, CSS, and HTML) is distribution of software “in the strictest sense”. As the creation of frontend code becomes more and more complex the result sent to the end user begins to look more and more like binaries, complete with a build or compilation step (via preprocessors, templating systems, dependency managers, minfiers, and the like). What this means is the code sent to the browser is much less usable than the source the developer used to make, while not as difficult as reverse engineering a binary, figuring out a complex program with 2 letter variables and function inlining is no easy task. So I guess my question is what counts as “source code” when it comes to frontend code under the GPL?</p>
+  </li>
+  <li>
+    <p>The OSI and FSF disagree on what are valid open source licenses, I’m thinking specifically about the Creative Commons 0 here (which generated a lot of discussion on the OSI mailing list, here, here, and here, before it was eventually rejected). Why should I trust one source over the other in matters of such disagreement?</p>
+  </li>
+  <li>
+    <p>What rights do you have in an employee/employer relationship? Can they really own everything you create? Are there ways to circumvent this, like say anonymous contributions?</p>
+  </li>
+</ul>
+
+<h2 id="final-thoughts">Final Thoughts</h2>
+
+<p>Informative and I look forward to reading the rest of the book, especially the patents and trademark sections. I think a few more motivating examples and a little more depth in the explanations could really improve this guide in terms of usefulness. That said it did answer a lot of unanswered questions I’ve had as is, so it certainly is worth taking a look at if these things are relevant to what you do or you find this stuff interesting.</p>
+
+<p>4.75/5</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../pacing-and-character-in-mcconaugheys-performance-in-mud/">Pacing and character in McConaughey’s performance in Mud</a> <span>Nov 19</span>
+        </li>
+        <li>
+          <a href="../leitmotif-in-dr-strangelove/">Leitmotif and comedic relief in Kubrick's Dr. Strangelove</a> <span>Oct 29</span>
+        </li>
+        <li>
+          <a href="../establishing-narrative-control-in-freers-high-fidelity/">Establishing narrative control in Freer's High Fidelity</a> <span>Sep 30</span>
+        </li>
+        <li>
+          <a href="../a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/bizleg/">BizLeg (15)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/hfoss/">HFOSS (4)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/film/">Film (3)</a></li>
+        <li><a href="/tags/cinematography/">Cinematography (1)</a></li>
+        <li><a href="/tags/review/">Review (10)</a></li>
+        <li><a href="/tags/trademark/">Trademark (2)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/legal/">Legal (1)</a></li>
+        <li><a href="/tags/licenses/">Licenses (1)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/business/">Business (1)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/foss/">FOSS (1)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/patents/">Patents (1)</a></li>
+        <li><a href="/tags/ip/">IP (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/video/">Video (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (28)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+  </body>
+</html>
