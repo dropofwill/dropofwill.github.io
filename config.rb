@@ -109,6 +109,7 @@ set :disqus_short_name, 'dropofwill'
 
 activate :deploy do |deploy|
   deploy.method = :git
+  deploy.branch = 'master'
 end
 
 set :site_url, ''
