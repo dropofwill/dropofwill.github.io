@@ -20,7 +20,7 @@
 
     <h2>Tags</h2>
     <ol class="columnize">
-      <% blog.tags.sort_by(&:size).each do |tag, articles| %>
+      <% blog.tags.sort_by{ |t| t[1].count }.reverse.each do |tag, articles| %>
         <li><%= link_to "#{tag} (#{articles.size})", "#{site_url}#{tag_path(tag)}" %></li>
       <% end %>
     </ol>

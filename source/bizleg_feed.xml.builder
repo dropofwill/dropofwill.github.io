@@ -10,7 +10,7 @@ xml.feed "xmlns" => "http://www.w3.org/2005/Atom" do
   xml.author { xml.name "Will Paul" }
 
   blog.articles.each do |article|
-    if article.tags.include? "BizLeg"
+    if article.tags.include? "Business and Legal"
       xml.entry do
         xml.title article.title
         xml.link "rel" => "alternate", "href" => URI.join(site_url, article.url)
