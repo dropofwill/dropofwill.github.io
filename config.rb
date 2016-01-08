@@ -10,7 +10,7 @@ activate :blog do |blog|
 
   # Matcher for blog source files
   blog.sources = "content/posts/{title}.html"
-  blog.permalink = "{year}/{title}.html"
+  blog.permalink = "posts/{year}/{title}.html"
 	blog.layout = "article"
   blog.summary_length = 300
   blog.default_extension = ".md.erb"
@@ -53,15 +53,10 @@ end
 
 helpers do
   def current_page?(page, category)
-    # print "#{current_page.url} #{page} #{category}"
-    # p ' '
-    # p current_page.url == page
-    # p current_page.url.include? category
-
     if current_page.url == page
       return 'current-page-link'
     elsif current_page.url.include? category
-      return 'current-pag-link'
+      return 'current-page-link'
     else
       return ''
     end
