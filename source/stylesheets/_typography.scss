@@ -1,14 +1,65 @@
-%link {
-  color: $link-color;
-  text-decoration: underline;
+$selectionColor: #b4d5fe;
+
+@mixin textShadowToCropUnderline($color) {
+  text-shadow: 0.03em 0 $color, -0.03em 0 $color,
+               0 0.03em $color, 0 -0.03em $color,
+               0.06em 0 $color, -0.06em 0 $color,
+               0.09em 0 $color, -0.09em 0 $color,
+               // 0.12em 0 $color, -0.12em 0 $color,
+               // 0.15em 0 $color, -0.15em 0 $color;
+}
+
+@mixin linkUnderlines($backgroundColor, $fontColor, $underlineColor,
+                      $strokeWidth, $selectionColor) {
+  @include textShadowToCropUnderline($backgroundColor);
+  color: $fontColor !important;
+  text-decoration: none;
+  background-image: linear-gradient($backgroundColor, $backgroundColor),
+                    linear-gradient($backgroundColor, $backgroundColor),
+                    linear-gradient($underlineColor, $underlineColor);
+  // background-size: .05em 1px, .05em 1px, 1px 1px;
+  background-size: .03em $strokeWidth, 0 $strokeWidth, $strokeWidth $strokeWidth;
+  background-repeat: no-repeat, no-repeat, repeat-x;
+  background-position: 0% 90%, 100% 90%, 0% 90%;
+
+  &::selection {
+    @include textShadowToCropUnderline($selectionColor);
+    background: $selectionColor;
+  }
+
+  &::-moz-selection {
+    @include textShadowToCropUnderline($selectionColor);
+    background: $selectionColor;
+  }
+
+  &:before,
+  &:after,
+  // *,
+  *:before,
+  *:after {
+    text-shadow: none;
+  }
 
   &:visited {
-    color: $link-visited-color;
+    color: $fontColor;
   }
-  &:hover, &:visited:hover {
-    color: $link-hover-color;
-    text-decoration: none;
+
+  &:hover,
+  &:visited:hover {
+    background: none;
   }
+}
+
+@mixin normalUnderlines($fontColor, $underlineColor) {
+  @include linkUnderlines(#fff, $fontColor, $underlineColor, 2px, $selectionColor);
+}
+
+@mixin boldUnderlines($fontColor, $underlineColor) {
+  @include linkUnderlines(#fff, $fontColor, $underlineColor, 7px, $selectionColor);
+}
+
+%link {
+  @include normalUnderlines(#000, $link-color);
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -85,7 +136,9 @@ a.top-link {
   font-size: 70%;
   text-transform: uppercase;
   text-decoration: none;
-  &:hover { text-decoration: underline; }
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .hero {
@@ -100,14 +153,20 @@ a.top-link {
   }
 }
 
-.project-nav {
+ul.project-nav {
+  display: block;
+  margin-top: 3rem !important;
+
   li {
-    margin-left: 0 !important;
+    margin-left: 0;
+    margin-bottom: 3rem;
     list-style-type: none;
   }
 }
 
-.project-title {
+a.project-link {
+  @include boldUnderlines(#000, $link-color);
+  @extend %h1;
 
   span {
     font-weight: normal;
