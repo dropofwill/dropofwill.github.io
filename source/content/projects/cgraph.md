@@ -4,15 +4,23 @@ project:
   title: C-Graph
   sub: interactive data-viz
 
+role: Frontend Developer
 tags: Frontend, Data Viz
-tech: Node.js, D3.js, Browserify, SVG
+tech:
+  - Node
+  - D3.js
+  - Browserify
+  - SVG
 
-github: 'https://github.com/brendanwhitfield/cgraph'
-link: 'http://cgraph.herokuapp.com'
+links:
+  - title: C-Graph
+    href: 'http://cgraph.herokuapp.com'
+  - title: Github
+    href: 'https://github.com/brendan-w/cgraph'
 
-teammates:
-  - name: 'Brenden Whitfield'
-    link: 'https://github.com/brendanwhitfield/'
+team:
+  - name: 'Brendan Whitfield'
+    link: 'https://github.com/brendan-w/'
 
 hero_img: 'cgraph-hero.png'
 

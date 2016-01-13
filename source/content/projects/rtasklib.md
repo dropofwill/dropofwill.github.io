@@ -4,11 +4,17 @@ project:
   title: Rtasklib
   sub: task data library
 
+role: Sole Developer
 tags: Backend, Library
-tech: Ruby, TaskWarrior
+tech:
+  - Ruby
+  - TaskWarrior
 
-github: 'https://github.com/dropofwill/rtasklib'
-link: 'http://will-paul.com/rtasklib'
+links:
+  - title: Rtasklib
+    href: 'http://will-paul.com/rtasklib'
+  - title: Github
+    href: 'https://github.com/dropofwill/rtasklib'
 
 hero_img: 'rtasklib-hero.png'
 

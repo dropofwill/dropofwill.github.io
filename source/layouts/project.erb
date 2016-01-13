@@ -6,7 +6,58 @@
 
     <h5><%= current_page.data.description %></h5>
 
-    <%= image_tag current_page.data.hero_img, class: 'project-hero-img' %>
+    <% if !current_page.data.hero_img.nil? %>
+      <%= image_tag current_page.data.hero_img, class: 'project-hero-img' %>
+    <% end %>
+
+    <section>
+      <% if !current_page.data.role.nil? %>
+        <section class="meta-data">
+          <h5>Role</h5>
+          <p><%= current_page.data.role %></p>
+        </section>
+      <% end %>
+
+      <% if !current_page.data.team.nil? %>
+        <section class="meta-data">
+          <% if current_page.data.team_name.nil? %>
+            <h5>Team</h5>
+          <% else %>
+            <h5><%= current_page.data.team_name %></h5>
+          <% end %>
+          <ul>
+            <% current_page.data.team.each do |teammate| %>
+              <% if teammate.link.nil? %>
+                <li><%= teammate.name %></li>
+              <% else %>
+                <li><a href="<%= teammate.link %>"><%= teammate.name %></a></li>
+              <% end %>
+            <% end %>
+          </ul>
+        </section>
+      <% end %>
+
+      <% if !current_page.data.tech.nil? %>
+        <section class="meta-data">
+          <h5>Tech</h5>
+          <ul>
+            <% current_page.data.tech.each do |technology| %>
+              <li><%= technology %></li>
+            <% end %>
+          </ul>
+        </section>
+      <% end %>
+
+      <% if !current_page.data.links.nil? %>
+        <section class="meta-data">
+          <h5>Links</h5>
+          <% current_page.data.links.each do |link| %>
+            <a href="<%= link.href %>"><%= link.title %></a><br />
+          <% end %>
+        </section>
+      <% end %>
+
+    <section>
 
     <%= yield %>
 

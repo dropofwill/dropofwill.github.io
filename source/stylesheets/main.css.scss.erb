@@ -38,6 +38,7 @@ body {
 
 hr {
   border-top: $standard-border;
+  @extend %clearfix;
 }
 
 .article {
@@ -73,7 +74,7 @@ hr {
 
 .project-hero-img {
   width: 100%;
-  max-width: 70rem;
+  max-width: 70rem !important;
 }
 
 .current-page-link {
@@ -83,6 +84,17 @@ hr {
 
   &:after  {
     content: ' )';
+  }
+}
+
+.meta-data {
+  @extend %clearfix;
+}
+
+@media (min-width: 600px) {
+  .meta-data {
+    width: 25%;
+    float: left;
   }
 }
 
@@ -99,3 +111,4 @@ hr {
     clear: both;
   }
 }
+
