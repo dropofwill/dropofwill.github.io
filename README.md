@@ -1,18 +1,16 @@
 # will-paul.com / dropofwill.github.io
 
-Updated version of my portfolio.
+Personal page built with Middleman.
 
-Built with Middleman.
+### License
 
-## License
+##### Content and Art
 
-All content (writing and artwork) is licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-
-All code is released into the public domain where possible under the CC0 (UNLICENSE.md) unless otherwise specified.
-
-All content (articles) are copyright by Will Paul at the date of creation, unless otherwise noted.
+All content (writing and artwork) is licensed under the Creative Commons Attribution 4.0 International License.
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This content is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+##### Code
 
 All unique code created for this project is unlicensed under the Creative Commons Zero, which releases the code into the public domain where possible and where that is not possible provides a permissive license as a backup plan.
 
