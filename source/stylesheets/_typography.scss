@@ -167,10 +167,11 @@ ul.project-nav {
 a.project-link {
   @include boldUnderlines(#000, $link-color);
   @extend %h1;
+}
 
-  span {
-    font-weight: normal;
-  }
+.project-title span,
+.project-link span {
+  font-weight: normal;
 }
 
 .typeset {
