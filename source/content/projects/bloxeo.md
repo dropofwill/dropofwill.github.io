@@ -20,7 +20,7 @@ links:
 team_name: Server team
 team:
   - name: 'Braxton Frederick'
-    link: 'https://github.com/bfrederick/'
+    link: 'https://github.com/brfrederick/'
   - name: 'Eric Kipnis'
     link: 'https://github.com/erickipnis/'
   - name: 'Nick Minnoe'
