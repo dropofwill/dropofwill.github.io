@@ -15,7 +15,7 @@ tech:
 
 links:
   - title: Bloxeo Design Deck
-    href: '../../images/bloxeo-deck.pdf'
+    href: '../../../images/bloxeo-deck.pdf'
 
 team_name: Server team
 team:
