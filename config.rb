@@ -11,7 +11,7 @@ activate :blog do |blog|
   # Matcher for blog source files
   blog.sources = "content/posts/{title}.html"
   blog.permalink = "posts/{year}/{title}.html"
-	blog.layout = "article"
+  blog.layout = "article"
   blog.summary_length = 300
   blog.default_extension = ".md.erb"
   blog.taglink = "tags/{tag}.html"
@@ -33,9 +33,9 @@ activate :blog do |blog|
   # end
 
   # Enable pagination
-	blog.paginate = true
-	blog.per_page = 2
-	blog.page_link = "page/{num}"
+  blog.paginate = true
+  blog.per_page = 2
+  blog.page_link = "page/{num}"
 end
 
 page "/feed.xml", layout: false
@@ -90,8 +90,8 @@ activate :syntax
 set :inline_theme, "github"
 set :markdown_engine, :kramdown
 set :markdown, layout_engine: :slim,
-               tables: true,
-               smartypants: true
+  tables: true,
+  smartypants: true
 
 set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
@@ -112,13 +112,13 @@ set :site_url, ''
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
-	activate :minify_css
+  activate :minify_css
 
   # Minify Javascript on build
-	activate :minify_javascript
+  activate :minify_javascript
 
   # Enable cache buster
-	activate :asset_hash
+  activate :asset_hash, :ignore => [/banner/]
 
   # Root/Refresh
   # activate :relative_assets
