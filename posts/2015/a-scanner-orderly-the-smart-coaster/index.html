@@ -1,0 +1,299 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - A Scanner Orderly: The smart coaster</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../../stylesheets/main-0a9e8dab.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class="current-page-link"><a href="/posts">posts</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>A Scanner Orderly: The smart coaster</h1>
+		<p>What if you could order drink with your coaster? This blog post explains how we made one using an Arduino and Node.js.</p>
+
+<p></p>
+
+<p><a href="https://github.com/dropofwill/a-scanner-orderly-embed">Arduino Source Code</a> (BSD 3, with GPL libraries)</p>
+
+<p><a href="https://github.com/dropofwill/a-scanner-orderly-web">Node Source Code</a> (BSD 3)</p>
+
+<h2 id="team">Team</h2>
+
+<blockquote>
+  <ul>
+    <li>
+      <p><a href="https://github.com/JosephCoppola">Joe Coppola</a>: Mechanical Engineer</p>
+    </li>
+    <li>
+      <p><a href="https://github.com/Petroochio">Peter Gyory</a>: Electrical Engineer</p>
+    </li>
+    <li>
+      <p><a href="https://github.com/dropofwill">Will Paul</a>: Software Engineer</p>
+    </li>
+  </ul>
+
+  <p><strong>Advisor:</strong></p>
+
+  <ul>
+    <li>James Wagoner: Actual Engineer</li>
+  </ul>
+</blockquote>
+
+<h2 id="design-overview">Design Overview</h2>
+
+<p>A general problem with work is that we are often asked to put our mental energy towards multiple tasks at once. Often times people will say that they are good at multi-tasking, but research has shown that multitasking leads to severe bottlenecking in planning actions and information retrieval from memory.</p>
+
+<p>Enter the bar domain, a common problem, especially for busy bars, is that the bartenders are asked to manage the ordering, making, and paying for the drinks all while managing a mental queue of what to work on next. This leads to long waits and a struggle to get the bartenders attention. Our idea is to automate the ordering and queuing process, with an eye towards the payment process, to let the bartenders focus on what they do best: make drinks.</p>
+
+<p>To achieve this we envisioned a smart coaster, which each patron would receive upon entry and would serve as their primary method of ordering drinks. Underneath the top of the coaster was a Force Resistant Sensor (FSR), which would allow the user to perform selection and detect when a drink arrived.Along the inner edge of the coaster a strand of LEDs were placed to give the user feedback on the state of their interaction with the coaster and the state of their drink. The coaster itself was 3D printed with translucent plastic so that the lights can shine through.</p>
+
+<p>On the bottom of the coaster we needed some sort of menu reader. We looked into barcode scanners, cameras, RFID tags, but all were either too expensive or too bulky for our needs, so we ended up going for an RGB sensor to be paired with a color-coded menu. For this prototype we decided to limit the options to ordering Highballs, which are two-part mixed drinks composed of one spirit and one mixer. One benefit of the RGB sensor we chose was that it had its own light source, so it can work even in a dark bar. While the sensor was actually surprisingly accurate we decide to limit the menu to just 3 spirits and 3 mixers for simplicity.</p>
+
+<h2 id="pics">Pics</h2>
+
+<p>Top of the coaster:</p>
+
+<p><img alt="Top of the coaster" src="https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/top.JPG" /></p>
+
+<p>Bottom of the coaster:</p>
+
+<p><img alt="Bottom of the coaster" src="https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/bottom.JPG" /></p>
+
+<p><img alt="The coaster lit up" src="https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/lit_up.jpg" /></p>
+
+<h2 id="videos">Videos</h2>
+
+<iframe src="https://player.vimeo.com/video/128517905" width="500" height="282" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<p><a href="https://vimeo.com/128517905">Shows selecting the spirit</a> from <a href="https://vimeo.com/user37593906">Will Paul</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+<iframe src="https://player.vimeo.com/video/128516073" width="500" height="282" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+<p><a href="https://vimeo.com/128516073">Shows selecting the mixer and waiting transition</a> from <a href="https://vimeo.com/user37593906">Will Paul</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+
+<h2 id="supplies">Supplies</h2>
+
+<ul>
+  <li>
+    <p>Small Arduino, we used a Flora</p>
+  </li>
+  <li>
+    <p>3 * 3D prints for the coaster</p>
+  </li>
+  <li>
+    <p>Adafruit RGB Sensor</p>
+  </li>
+  <li>
+    <p>16 Adafruit Neopixels in a strip</p>
+  </li>
+  <li>
+    <p>Stuff to make a Force Resistance Sensor, we used:</p>
+
+    <ul>
+      <li>
+        <p>2 Sheets of aluminum foil</p>
+      </li>
+      <li>
+        <p>2 Sheets of laminate</p>
+      </li>
+      <li>
+        <p>1 sheet of Velostat/Polymer</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Solder</p>
+  </li>
+  <li>
+    <p>Glue / Electrical Tape</p>
+  </li>
+  <li>
+    <p>Resistors / Wires</p>
+  </li>
+</ul>
+
+<h2 id="construction">Construction</h2>
+
+<p>Inside of the coaster:</p>
+
+<p><img alt="Inside of the coaster" src="https://raw.githubusercontent.com/dropofwill/a-scanner-orderly-web/master/design/images/inside.JPG" /></p>
+
+<p>The coaster itself consists of three 3D printed parts, the bottom (which has the sides, a ledge for the other two parts just large enough for the strand of LEDS, and a custom fit whole/dip for our RGB sensor), the middle part (which was just a small sheet of plastic for the FSR to set on) and the top (which was cut to fit right on the ledge and a special cutout so that the wire from connecting to the FSR didn’t cause it to bulge). In the end we also added little bits of cardboard for extra support against the FSR (so that it would be more responsive), and this should probably be added to the print for future additions. Also the FSR ended up being thicker than we thought, so in future prints we would make that divot a little deeper so that it fits together a bit tighter.</p>
+
+<p>All the internal connections were soldered and since there wasn’t really room for a breadboard all the circuits were made with just wires and resistors. To keep everything insulated we made extensive use of electrical tape and hot glue (for stuff that electrical tape wouldn’t stick to).</p>
+
+<h2 id="code">Code</h2>
+
+<p>We had communication in both directions between the Arduino (potentially multiple) and the Express Node Server using the Serial port and communicated between the server and the (potentially multiple) clients using web sockets so that the page didn’t have to be refreshed to display updates.</p>
+
+<pre class="highlight plaintext"><code>Arduino(s) &lt;-&gt; Node Server &lt;-&gt; Clients
+         Serial         Socket.io
+</code></pre>
+
+<p>We used the Node <a href="https://github.com/voodootikigod/node-serialport"><code>serialport</code></a> library to handle communication between the server and Arduino. It worked by polling the clients serial ports for any device that was sending the message ‘Connect’, which was what our coaster sends out until it gets the “$” sign response from the server (we chose “$” because it was single byte ASCII character that signifies end of string in Regex, so it seemed an appropriate way to close a message).</p>
+
+<p>Since there is always a high possibility of data getting lost/missed in Serial communication we implemented a UDP-esque approach where we just keep sending the message until the receiver tells us they have received it.</p>
+
+<pre class="highlight plaintext"><code>Arduino &lt;-&gt; Server &lt;-&gt; Clients
+
+# Sends 'Connect' until server responds
+A -&gt; S  "Connect"
+...
+"$" A &lt;- S
+
+# Sends a drink JSON string after the user selects their drink
+# Sends until server responds
+A -&gt; S "{\"drink\": [0,0]}" -&gt; C
+...
+"$" A &lt;- S
+
+# Send a message that the bartender has started the drink
+"start" A &lt;- S &lt;- C
+...
+"$" S -&gt; A -&gt; C
+
+# Send a message that their drink is on its way
+"ready" A &lt;- S &lt;- C
+...
+"$" S -&gt; A -&gt; C
+
+# Sends a message to the server that the drink has arrived
+A -&gt; S  "Done"
+...
+"$" A &lt;- S
+
+</code></pre>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Obviously, a wired coaster isn’t going to work in a real world environment, but the proof-of-concept is there. With a Wifi module, a 5 volt Arduino (instead of our 3.3v Flora), and a small battery pack along with some slight modifications to the model we think it could work pretty well.</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="./">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+        <li>
+          <a href="../mouse-rat-technical-explanation/">Mouse Rat: Technical explanation</a> <span>Mar 28</span>
+        </li>
+        <li>
+          <a href="../mouse-rat-rethinking-the-mouse-computer-interface/">Mouse Rat: Rethinking the mouse computer interface</a> <span>Mar 28</span>
+        </li>
+        <li>
+          <a href="../review-of-market-power-and-regulation/">Review of: Market power and regulation</a> <span>Mar 18</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/business-and-legal/">Business and Legal (15)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/review/">Review (11)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/ip/">IP (5)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/foss/">FOSS (5)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (25)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-55319602-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  </body>
+</html>

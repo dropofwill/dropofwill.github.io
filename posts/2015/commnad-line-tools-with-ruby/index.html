@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - Writing Command Line Tools with Ruby</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../../stylesheets/main-0a9e8dab.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class="current-page-link"><a href="/posts">posts</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>Writing Command Line Tools with Ruby</h1>
+		<p>I’ve written a lot of Ruby code over the years from web applications, to rack frameworks, to rake tasks, even packaged a few up as gems, but one thing I’ve never done is write a command line tool directly in ruby. This post just sums up my initial foray into making Ruby cli tools, as usual with Ruby it’s not nearly as hard as it sounds.</p>
+
+<h2 id="the-basics">The Basics</h2>
+
+<p>Typically when you write a ruby script you execute it with the Ruby command followed by a file path, like so:</p>
+
+<pre class="highlight plaintext"><code>$ ruby ../path/to/some_example.rb
+</code></pre>
+
+<p>But that puts a lot of weight on the user, they need to know 1) this is a Ruby program, 2) where it was ‘installed’, and 3) the file extension for Ruby. The API we want is this:</p>
+
+<pre class="highlight plaintext"><code>$ some_example
+</code></pre>
+
+<p>To accomplish this we first need to add a ‘shebang’ to the top of our main entry point to the application, like this:</p>
+
+<pre class="highlight ruby"><code><span class="c1">#!/usr/bin/env ruby</span>
+</code></pre>
+
+<p>This line tells the shell how we want the following file interpreted. We could hard code a path to ruby, but by using the env dir we let the user’s shell decide what ruby is, this way people can install ruby however they want and our program will still run. To run the program directly we also need to make it executable:</p>
+
+<pre class="highlight plaintext"><code>$ chmod +x ../path/to/some_example.rb
+</code></pre>
+
+<p>And now the program can be run without specifying Ruby:</p>
+
+<pre class="highlight plaintext"><code>$ ../path/to/some_example.rb
+</code></pre>
+
+<p>Or we can optionally leave off the Ruby extension (.rb) and run it without any knowledge that it is Ruby under the hood:</p>
+
+<pre class="highlight plaintext"><code>$ mv ../path/to/some_example.rb ../path/to/some_example
+$ ../path/to/some_example
+</code></pre>
+
+<p>But what about that annoying <code>../path/to/</code> nonsense, the user shouldn’t have to even know, much less have to type the full path to the program to run it. To solve this we have two main options (though there are certainly a number of ways to accomplish this).</p>
+
+<p>The first and ‘easiest’ approach is to simply add the executable to the users PATH either in the shell, a init script, or by typing it right in the shell:</p>
+
+<pre class="highlight plaintext"><code>$ export PATH=/abs/path/to/some_example:$PATH
+$ some_example
+</code></pre>
+
+<p>This prepends our code to the lookup PATH ($PATH is a variable for the current PATH, the colon separates different parts of the PATH) so that we don’t need to know where the code is located in order to execute it.</p>
+
+<p>This meets our original requirements, but comes with a number of problems. Are we going to make the user manage the PATH themselves? Is this run with an install shell script? What it the users’ shell of choice doesn’t use the <code>export</code> API? What if they want to move where the install directory is on their computer? All these questions lead us to believe there must be a better or at least more standardized approach to this.</p>
+
+<p>And as it turns out there is! The people behind RubyGems have put a lot of thought into this, so that when you create a gem you can define a set of files that can be used as executables and it then copies them to <code>#{ruby-prefix}/bin/{#gem_name}</code>, which is already added to their PATH during the installation of Ruby and is managed by tools like rbenv, chruby, or RVM so that you don’t have to.</p>
+
+<p>The downside to this is that their is a bit of extra boilerplate needed to comply with the whole gemspec standard, but in the long run this is well worth the extra startup time. Luckily the bundler gem, a popular gem manager (that itself is a gem), comes with a scaffold-er to keep the amount of boilerplate you need to write to a minimum as well as giving you a set of best-practices/conventions that the rest of the Ruby community often follows. To create a new project run <code>bundler gem #{your_gem_name_here}</code>, which initializes a git repo and gives us the following file structure:</p>
+
+<pre class="highlight plaintext"><code>$ tree
+├── Gemfile
+├── LICENSE.txt
+├── README.md
+├── Rakefile
+├── gem_cli.gemspec
+└── lib
+    ├── gem_cli
+    │   └── version.rb
+    └── gem_cli.rb
+
+2 directories, 7 files
+</code></pre>
+
+<p>By default it gives you a copy of the MIT license, this is by far the most popular license within the Ruby community, but you are free to change it to whatever you like (just make sure you update those changes in your gemspec as well). You should also add your dependencies in the Gemfile (if you have any), add your code to the <code>lib/</code> dir, and then create a new <code>bin/</code> dir with the cli code (which hopefully require’s whatever the rest of your lib does for DRY purposes). Then it’s just a matter of updating the <code>*.gemspec</code> file to meet your requirements. The key bit that bundler gives us by default is what does the making <code>bin/</code> executable business:</p>
+
+<pre class="highlight plaintext"><code>  spec.files         = `git ls-files -z`.split("\x0")
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.require_paths = ["lib"]
+</code></pre>
+
+<p>The first line adds only files tracked by git (a classic error is not adding changes to git before building if you leave this line in), you can of course use any other Ruby/shell code to grab the paths you want. The second line does the job of telling RubyGems what files to add to the users path, basically it looks through the list of files regex-ing for the bin and adding the files in that dir. Of course if you don’t want to put your executables in <code>bin/</code>, you could rename that dir and regex for that something different here. Bin is just a convention of course and the <code>*.gemspec</code> file is just a plain old Ruby file, so anything you want to add here will work just fine.</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+        <li>
+          <a href="../mouse-rat-technical-explanation/">Mouse Rat: Technical explanation</a> <span>Mar 28</span>
+        </li>
+        <li>
+          <a href="../mouse-rat-rethinking-the-mouse-computer-interface/">Mouse Rat: Rethinking the mouse computer interface</a> <span>Mar 28</span>
+        </li>
+        <li>
+          <a href="../review-of-market-power-and-regulation/">Review of: Market power and regulation</a> <span>Mar 18</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/business-and-legal/">Business and Legal (15)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/review/">Review (11)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/ip/">IP (5)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/foss/">FOSS (5)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (25)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-55319602-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  </body>
+</html>

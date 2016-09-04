@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - Word Sense Disambiguation with Python</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../../stylesheets/main-0a9e8dab.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class="current-page-link"><a href="/posts">posts</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>Word Sense Disambiguation with Python</h1>
+		<p>One of the first things you realize when working with any sort of linguistic data is just how ambiguous just about anything we say or write really is. From the smallest units of sound (what was that garbled bit of sound?) to the document unit of meaning (what was that article about?), there aren’t many parts of language that we can be 100% sure of even as native speakers, much less as an outside observer, like our programs.</p>
+
+<p>Nevertheless, we have solved a number of very difficult problems to a reasonable degree of accuracy with computational approaches. Today I’m going to talk about one of the more naive approaches to word sense disambiguation, which actually does fairly well when given a reasonably large input.</p>
+
+<p>But first, what’s this Word Sense Disambiguation all about. Well, a words sense can is a way of identifying how we use a given word by associating it with a <em>gloss</em>, which you can think of as it’s definition. For example the sense in which I’m using the word sense according to WordNet (a corpus that keeps track of all this) is <strong>sense.n.02</strong>. That means the root word is sense, it’s being used as a noun, and it is the second most common usage of the word. The gloss associated with this sense is:</p>
+
+<blockquote>
+  <p>the meaning of a word or expression; the way in which a word or expression or situation can be interpreted</p>
+</blockquote>
+
+<p>Other root words and part of speech are possible, for example another senses of this word is <strong>common_sense.n.01</strong> or <strong>smell.v.05</strong>. This is where the ambiguity problem comes in how does a computer know how to treat a given input when each one has a number of different senses, some of which have wildly different connotations and usages? This one problem is a key building block for all sorts of more complex, interesting NLP systems, from sentiment analysis to machine translation.</p>
+
+<p>One simple approach to this problem is to use a tool like WordNet to lookup the various senses and compare their glosses and examples to the context that the word was found in. This technique is called the Simplified Lesk algorithm (simplified because he started out with a more complex probabilistic approach, but found that on smaller datasets this naive approach actually performs better!).</p>
+
+<p>First things first import the magic that is going to help us on our task:</p>
+
+<pre class="highlight plaintext"><code>import nltk
+from nltk.corpus import wordnet as wn
+from nltk.corpus import stopwords
+from nltk.tokenize import RegexpTokenizer
+</code></pre>
+
+<p>Next the main function, we’ll save our results as we go in a dict called res/results. This outlines the 3 major steps in the algorithm:</p>
+
+<ol>
+  <li>Normalize the word into its root form</li>
+  <li>Query WordNet or some other resource to get the set of possible senses</li>
+  <li>Loop over these sense computing the overlap between their glosses and examples and our context.</li>
+</ol>
+
+<pre class="highlight plaintext"><code>def get_results(word, context):
+    res = dict()
+    res["word"] = word
+    res["base"] = base_form_of(word)
+    res["synsets"] = synsets_of(res["base"])
+    res["best_sense"] = simple_lesk(res, context)
+    print(res["best_sense"])
+</code></pre>
+
+<p>To get the normalized form we use NLTK’s excellent built in tool, Morphy, which uses a sequence of rules to transform (or transduce) it to a root word. Next we use that base form to query WordNet for all possible senses.</p>
+
+<pre class="highlight plaintext"><code>def base_form_of(word):
+    return wn.morphy(word)
+
+def synsets_of(word):
+    return wn.synsets(word)
+</code></pre>
+
+<p>Now onto the fun part: the Simplified Lesk. First we initialize the tokenizer we imported earlier with a regular expression that basically says to break up a given string into an array of consecutive (<code>+</code>) alphabetic characters (<code>\w</code>).</p>
+
+<pre class="highlight plaintext"><code>def simple_lesk(results, context):
+    """
+    Input: A previously computed results dict and a context list/set
+    Returns: The sense from WordNet with the most overlap with the context,
+             if there are none it defaults to the most common sense
+    """
+    tokenizer = RegexpTokenizer(r'\w+')
+</code></pre>
+
+<p>Next we initalize the best_sense variable to equal the first WordNet sense, that way if we don’t get any hits we can default back to the most common sense. Same with overlap, we haven’t compared anything yet so how would we know how much any given context overlaps?</p>
+
+<pre class="highlight plaintext"><code>    best_sense = results["synsets"][0]
+    max_overlap = 0
+</code></pre>
+
+<p>Stopwords are usually function words (is, the, me, etc.) that hold a great deal of syntactic meaning, but aren’t that helpful in semantic analysis. NLTK comes with a default set for English that has pretty good coverage, we then extend the list to include the words we’re dealing with since that might influence the results unintentionally.</p>
+
+<pre class="highlight plaintext"><code>    stop_words = stopwords.words("english")
+    stop_words.extend([results["base"], results["word"]])
+</code></pre>
+
+<p>Next we use the tokenizer and the list of stop words to generate a set of content tokens from the context using the python concept of list comprehensions.</p>
+
+<pre class="highlight plaintext"><code>    context = set(w.lower() for w in tokenizer.tokenize(context) \
+                    if w.lower() not in stop_words)
+</code></pre>
+
+<p>Finally we loop over sense, grab its definition and any examples and tokenize that in the same way as with the context. We then compute the overlap between the two sets and keep track of which tallies up the most overlap as we go. Once it’s all done we return the sense with the most results.</p>
+
+<pre class="highlight plaintext"><code>    for sense in results["synsets"]:
+        signature = set()
+        text = [ex for ex in sense.examples]
+        text.append(sense.definition)
+
+        signature = set(w.lower() for w in tokenizer.tokenize(" ".join(text)) \
+                            if w.lower() not in stop_words)
+
+        overlap = compute_overlap(signature, context)
+
+        if overlap &gt; max_overlap:
+            max_overlap = overlap
+            best_sense = sense
+
+    return best_sense
+</code></pre>
+
+<p>But what about the compute_overlap bit, I hear you saying. Well that’s simple, since we’re dealing with sets that’s as simple as taking the length (len()) of the <em>intersection</em> (&amp;) between them.</p>
+
+<pre class="highlight plaintext"><code>def compute_overlap(signature, context):
+    """
+    Input: Two sets of types
+    Returns: Length of the intersection of the two sets
+    """
+    return len(signature &amp; context)
+</code></pre>
+
+<p>And that’s it, while this might seem way to simple it actually works fairly well because there usually aren’t a lot of senses and the distribution is heavily weighted towards the top (so our default state is right a large percentage of the time). If you want to see a complete working example (that also computes some other features like word similarity) check out the <a href="https://github.com/dropofwill/word-sense-disambiguation/blob/master/ps2_4_wordnetinfo.py">full script</a>.</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../../2015/a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../../2015/packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../../2015/playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../../2015/lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+        <li>
+          <a href="../../2015/mouse-rat-technical-explanation/">Mouse Rat: Technical explanation</a> <span>Mar 28</span>
+        </li>
+        <li>
+          <a href="../../2015/mouse-rat-rethinking-the-mouse-computer-interface/">Mouse Rat: Rethinking the mouse computer interface</a> <span>Mar 28</span>
+        </li>
+        <li>
+          <a href="../../2015/review-of-market-power-and-regulation/">Review of: Market power and regulation</a> <span>Mar 18</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/business-and-legal/">Business and Legal (15)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/review/">Review (11)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/ip/">IP (5)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/foss/">FOSS (5)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (25)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-55319602-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  </body>
+</html>

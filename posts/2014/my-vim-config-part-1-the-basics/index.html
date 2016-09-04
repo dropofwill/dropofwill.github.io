@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Drop of Will - My Vim Config Part 1: The Basics</title>
+
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="/feed.xml" />
+
+    <link href="../../../stylesheets/main-0a9e8dab.css" rel="stylesheet" type="text/css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+
+    <header class="hero">
+<a href="/">        <img class="logo" alt="Will Paul" src="../../../images/logo-ff6fa38a.svg" />
+        <!-- <h1> -->
+        <!--   &#38;lambda;will.paul -->
+        <!-- </h1> -->
+</a>      <nav>
+        <ul>
+          <li class=""><a href="/">projects</a></li>
+          <li class="current-page-link"><a href="/posts">posts</a></li>
+          <li><a href="http://github.com/dropofwill">github</a></li>
+          <li><a href="http://will-paul.com/resume">resume</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="typeset" role="main">
+
+        <article class="article">
+    <h1>My Vim Config Part 1: The Basics</h1>
+		<p>As someone that came to Vim from Sublime Text (through the excellent Vi-ntage mode), one thing that held me back was just how annoying the default Vim settings are. In a way looking back at it that wasn’t a bad thing, it let me really craft my own configuration that I’m pretty happy with, but always looking for ways to improve. In order to help someone else a who is headed down that path find a config that works for them a little quicker.</p>
+
+<p>To start off I just want to look at the basic stuff, how do we get rid of all that annoying old Vi stuff and get some useful defaults?</p>
+
+<p>First, the most important thing to do is turn off Vi-compatibility, unless you plan on using this config on really old computers you shouldn’t have any need for this compatibility.</p>
+
+<pre class="highlight plaintext"><code>" Use Vim settings that are not compatible with legacy Vi
+set nocompatible
+</code></pre>
+
+<p>By default backspace in Vim’s insert mode behaves a little weirdly. It works as you expect on a single line, but doesn’t allow you to delete over new lines, automatically indented text, or beyond the point where you entered insert mode. You can change that by adding that to the backspace setting. I also like to set utf-8 to handle odd characters without trouble (I use √ all the time in todo lists for example).</p>
+
+<pre class="highlight plaintext"><code>" Backspace anything in insert mode
+set backspace=indent,eol,start
+
+" Set the text encoding to handle utf-8
+set encoding=utf-8
+</code></pre>
+
+<p>Next we want to make things start to look a little better (more on that in a later post). Most of this is pretty self explanatory. One cool thing is relativenumber/number this sets it so the current line give you the actual line number with all the other lines relative to that. This makes it so it’s easy to run commands like 10j or 5dd without having to count the lines.</p>
+
+<p>Scroll off makes sure the current line always has n lines above or below visible. Some people like to set this to 4000 or some other high number to always keep the cursor in the center of the screen, personally I like to just leave it at 4 or 5.</p>
+
+<pre class="highlight plaintext"><code>syntax on           " Syntax highlighting
+set relativenumber	" Line numbers relative to cursor
+set number          " But ignore the current line
+set numberwidth=4   " How wide the line number column should be by default
+set showcmd         " Show incomplete commands
+set noerrorbells    " No dinging!
+set scrolloff=4     " Pad lines vertically by 4
+set hidden          " Hide buffers instead of yelling at me about it
+set ruler           " Tells you the coords of the cursor in the status line
+set wildmenu        " Tab complete vim commands
+set wildmode=longest,list,full
+set laststatus=2    " Always show status line
+</code></pre>
+
+<p>Tabs are something that everyone complains about with Vim and they are a little bit confusing at first. Basically the width of what your tab key creates and what the shift keys (<code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>&lt;</code>, and <code>&gt;</code>) create are two separate settings, even though you would very rarely actually want them different. Here I’m just showing how I like to indent my code in a perfect world (2 spaces, autoindented nicely), later when we talk about plugins I’ll show you how to do this on a per file-type basis.</p>
+
+<p>Breakindent is a bleeding edge feature added to Vim 7.4, which makes words wrap such that they respect the indent level. This makes word wrap with long-lined and heavily indented code (cough html cough) actually alright to look at.</p>
+
+<pre class="highlight plaintext"><code>" Nice, compact default tab settings
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set autoindent
+" set nowrap
+set breakindent
+</code></pre>
+
+<p>If you still want to be able to use the mouse and your terminal allows it, you can enable it with this function. I used to, but I find it gets more in the way than I actually use it, but it’s nice to know how to enable it if you want it sometime.</p>
+
+<pre class="highlight plaintext"><code>" In many terminal emulators the mouse works just fine, so you can enable it.
+if has('mouse')
+  set mouse=a
+endif
+</code></pre>
+
+<p>One thing you’ll notice when working with Vim is all these dotfiles it litters all over your working directory. These are how maintains undo state across sessions as one example. A lot of people just disable this because they don’t like the clutter and use version control (which everyone should of course). But instead of just getting rid of it I like to throw it in a tmp directory somewhere so if some catastrophic does happen I have a backup plan.</p>
+
+<p>Also copy and paste isn’t great out of the box, setting copyindent makes things a lot more bearable.</p>
+
+<pre class="highlight plaintext"><code>" File management
+set undolevels=1000
+set backupdir=~/.vim/tmp
+set directory=~/.vim/tmp
+set undodir=~/.vim/tmp
+set noswapfile
+
+" Copy/Paste settings
+set copyindent
+</code></pre>
+
+<p>Finally some more personal choices that I’ve found useful. Colorcolumn just draws a vertical sstripe at 80 characters wide to show when my code is getting to wide. Incsearch and hlsearch make regex-ing a nicer visual experience. Set spell is awesome, it highlights your mistakes, and gives you a list of suggestions when you run <code>za=</code>. Run <code>:help spell</code> for more details.</p>
+
+<pre class="highlight plaintext"><code>set incsearch   " Show matches as you type
+set hlsearch    " Highlight all search matches not just the current one
+set showmatch   " Visually flash matching brackets when typing
+set spell       " Spell checker for Vim!
+set colorcolumn=80 " Let me know when my lines are too damn long
+</code></pre>
+
+<p>That’s it for now, next time we’ll talk about the adventure that is key remapping.</p>
+
+
+    <div class="article-comments">
+			<div id="disqus_thread">
+	
+	<script async="true" src="http://dropofwill.disqus.com/embed.js" type="text/javascript"></script>
+	<noscript>
+		<a>(href="http://#{short_name}.disqus.com/embed.js?url=ref") View comments.</a>
+	</noscript>
+</div>
+
+    </div>
+  </article>
+
+  <aside>
+    <h2>Recent Articles</h2>
+    <ol>
+        <li>
+          <a href="../../2015/a-scanner-orderly-the-smart-coaster/">A Scanner Orderly: The smart coaster</a> <span>May 20</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-first-release/">rtasklib first release</a> <span>May 19</span>
+        </li>
+        <li>
+          <a href="../../2015/packaging-ruby-gems/">Packaging Ruby gems</a> <span>May 10</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update/">rtasklib update</a> <span>Apr 20</span>
+        </li>
+        <li>
+          <a href="../../2015/playing-power-chords-on-an-arduino/">Playing power chords on an Arduino</a> <span>Apr 14</span>
+        </li>
+        <li>
+          <a href="../../2015/rtasklib-update-ruby-and-external-tools/">rtasklib update: Ruby and external tools</a> <span>Apr  6</span>
+        </li>
+        <li>
+          <a href="../../2015/lit-review-of-the-quantifying-the-value-of-open-source-hardware-development/">Review of: the Quantifying the Value of Open Source Hardware Development</a> <span>Mar 31</span>
+        </li>
+        <li>
+          <a href="../../2015/mouse-rat-technical-explanation/">Mouse Rat: Technical explanation</a> <span>Mar 28</span>
+        </li>
+        <li>
+          <a href="../../2015/mouse-rat-rethinking-the-mouse-computer-interface/">Mouse Rat: Rethinking the mouse computer interface</a> <span>Mar 28</span>
+        </li>
+        <li>
+          <a href="../../2015/review-of-market-power-and-regulation/">Review of: Market power and regulation</a> <span>Mar 18</span>
+        </li>
+    </ol>
+
+    <h2>Tags</h2>
+    <ol class="columnize">
+        <li><a href="/tags/business-and-legal/">Business and Legal (15)</a></li>
+        <li><a href="/tags/ruby/">Ruby (14)</a></li>
+        <li><a href="/tags/linuxdev/">LinuxDev (11)</a></li>
+        <li><a href="/tags/review/">Review (11)</a></li>
+        <li><a href="/tags/rtasklib/">rtasklib (7)</a></li>
+        <li><a href="/tags/ip/">IP (5)</a></li>
+        <li><a href="/tags/physical-computing/">Physical Computing (5)</a></li>
+        <li><a href="/tags/arduino/">Arduino (5)</a></li>
+        <li><a href="/tags/foss/">FOSS (5)</a></li>
+        <li><a href="/tags/task_time/">task_time (4)</a></li>
+        <li><a href="/tags/data-viz/">Data Viz (3)</a></li>
+        <li><a href="/tags/middleman/">Middleman (3)</a></li>
+        <li><a href="/tags/javascript/">JavaScript (3)</a></li>
+        <li><a href="/tags/config/">Config (3)</a></li>
+        <li><a href="/tags/vim/">Vim (3)</a></li>
+        <li><a href="/tags/semantics/">Semantics (2)</a></li>
+        <li><a href="/tags/mouse-rat/">Mouse Rat (2)</a></li>
+        <li><a href="/tags/econ/">Econ (2)</a></li>
+        <li><a href="/tags/wearables/">Wearables (2)</a></li>
+        <li><a href="/tags/nlp/">NLP (2)</a></li>
+        <li><a href="/tags/remix/">Remix (2)</a></li>
+        <li><a href="/tags/blog/">Blog (2)</a></li>
+        <li><a href="/tags/c/">C (1)</a></li>
+        <li><a href="/tags/bugfix/">Bugfix (1)</a></li>
+        <li><a href="/tags/talk/">Talk (1)</a></li>
+        <li><a href="/tags/deployment/">Deployment (1)</a></li>
+        <li><a href="/tags/functional-programming/">Functional Programming (1)</a></li>
+        <li><a href="/tags/processing/">Processing (1)</a></li>
+        <li><a href="/tags/d3/">D3 (1)</a></li>
+        <li><a href="/tags/python/">Python (1)</a></li>
+    </ol>
+
+    <h2>By Year</h2>
+    <ol>
+        <li><a href="/2015/">2015 (25)</a></li>
+        <li><a href="/2014/">2014 (16)</a></li>
+    </ol>
+  </aside>
+
+
+    </div>
+  </div>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-55319602-3', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+  </body>
+</html>
