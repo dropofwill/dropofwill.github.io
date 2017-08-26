@@ -1,8 +1,8 @@
 ---
 layout: project
 project:
-  title: Stressed Out
-  sub: NLP research
+  title: Stressed out
+  sub: computational linguistics research
 
 role: Primary Author/Researcher
 tags: NLP, Machine Learning, Speech Processing
