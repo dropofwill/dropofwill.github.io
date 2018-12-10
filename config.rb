@@ -34,7 +34,6 @@ activate :blog do |blog|
 
   # Enable pagination
   blog.paginate = true
-  blog.per_page = 2
   blog.page_link = "page/{num}"
 end
 
@@ -47,9 +46,9 @@ page "/linux_dev_feed.xml", layout: false
 ###
 
 # Change Compass configuration
-compass_config do |config|
-  config.output_style = :compact
-end
+# compass_config do |config|
+#   config.output_style = :compact
+# end
 
 helpers do
   def current_page?(page, category)
@@ -102,12 +101,18 @@ set :images_dir, 'images'
 ###
 set :disqus_short_name, 'dropofwill'
 
-activate :deploy do |deploy|
-  deploy.method = :git
-  deploy.branch = 'master'
+activate :gh_pages do |gh_pages|
+  gh_pages.remote = 'git@github.com:dropofwill/dropofwill.github.io.git'
+  gh_pages.branch = 'master'
 end
+# activate :deploy do |deploy|
+#   deploy.method = :git
+#   deploy.branch = 'master'
+# end
 
-set :site_url, ''
+configure :server do
+  set :site_url, ''
+end
 
 # Build-specific configuration
 configure :build do

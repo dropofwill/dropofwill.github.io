@@ -12,8 +12,10 @@ per_page: 8
   <% end %>
 <% end %>
 
+<%= puts page_articles %>
+
 <% page_articles.each_with_index do |article, i| %>
-	<article class="summary">
+  <article class="summary">
 
     <% link_to article do %>
       <h3 class="summary-title"><%= article.data.title %></h3>
@@ -21,12 +23,12 @@ per_page: 8
 
     <div class="summary-body emphasis">
       <p>
-        <%= article.summary %>
-        <%= link_to "Read more&#8230;", article.url %>
+      <%= article.summary %>
+      <%= link_to "Read more&#8230;", article.url %>
       </p>
     </div>
 
-	</article>
+  </article>
 <% end %>
 
 <% if paginate %>
@@ -48,14 +50,14 @@ per_page: 8
   <h2>Tags</h2>
   <ol class="columnize">
     <% blog.tags.sort_by{ |t| t[1].count }.reverse.each do |tag, articles| %>
-      <li><%= link_to "#{tag} (#{articles.size})", "#{site_url}#{tag_path(tag)}" %></li>
+      <li><%= link_to "#{tag} (#{articles.size})", "#{config[:site_url]}#{tag_path(tag)}" %></li>
     <% end %>
   </ol>
 
   <h2>By Year</h2>
   <ol>
     <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
-      <li><%= link_to "#{year} (#{articles.size})", "#{site_url}#{blog_year_path(year)}" %></li>
+      <li><%= link_to "#{year} (#{articles.size})", "#{config[:site_url]}#{blog_year_path(year)}" %></li>
     <% end %>
   </ol>
 </aside>

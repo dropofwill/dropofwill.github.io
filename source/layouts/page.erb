@@ -10,7 +10,7 @@
   <aside>
     <h2>Recent Articles</h2>
     <ol>
-      <% blog.articles[0...10].each do |article| %>
+      <% blog.articles[0...2].each do |article| %>
         <li>
           <%= link_to article.title, article %> <span><%= article.date.strftime('%b %e') %></span>
         </li>
@@ -20,14 +20,14 @@
     <h2>Tags</h2>
     <ol class="columnize">
       <% blog.tags.sort_by{ |t| t[1].count }.reverse.each do |tag, articles| %>
-        <li><%= link_to "#{tag} (#{articles.size})", "#{site_url}#{tag_path(tag)}" %></li>
+        <li><%= link_to "#{tag} (#{articles.size})", "#{config[:site_url]}#{tag_path(tag)}" %></li>
       <% end %>
     </ol>
 
     <h2>By Year</h2>
     <ol>
       <% blog.articles.group_by {|a| a.date.year }.each do |year, articles| %>
-        <li><%= link_to "#{year} (#{articles.size})", "#{site_url}#{blog_year_path(year)}" %></li>
+        <li><%= link_to "#{year} (#{articles.size})", "#{config[:site_url]}#{blog_year_path(year)}" %></li>
       <% end %>
     </ol>
   </aside>
