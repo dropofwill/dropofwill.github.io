@@ -48,7 +48,7 @@ page "/linux_dev_feed.xml", layout: false
 
 # Change Compass configuration
 compass_config do |config|
-  config.output_style = :compact
+  config.output_style = :nested
 end
 
 helpers do
@@ -112,7 +112,7 @@ set :site_url, ''
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
-  activate :minify_css
+  # activate :minify_css
 
   # Minify Javascript on build
   activate :minify_javascript
