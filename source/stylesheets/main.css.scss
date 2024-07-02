@@ -1,13 +1,5 @@
-<%= Rouge::Themes::Github.render(:scope => '.highlight') %>
-
-@import 'base';
-@import "compass/css3";
-@import "compass/reset";
-@import "compass";
-@import 'typography';
-
-// Reset
-@include global-reset;
+@import 'base.scss';
+@import 'typography.scss';
 
 $standard-border: solid black 10px;
 
@@ -27,7 +19,7 @@ body {
 }
 
 *, *:before, *:after {
-  @include box-sizing(border-box);
+  box-sizing: border-box;
 }
 
 .columnize {
@@ -38,7 +30,7 @@ body {
 
 hr {
   border-top: $standard-border;
-  @extend %clearfix;
+  overflow: hidden;
 }
 
 .article {
@@ -54,7 +46,7 @@ hr {
 }
 
 .hero {
-  @extend %clearfix;
+  overflow: hidden;
 
   .logo {
     float: left;
@@ -89,7 +81,7 @@ hr {
 
 .meta-data,
 .clearfix {
-  @extend %clearfix;
+  overflow: hidden;
 }
 
 @media (min-width: 600px) {

@@ -46,11 +46,6 @@ page "/linux_dev_feed.xml", layout: false
 # Compass
 ###
 
-# Change Compass configuration
-compass_config do |config|
-  config.output_style = :nested
-end
-
 helpers do
   def current_page?(page, category)
     if current_page.url == page
@@ -103,7 +98,7 @@ set :images_dir, 'images'
 set :disqus_short_name, 'dropofwill'
 
 activate :deploy do |deploy|
-  deploy.method = :git
+  deploy.deploy_method = :git
   deploy.branch = 'master'
 end
 
