@@ -12,7 +12,7 @@ jobs:
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
           # Target branch
-          PAGES_BRANCH: gh-pages-test
+          PAGES_BRANCH: gh-pages
           # Provide personal access token
           # TOKEN: ${{ secrets.TOKEN }}
           # Or if publishing to the same repo, use the automatic token
