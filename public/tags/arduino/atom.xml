@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title> - Arduino</title>
-    <link rel="self" type="application/atom+xml" href="https://will-paul.com/wwwdotcomslash/tags/arduino/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash"/>
+    <link rel="self" type="application/atom+xml" href="https://will-paul.com/tags/arduino/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://will-paul.com/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2015-05-20T02:04:00+00:00</updated>
-    <id>https://will-paul.com/wwwdotcomslash/tags/arduino/atom.xml</id>
+    <id>https://will-paul.com/tags/arduino/atom.xml</id>
     <entry xml:lang="en">
         <title>A Scanner Orderly: The smart coaster</title>
         <published>2015-05-20T02:04:00+00:00</published>
@@ -19,8 +19,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash/posts/a-scanner-orderly-the-smart-coaster/"/>
-        <id>https://will-paul.com/wwwdotcomslash/posts/a-scanner-orderly-the-smart-coaster/</id>
+        <link rel="alternate" type="text/html" href="https://will-paul.com/posts/a-scanner-orderly-the-smart-coaster/"/>
+        <id>https://will-paul.com/posts/a-scanner-orderly-the-smart-coaster/</id>
         
         <summary type="html">&lt;p&gt;What if you could order drink with your coaster? This blog post explains how we made one using an Arduino and Node.js.&lt;&#x2F;p&gt;
 </summary>
@@ -39,8 +39,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash/posts/playing-power-chords-on-an-arduino/"/>
-        <id>https://will-paul.com/wwwdotcomslash/posts/playing-power-chords-on-an-arduino/</id>
+        <link rel="alternate" type="text/html" href="https://will-paul.com/posts/playing-power-chords-on-an-arduino/"/>
+        <id>https://will-paul.com/posts/playing-power-chords-on-an-arduino/</id>
         
         <summary type="html">&lt;p&gt;Play power chords with an Arduino, capacitive touch pads, and a couple of speakers.&lt;&#x2F;p&gt;
 </summary>
@@ -59,8 +59,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash/posts/mouse-rat-technical-explanation/"/>
-        <id>https://will-paul.com/wwwdotcomslash/posts/mouse-rat-technical-explanation/</id>
+        <link rel="alternate" type="text/html" href="https://will-paul.com/posts/mouse-rat-technical-explanation/"/>
+        <id>https://will-paul.com/posts/mouse-rat-technical-explanation/</id>
         
         <summary type="html">&lt;p&gt;Technical explanation for a wearable gesture based mouse glove. It used the Arduino Flora, the wearable LSM9DSO accelerometer, and MPR121 capacitive touch breakout, all from Adafruit.&lt;&#x2F;p&gt;
 </summary>
@@ -79,8 +79,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash/posts/mouse-rat-rethinking-the-mouse-computer-interface/"/>
-        <id>https://will-paul.com/wwwdotcomslash/posts/mouse-rat-rethinking-the-mouse-computer-interface/</id>
+        <link rel="alternate" type="text/html" href="https://will-paul.com/posts/mouse-rat-rethinking-the-mouse-computer-interface/"/>
+        <id>https://will-paul.com/posts/mouse-rat-rethinking-the-mouse-computer-interface/</id>
         
         <summary type="html">&lt;p&gt;Design exploration for a wearable gesture based mouse glove.&lt;&#x2F;p&gt;
 </summary>
@@ -99,8 +99,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash/posts/blink-project-hacking-on-an-arduino/"/>
-        <id>https://will-paul.com/wwwdotcomslash/posts/blink-project-hacking-on-an-arduino/</id>
+        <link rel="alternate" type="text/html" href="https://will-paul.com/posts/blink-project-hacking-on-an-arduino/"/>
+        <id>https://will-paul.com/posts/blink-project-hacking-on-an-arduino/</id>
         
         <summary type="html">&lt;p&gt;For my Physical Computing &amp;amp; Alt Interfaces class we had to use an Arduino (I have the latest Uno) to control LED(s) in a non-trivial way. I knew I wanted to make some kind of LED matrix, but didn&#x27;t know how big of one I could make on my half sized breadboard and limited number of pins. What I ended up with was a 16 LED (4x4) matrix controlled by just 8 pins, each of which can be individually controlled.&lt;&#x2F;p&gt;
 </summary>

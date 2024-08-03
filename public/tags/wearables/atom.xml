@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title> - Wearables</title>
-    <link rel="self" type="application/atom+xml" href="https://will-paul.com/wwwdotcomslash/tags/wearables/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash"/>
+    <link rel="self" type="application/atom+xml" href="https://will-paul.com/tags/wearables/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://will-paul.com/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2015-03-28T18:37:00+00:00</updated>
-    <id>https://will-paul.com/wwwdotcomslash/tags/wearables/atom.xml</id>
+    <id>https://will-paul.com/tags/wearables/atom.xml</id>
     <entry xml:lang="en">
         <title>Mouse Rat: Technical explanation</title>
         <published>2015-03-28T18:37:00+00:00</published>
@@ -19,8 +19,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash/posts/mouse-rat-technical-explanation/"/>
-        <id>https://will-paul.com/wwwdotcomslash/posts/mouse-rat-technical-explanation/</id>
+        <link rel="alternate" type="text/html" href="https://will-paul.com/posts/mouse-rat-technical-explanation/"/>
+        <id>https://will-paul.com/posts/mouse-rat-technical-explanation/</id>
         
         <summary type="html">&lt;p&gt;Technical explanation for a wearable gesture based mouse glove. It used the Arduino Flora, the wearable LSM9DSO accelerometer, and MPR121 capacitive touch breakout, all from Adafruit.&lt;&#x2F;p&gt;
 </summary>
@@ -39,8 +39,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash/posts/mouse-rat-rethinking-the-mouse-computer-interface/"/>
-        <id>https://will-paul.com/wwwdotcomslash/posts/mouse-rat-rethinking-the-mouse-computer-interface/</id>
+        <link rel="alternate" type="text/html" href="https://will-paul.com/posts/mouse-rat-rethinking-the-mouse-computer-interface/"/>
+        <id>https://will-paul.com/posts/mouse-rat-rethinking-the-mouse-computer-interface/</id>
         
         <summary type="html">&lt;p&gt;Design exploration for a wearable gesture based mouse glove.&lt;&#x2F;p&gt;
 </summary>

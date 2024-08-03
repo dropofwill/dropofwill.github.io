@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <title> - Processing</title>
-    <link rel="self" type="application/atom+xml" href="https://will-paul.com/wwwdotcomslash/tags/processing/atom.xml"/>
-    <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash"/>
+    <link rel="self" type="application/atom+xml" href="https://will-paul.com/tags/processing/atom.xml"/>
+    <link rel="alternate" type="text/html" href="https://will-paul.com/"/>
     <generator uri="https://www.getzola.org/">Zola</generator>
     <updated>2014-09-08T03:09:00+00:00</updated>
-    <id>https://will-paul.com/wwwdotcomslash/tags/processing/atom.xml</id>
+    <id>https://will-paul.com/tags/processing/atom.xml</id>
     <entry xml:lang="en">
         <title>Run Processing Sketches from Vim</title>
         <published>2014-09-08T03:09:00+00:00</published>
@@ -19,8 +19,8 @@
           </name>
         </author>
         
-        <link rel="alternate" type="text/html" href="https://will-paul.com/wwwdotcomslash/posts/run-processing-sketches-from-vim/"/>
-        <id>https://will-paul.com/wwwdotcomslash/posts/run-processing-sketches-from-vim/</id>
+        <link rel="alternate" type="text/html" href="https://will-paul.com/posts/run-processing-sketches-from-vim/"/>
+        <id>https://will-paul.com/posts/run-processing-sketches-from-vim/</id>
         
         <summary type="html">&lt;p&gt;So I started writing Processing for one of my classes (Interactive Media Development) and unfortunately the default development workflow they want us to use is tightly bound to the IDE that it ships with. In general I&#x27;m not a huge fan of IDEs anyways, but the Processing one is especially terrible. It&#x27;s obviously been designed to abstract away programming concepts to make the barrier to entry really low (I think it was originally made to help artist make procedural art), but in the end this makes for an annoying experience for those of us with a bit of experience.&lt;&#x2F;p&gt;
 </summary>

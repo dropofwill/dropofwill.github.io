@@ -6,10 +6,10 @@
     <title>Will Paul - Sankey diagram of rule distributions for word sense disambiguation </title>
 
     
-      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/wwwdotcomslash/atom.xml">
+      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/atom.xml">
     
 
-    <link rel="stylesheet" href="https://will-paul.com/wwwdotcomslash/main.css" />
+    <link rel="stylesheet" href="https://will-paul.com/main.css" />
 
     <!-- Viewport declarations -->
     <meta name="viewport" content="width=533">
@@ -26,8 +26,8 @@
 
         <nav>
           <ul>
-            <li><a href="/">projects</a></li>
-            <li ><a href="/posts">posts</a></li>
+            <li><a href="https://will-paul.com">projects</a></li>
+            <li ><a href="https://will-paul.com/posts">posts</a></li>
             <li><a href="http://github.com/dropofwill">github</a></li>
             <li><a href="http://will-paul.com/resume">resume</a></li>
           </ul>
@@ -80,7 +80,7 @@ Confusion matrices for both cases. The rows are what the answers should have bee
 <p>The most obvious observation from this visualization is just how many low likelihoods there are in both cases (incidentally this is because the likelihoods of rules with just 1 example end up 3 for the bass case and 4 for the sake case), but also how few times they actually get applied.</p>
 <p>One major assumption in this algorithm is that higher likelihood will have better results, how good is this assumption? We can't tell that from the confusion matrix, but with the Sankey diagram every incorrect answer can be traced back to the rule's likelihood that made a mistake. Here we can see that no rule with a likelihood greater than 5 ever makes a mistake in both cases, which shows that the assumption is not only pretty good, but also consistent across use cases.</p>
 <p>Another takeaway is how few rules we have for the sake* case and also how low in the decision list those that exist are. This shows an non-obvious limitation of the algorithm, it needs similar distributions of data. Even though this algorithm performed "better" in overall accuracy then the bass case, it still only got 50% of the sake as in wine cases correct.</p>
-<p><img src="https://will-paul.com/wwwdotcomslash/posts/sankey-diagram-of-rule-distributions-for-word-sense-disambiguation/first-attempt.svg" alt="Reign-Gold tree as a first attempt" /></p>
+<p><img src="https://will-paul.com/posts/sankey-diagram-of-rule-distributions-for-word-sense-disambiguation/first-attempt.svg" alt="Reign-Gold tree as a first attempt" /></p>
 <p>My first attempt (incomplete version above) was the straight forward Reign-Gold tree diagram with labelled nodes. This admittedly shows the exact numbers immediately (without hover over), but it loses the high level visual cues of size and is not interpreted necessarily as a temporal flow like the Sankey approach.</p>
 <style>
 

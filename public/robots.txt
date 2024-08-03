@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 Allow: /
-Sitemap: https://will-paul.com/wwwdotcomslash/sitemap.xml
+Sitemap: https://will-paul.com/sitemap.xml
