@@ -4,7 +4,7 @@ name: Build and deploy GH Pages
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/zola'
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -12,7 +12,7 @@ jobs:
         uses: shalzz/zola-deploy-action@v0.17.2
         env:
           # Target branch
-          PAGES_BRANCH: gh-pages
+          PAGES_BRANCH: gh-pages-test
           # Provide personal access token
           # TOKEN: ${{ secrets.TOKEN }}
           # Or if publishing to the same repo, use the automatic token
