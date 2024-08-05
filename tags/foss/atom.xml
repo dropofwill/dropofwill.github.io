@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - FOSS</title>
+    <link href="https://will-paul.com/tags/foss/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://will-paul.com/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2014-09-24T05:43:00+00:00</updated>
+    <id>https://will-paul.com/tags/foss/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Bugfix: FooTable</title>
+        <published>2014-09-24T05:43:00+00:00</published>
+        <updated>2014-09-24T05:43:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/bugfix-footable/" type="text/html"/>
+        <id>https://will-paul.com/posts/bugfix-footable/</id>
+        
+        <summary type="html">&lt;p&gt;Everyone in the frontend community likes to hate on tables, it&#x27;s like Comic Sans in the design community. And this is for mostly good reasons, tables for layouts are pretty much unnecessary in this day in age (unless you&#x27;re looking to center something vertically, &lt;a href=&quot;http:&#x2F;&#x2F;css-tricks.com&#x2F;centering-in-the-unknown&#x2F;&quot;&gt;then &lt;em&gt;maybe&lt;&#x2F;em&gt; you can use it in your CSS, not the markup&lt;&#x2F;a&gt;{:target=&amp;quot;_blank&amp;quot;}), but there are still actually legitimate uses of tables. You know like for tabular data.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

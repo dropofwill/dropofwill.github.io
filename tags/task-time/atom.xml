@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - task_time</title>
+    <link href="https://will-paul.com/tags/task-time/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://will-paul.com/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2015-05-10T15:46:00+00:00</updated>
+    <id>https://will-paul.com/tags/task-time/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Packaging Ruby gems</title>
+        <published>2015-05-10T15:46:00+00:00</published>
+        <updated>2015-05-10T15:46:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/packaging-ruby-gems/" type="text/html"/>
+        <id>https://will-paul.com/posts/packaging-ruby-gems/</id>
+        
+        <summary type="html">&lt;p&gt;In the Ruby community the most common way to distribute software is in a packaged format cutely named gems (similar to the Python concept of Eggs). This manages dependencies and meta data much like the other packaging platforms, but with Ruby syntax in a file called &#x27;#{you_gems_name}.gemspec&#x27;. This process is completely automated through the Ruby gems, &lt;code&gt;gem&lt;&#x2F;code&gt; (installation&#x2F;RubyGems.org integration), &lt;code&gt;bundler&lt;&#x2F;code&gt; (dependency management and boiler plate code), and &lt;code&gt;rake&lt;&#x2F;code&gt; (Ruby make, to streamline the process).&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>task_time and rtasklib updates March 8th</title>
+        <published>2015-03-09T01:10:00+00:00</published>
+        <updated>2015-03-09T01:10:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/task-time-and-rtasklib-updates-march-8th/" type="text/html"/>
+        <id>https://will-paul.com/posts/task-time-and-rtasklib-updates-march-8th/</id>
+        
+        <summary type="html">&lt;p&gt;Last week I talked about how all existing &lt;code&gt;TaskWarrior&lt;&#x2F;code&gt; wrappers were not going to satisfy the requirements for &lt;code&gt;task_time&lt;&#x2F;code&gt;, so I decided to roll my own Ruby wrapper &lt;code&gt;rtasklib&lt;&#x2F;code&gt; and started working on the JSON to domain object marshalling and vice versa. I realized that I was reinventing the wheel a bit with the domain objects and to some extent with the data type coercions (though obviously some custom coercions will be necessary).&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>task_time update March 1st</title>
+        <published>2015-03-02T02:16:00+00:00</published>
+        <updated>2015-03-02T02:16:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/task-time-update-march-1st/" type="text/html"/>
+        <id>https://will-paul.com/posts/task-time-update-march-1st/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;a href=&quot;&#x2F;2015&#x2F;02&#x2F;22&#x2F;a-comparison-of-task-warrior-wrappers.html.markdown&quot;&gt;Last week&lt;&#x2F;a&gt; I talked about picking an appropriate TaskWarrior wrapper for my &lt;code&gt;task_time&lt;&#x2F;code&gt; project. A rundown of the options are &lt;code&gt;taskw&lt;&#x2F;code&gt; (Python, GPL, low on documentation, durations not implemented yet), &lt;code&gt;tasklib&lt;&#x2F;code&gt; (Python, BSD, good documentation, durations not implemented, does not read in users &lt;code&gt;.taskrc&lt;&#x2F;code&gt;), and &lt;code&gt;taskwarrior&lt;&#x2F;code&gt; (Ruby, MIT, just does JSON marshalling&#x2F;unmarshalling). In the end I decided none of these were actually going to cut it, since none implemented duration features, so my choices were to either Fork and implement durations and whatever other features were needed or to roll my own. In the end I really would rather use Ruby for this so I decided that it would be good to write the wrapper from scratch, while taking cues from each of the other implementations. I named the repo &lt;code&gt;rtasklib&lt;&#x2F;code&gt; in following with the ruby convention of naming wrappers with lib and either a leading &lt;code&gt;r&lt;&#x2F;code&gt; or trailing &lt;code&gt;_ruby&lt;&#x2F;code&gt; (dashes imply a subclass and are only used when your&#x27;re gem extends an existing gem not an external program). You can find the repo at &lt;a href=&quot;http:&#x2F;&#x2F;github.com&#x2F;dropofwill&#x2F;rtasklib&quot;&gt;&lt;code&gt;dropofwill&#x2F;rtasklib&lt;&#x2F;code&gt;&lt;&#x2F;a&gt; and the &lt;code&gt;task_time&lt;&#x2F;code&gt; repo at &lt;a href=&quot;http:&#x2F;&#x2F;github.com&#x2F;dropofwill&#x2F;task_time&quot;&gt;dropofwill&#x2F;task_time&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>A Comparison of Task Warrior Wrappers</title>
+        <published>2015-02-22T20:54:00+00:00</published>
+        <updated>2015-02-22T20:54:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/a-comparison-of-task-warrior-wrappers/" type="text/html"/>
+        <id>https://will-paul.com/posts/a-comparison-of-task-warrior-wrappers/</id>
+        
+        <summary type="html">&lt;p&gt;So as it turns out there were 3 main libraries written to interact with the TaskWarrior database (I think there is also a Perl and maybe a PHP wrapper as well, but I couldn&#x27;t find them again and let&#x27;s face it: I&#x27;m not interested in using either of those languages anyways).&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

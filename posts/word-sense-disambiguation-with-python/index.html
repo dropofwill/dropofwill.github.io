@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Will Paul - Word Sense Disambiguation with Python </title>
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/atom.xml">
+    
+
+    <link rel="stylesheet" href="https://will-paul.com/main.css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="hero">
+        <a href="/">
+          <h1 class='logo'>
+            &lambda;will.paul
+          </h1>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="https://will-paul.com">projects</a></li>
+            <li ><a href="https://will-paul.com/posts">posts</a></li>
+            <li><a href="http://github.com/dropofwill">github</a></li>
+            <li><a href="http://will-paul.com/resume">resume</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="typeset" role="main">
+        
+<article class="article row">
+  <h1>Word Sense Disambiguation with Python</h1>
+  <time>Oct 13, 2014</time>
+  <div class="large-10 large-offset-1 columns typeset">
+    <p>One of the first things you realize when working with any sort of linguistic data is just how ambiguous just about anything we say or write really is. From the smallest units of sound (what was that garbled bit of sound?) to the document unit of meaning (what was that article about?), there aren't many parts of language that we can be 100% sure of even as native speakers, much less as an outside observer, like our programs.</p>
+<span id="continue-reading"></span>
+<p>Nevertheless, we have solved a number of very difficult problems to a reasonable degree of accuracy with computational approaches. Today I'm going to talk about one of the more naive approaches to word sense disambiguation, which actually does fairly well when given a reasonably large input.</p>
+<p>But first, what's this Word Sense Disambiguation all about. Well, a words sense can is a way of identifying how we use a given word by associating it with a <em>gloss</em>, which you can think of as it's definition. For example the sense in which I'm using the word sense according to WordNet (a corpus that keeps track of all this) is <strong>sense.n.02</strong>. That means the root word is sense, it's being used as a noun, and it is the second most common usage of the word. The gloss associated with this sense is:</p>
+<blockquote>
+<p>the meaning of a word or expression; the way in which a word or expression or situation can be interpreted</p>
+</blockquote>
+<p>Other root words and part of speech are possible, for example another senses of this word is <strong>common_sense.n.01</strong> or <strong>smell.v.05</strong>. This is where the ambiguity problem comes in how does a computer know how to treat a given input when each one has a number of different senses, some of which have wildly different connotations and usages? This one problem is a key building block for all sorts of more complex, interesting NLP systems, from sentiment analysis to machine translation.</p>
+<p>One simple approach to this problem is to use a tool like WordNet to lookup the various senses and compare their glosses and examples to the context that the word was found in. This technique is called the Simplified Lesk algorithm (simplified because he started out with a more complex probabilistic approach, but found that on smaller datasets this naive approach actually performs better!).</p>
+<p>First things first import the magic that is going to help us on our task:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>import nltk
+</span><span>from nltk.corpus import wordnet as wn
+</span><span>from nltk.corpus import stopwords
+</span><span>from nltk.tokenize import RegexpTokenizer
+</span></code></pre>
+<p>Next the main function, we'll save our results as we go in a dict called res/results. This outlines the 3 major steps in the algorithm:</p>
+<ol>
+<li>Normalize the word into its root form</li>
+<li>Query WordNet or some other resource to get the set of possible senses</li>
+<li>Loop over these sense computing the overlap between their glosses and examples and our context.</li>
+</ol>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>def get_results(word, context):
+</span><span>    res = dict()
+</span><span>    res[&quot;word&quot;] = word
+</span><span>    res[&quot;base&quot;] = base_form_of(word)
+</span><span>    res[&quot;synsets&quot;] = synsets_of(res[&quot;base&quot;])
+</span><span>    res[&quot;best_sense&quot;] = simple_lesk(res, context)
+</span><span>    print(res[&quot;best_sense&quot;])
+</span></code></pre>
+<p>To get the normalized form we use NLTK's excellent built in tool, Morphy, which uses a sequence of rules to transform (or transduce) it to a root word. Next we use that base form to query WordNet for all possible senses.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>def base_form_of(word):
+</span><span>    return wn.morphy(word)
+</span><span>
+</span><span>def synsets_of(word):
+</span><span>    return wn.synsets(word)
+</span></code></pre>
+<p>Now onto the fun part: the Simplified Lesk. First we initialize the tokenizer we imported earlier with a regular expression that basically says to break up a given string into an array of consecutive (<code>+</code>) alphabetic characters (<code>\w</code>).</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>def simple_lesk(results, context):
+</span><span>    &quot;&quot;&quot;
+</span><span>    Input: A previously computed results dict and a context list/set
+</span><span>    Returns: The sense from WordNet with the most overlap with the context,
+</span><span>             if there are none it defaults to the most common sense
+</span><span>    &quot;&quot;&quot;
+</span><span>    tokenizer = RegexpTokenizer(r&#39;\w+&#39;)
+</span></code></pre>
+<p>Next we initalize the best_sense variable to equal the first WordNet sense, that way if we don't get any hits we can default back to the most common sense. Same with overlap, we haven't compared anything yet so how would we know how much any given context overlaps?</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>    best_sense = results[&quot;synsets&quot;][0]
+</span><span>    max_overlap = 0
+</span></code></pre>
+<p>Stopwords are usually function words (is, the, me, etc.) that hold a great deal of syntactic meaning, but aren't that helpful in semantic analysis. NLTK comes with a default set for English that has pretty good coverage, we then extend the list to include the words we're dealing with since that might influence the results unintentionally.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>    stop_words = stopwords.words(&quot;english&quot;)
+</span><span>    stop_words.extend([results[&quot;base&quot;], results[&quot;word&quot;]])
+</span></code></pre>
+<p>Next we use the tokenizer and the list of stop words to generate a set of content tokens from the context using the python concept of list comprehensions.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>    context = set(w.lower() for w in tokenizer.tokenize(context) \
+</span><span>                    if w.lower() not in stop_words)
+</span></code></pre>
+<p>Finally we loop over sense, grab its definition and any examples and tokenize that in the same way as with the context. We then compute the overlap between the two sets and keep track of which tallies up the most overlap as we go. Once it's all done we return the sense with the most results.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>    for sense in results[&quot;synsets&quot;]:
+</span><span>        signature = set()
+</span><span>        text = [ex for ex in sense.examples]
+</span><span>        text.append(sense.definition)
+</span><span>
+</span><span>        signature = set(w.lower() for w in tokenizer.tokenize(&quot; &quot;.join(text)) \
+</span><span>                            if w.lower() not in stop_words)
+</span><span>
+</span><span>        overlap = compute_overlap(signature, context)
+</span><span>
+</span><span>        if overlap &gt; max_overlap:
+</span><span>            max_overlap = overlap
+</span><span>            best_sense = sense
+</span><span>
+</span><span>    return best_sense
+</span></code></pre>
+<p>But what about the compute_overlap bit, I hear you saying. Well that's simple, since we're dealing with sets that's as simple as taking the length (len()) of the <em>intersection</em> (&amp;) between them.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>def compute_overlap(signature, context):
+</span><span>    &quot;&quot;&quot;
+</span><span>    Input: Two sets of types
+</span><span>    Returns: Length of the intersection of the two sets
+</span><span>    &quot;&quot;&quot;
+</span><span>    return len(signature &amp; context)
+</span></code></pre>
+<p>And that's it, while this might seem way to simple it actually works fairly well because there usually aren't a lot of senses and the distribution is heavily weighted towards the top (so our default state is right a large percentage of the time). If you want to see a complete working example (that also computes some other features like word similarity) check out the <a href="https://github.com/dropofwill/word-sense-disambiguation/blob/master/ps2_4_wordnetinfo.py">full script</a>.</p>
+
+  </div>
+</article>
+
+      </div>
+    </div>
+
+    <!-- Render nice latex formulas -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 130
+        }
+      });
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </body>
+</html>

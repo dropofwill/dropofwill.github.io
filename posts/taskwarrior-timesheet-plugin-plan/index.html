@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Will Paul - Taskwarrior timesheet plugin plan </title>
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/atom.xml">
+    
+
+    <link rel="stylesheet" href="https://will-paul.com/main.css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="hero">
+        <a href="/">
+          <h1 class='logo'>
+            &lambda;will.paul
+          </h1>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="https://will-paul.com">projects</a></li>
+            <li ><a href="https://will-paul.com/posts">posts</a></li>
+            <li><a href="http://github.com/dropofwill">github</a></li>
+            <li><a href="http://will-paul.com/resume">resume</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="typeset" role="main">
+        
+<article class="article row">
+  <h1>Taskwarrior timesheet plugin plan</h1>
+  <time>Feb 16, 2015</time>
+  <div class="large-10 large-offset-1 columns typeset">
+    <p>This is a plan for a project that will act as a plugin for the application Taskwarrior that allows the users to use <code>task</code> to keep track of their time involved with tasks. I chose task_time as the name because the original program is run with the <code>task</code> command and in Ruby underscores are used to denote spaces (dashes imply some sort of class hierarchy).</p>
+<span id="continue-reading"></span>
+<p><a href="http://github.com/dropofwill/task_time">Repo: dropofwill/task_time</a></p>
+<h2 id="abstract">Abstract</h2>
+<p>Taskwarrior is a lightweight command-line applications that makes managing/filtering/reporting/understanding of your todos easier. One aspect that it is missing is time-tracking the developers say that this feature is out of scope and should be remedied with a plugin, the currently available plugins don't mirror Taskwarrior's attention to detail or polish and seem to be fairly minimal (no offense to those maintainers).</p>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>The interface for this project will be that of a simple command line tool, at some point I want to write or extend a current ncurses layout to use this as well, but that is out of scope for this phase of the project. I'm thinking that the entry point will be <code>task_time &lt;filter&gt;</code> with an optional shell script for users that want a more seamless integration that will take <code>task &lt;filter&gt; time</code> just like you would use it if it was built into Taskwarrior itself. All the task filtering will be passed on to <code>task</code> behind the scenes, so I won't have to reimplement that.</p>
+<p>The user will probably be something like <code>start</code> and <code>stop</code> for keeping track of the raw data, <code>est</code> for estimating how long a task is going to take, and then some other commands for generating the reports based on the previous time spent (filtering by project, task, tag, whatever). Another feature I would like to implement is a Kanban workflow. For all the reports I want to be able to export them to the command line to view and export to a number of formats (json, csv, xml, etc) like for all the other Taskwarrior reports, but also a PDF export from any Tilt-based template.</p>
+<h2 id="excitement-or-why-do-you-care-about-a-todo-app">Excitement (or why do you care about a todo app)</h2>
+<p>Taskwarrior is an tool I use everyday, but as is I have to use another app (Freshbooks, Teamwork, etc.) to track my time spent on tasks for work and I end up not tracking my time for anything else. An important part of being a productive developer is understanding the end-to-end process: how long should this take? How long did it take? And why? Having actual data and reporting about this should make this process easier to understand.</p>
+<p>Plus all I write these days are web apps, yet most of what I use day-to-day is in the terminal, it will be nice to work on something where I'm the target audience for once. :)</p>
+<h2 id="scope">Scope</h2>
+<p>Nothing is ever finished, but I think the scope of this project is such that I can make an initial release by the end of the class (see Milestones). As this is something I plan on using a lot, I imagine I will continue working on it after class is over.</p>
+<h2 id="license">License</h2>
+<p>My license of choice is the Creative Commons 0, because I prefer to be as permissive as possible (and I don't care about attribution). But since that is not OSI approved (and it needs to be for this class), my backup is the MIT, which is fairly permissive and the default license for Ruby projects and the license that Taskwarrior is released under, so it probably makes the most sense anyways.</p>
+<h2 id="milestones">Milestones</h2>
+<ol>
+<li>
+<p>Initial functionality: internals work and public API finalized. Rough due date = March 16th, may shift back if I need to spend more time on implementing functionality in the wrapper.</p>
+</li>
+<li>
+<p>Reporting and external integration: all the charts and reporting features are working and any integration with external services are finalized. Rough due date = April 27th</p>
+</li>
+<li>
+<p>Initial Release: full to near full test coverage and packaged and submitted to at a minimum: RubyGems, AUR, and Debian (possibly also RPM as time permits). Rough due date = May 14th</p>
+</li>
+</ol>
+<h2 id="programming-languages">Programming languages</h2>
+<p>This shouldn't be a resource heavy project, all the heavy lifting will be done by taskwarrior itself (written in C++), for that reason I want to use Ruby, which is my interpreted language goto. If speed becomes an issue pivoting to Rust or C is always an option, but I do not foresee that as a problem.</p>
+<p>That said right now the Ruby library for interacting with Taskwarrior is a little out of date (missing a couple major Taskwarrior updates), so I'm going to have to either fork that project to add the functionality I need or pivot and write the project in Python, which has a more actively developed wrapper that seems to be up to date. I'll have to make that decision pretty soon, I'm reviewing my options now.</p>
+
+  </div>
+</article>
+
+      </div>
+    </div>
+
+    <!-- Render nice latex formulas -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 130
+        }
+      });
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </body>
+</html>

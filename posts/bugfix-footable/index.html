@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Will Paul - Bugfix: FooTable </title>
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/atom.xml">
+    
+
+    <link rel="stylesheet" href="https://will-paul.com/main.css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="hero">
+        <a href="/">
+          <h1 class='logo'>
+            &lambda;will.paul
+          </h1>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="https://will-paul.com">projects</a></li>
+            <li ><a href="https://will-paul.com/posts">posts</a></li>
+            <li><a href="http://github.com/dropofwill">github</a></li>
+            <li><a href="http://will-paul.com/resume">resume</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="typeset" role="main">
+        
+<article class="article row">
+  <h1>Bugfix: FooTable</h1>
+  <time>Sep 24, 2014</time>
+  <div class="large-10 large-offset-1 columns typeset">
+    <p>Everyone in the frontend community likes to hate on tables, it's like Comic Sans in the design community. And this is for mostly good reasons, tables for layouts are pretty much unnecessary in this day in age (unless you're looking to center something vertically, <a href="http://css-tricks.com/centering-in-the-unknown/">then <em>maybe</em> you can use it in your CSS, not the markup</a>{:target=&quot;_blank&quot;}), but there are still actually legitimate uses of tables. You know like for tabular data.</p>
+<span id="continue-reading"></span>
+<p>Unfortunately the default HTML tables aren't really that great from a UX perspective. From a functional standpoint there's no way to sort or filter data and from a design perspective it definitely still looks like something from the 90s. Now try loading that 90s era table of data with more than four columns of data on your phone, things start to get bad fast.</p>
+<p>That's where <a href="https://github.com/bradvin/FooTable">FooTables</a>{:target=&quot;_blank&quot;} comes in. It's a <a href="https://github.com/jquery/jquery">JQuery</a>{:target=&quot;_blank&quot;} plugin that makes your data tables responsive with custom breakpoints, gives you some default styles that don't suck if you want them, and offers tons of new functionality, like filtering, sorting, pagination, and more. I've used on numerous occasions with great success, so when I got a job that needed to display a lot of tabular data to users (a lot of which who were mobile users), I decided to use FooTables.</p>
+<h3 id="a-tale-of-two-bugs">A Tale of Two Bugs</h3>
+<p>But when I went to include it on my page nothing happened, I just had the same old ugly table. Pop open the console and there were a bunch of <code>ReferenceErrors</code> coming from the FooTables source. After digging around in the source code a bit I noticed a number of instances where variables were being defined without the <code>var</code> keyword, like so:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>function someScope() {
+</span><span>  newVar = foo;
+</span><span>}
+</span></code></pre>
+<p>In most cases this is no big deal, newVar will still be given the value foo. However, it will be added to the global scope instead of inside the scope it was defined in. So the above is the equivalent to:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>// Assuming this isn&#39;t nested in another function
+</span><span>var newVar;
+</span><span>function someScope() {
+</span><span>  newVar = foo;
+</span><span>}
+</span></code></pre>
+<p>That's usually not what you intend and if it is, you should probably be doing it explicitly so that other readers can understand what your doing:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>// Again assuming no nesting
+</span><span>// `this` in the top-level refers to the window/global object
+</span><span>var global = this;
+</span><span>function someScope() {
+</span><span>  global.newVar = foo;
+</span><span>}
+</span></code></pre>
+<p>But anyways, back to FooTables, it worked before, right? Why was it failing now? Well, this part was my fault. You see with <a href="http://kangax.github.io/compat-table/es5/">ECMAScript</a>{:target=&quot;_blank&quot;} 5 came a <a href="http://perldoc.perl.org/strict.html">Perl like convention of &quot;strict&quot;</a>{:target=&quot;_blank&quot;} mode, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">this does a lot of things</a>{:target=&quot;_blank&quot;}, but the gist of it is things that worked before or failed silently would no longer be allowed in the interest of a more stable software platform. One of the items that changed was that global variables could only be assigned like the third example, and when you use that first method, yep, you guessed it, JavaScript throws a <code>ReferenceError</code>.</p>
+<p>At first this may seem like a terrible mistake, now perfectly good programs will fail. That might not sound like much of a stability boost to you. But the folks working on the spec thought of that as well. It turns out that setting strict mode works just like variables, <em>it only applies to the scope it's defined in.</em> So:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>// Strict mode for all the things!
+</span><span>&quot;use strict&quot;;
+</span><span>function someScope() {
+</span><span>  // This will be strict as well
+</span><span>}
+</span><span>+++--
+</span><span>// Not strict
+</span><span>function someScope() {
+</span><span>  &quot;use strict&quot;;
+</span><span>  // items in this scope and nested below will be treated with strict mode
+</span><span>}
+</span><span>// Not strict
+</span></code></pre>
+<p>So best JavaScript practice is to define strict mode only in scopes that you are responsible for, otherwise you might break third party libraries. And that's exactly the route I took on the aforementioned project (which you can see the relevant table bits for <a href="http://www.demandingjustice.org/states/new-york/">here</a>{:target=&quot;_blank&quot;}).</p>
+<h3 id="a-wild-bugfix-appears">A Wild Bugfix Appears</h3>
+<p>But why not fix the other problem too? There's no reason FooTables shouldn't be strict mode compliant and it seemed like a pretty easy fix. So I forked the repo and dove in.</p>
+<p>Looking around a bit I found that it was managed with <a href="https://www.npmjs.org/doc/">npm</a>{:target=&quot;_blank&quot;}, distributed with <a href="http://bower.io/">Bower</a>{:target=&quot;_blank&quot;}, and used <a href="http://gruntjs.com/">Grunt</a>{:target=&quot;_blank&quot;} to run the build and testing step. The files I need to edit were going to be located in the <code>js/</code> directory, but first before I started messing around with the project internals I figured I better install the project's dependencies.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ npm install
+</span><span>
+</span><span>npm ERR! install Couldn&#39;t read dependencies
+</span><span>npm ERR! Darwin 13.3.0
+</span><span>npm ERR! argv &quot;node&quot; &quot;/usr/local/bin/npm&quot; &quot;install&quot;
+</span><span>npm ERR! node v0.10.32
+</span><span>npm ERR! npm  v2.0.0
+</span><span>
+</span><span>npm ERR! Invalid version: &quot;2.0.1.5&quot;
+</span><span>npm ERR!
+</span><span>npm ERR! If you need help, you may report this error at:
+</span><span>npm ERR!     &lt;http://github.com/npm/npm/issues&gt;
+</span></code></pre>
+<p>Ah, the classic npm err. I've spent countless hours debugging npm dependency errors in the past and a lot of times the solution is just to reinstall npm. So without even bothering to read the error messages I blindly upgraded npm:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>$ brew info npm
+</span><span>...
+</span><span>$ brew upgrade npm
+</span><span>==&gt; Upgrading 1 outdated package, with result:
+</span><span>...
+</span><span>$ npm install
+</span></code></pre>
+<p>But to no avail. I decided to check the error log a little closer:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>npm ERR! Invalid version: &quot;2.0.1.5&quot;
+</span></code></pre>
+<p>Ahah! npm requires <a href="http://semver.org/">semantic versioning</a>{:target=&quot;_blank&quot;}, which means version numbers must follows the pattern: MAJOR.MINOR.PATCH-pre-release-label. After taking a look at the git history of the <code>package.json</code> file where npm defines the version, it seemed like an appropriate semantic version would be 2.0.2 instead of 2.0.1.5. I edited the <code>package.json</code> and <code>bower.json</code> to reflect this and submitted a <a href="https://github.com/bradvin/FooTable/pull/276">pull request</a>{:target=&quot;_blank&quot;}.</p>
+<p>Since <a href="https://travis-ci.org/">Travis.ci</a>{:target=&quot;_blank&quot;} was setup on the project I went to watch my pull request be tested. Once it passed I went back to the pull requests page to review my submission. But it was no where to be found. Confused I hopped around from issues to pull requests wondering what happened. Finally I clicked on the &quot;Closed&quot; link on the pull requests page only to find he had already merged my pull request. A mere two minutes after I made it, at 1am on a Wednesday. Talk about a responsive upstream!</p>
+<p>With that bug squashed I returned to my original mission. Finding all the violations of strict mode was as simple as running <a href="https://github.com/jshint/jshint/">JSHint</a>{:target=&quot;_blank&quot;} in my editor (<a href="https://github.com/scrooloose/syntastic">Vim, Syntastic plugin</a>{:target=&quot;_blank&quot;}) and exploring the context of each warning to make sure what I was doing wasn't actually breaking anything. That done, I looked at the Gruntfile to see what sort of build tasks were setup. Turns out the default task ran everything, so I just ran <code>grunt</code> and all the js tests passed and the builds completed. Strangely the LESS didn't compile to the same as the prior CSS (even though I hadn't changed anything) and the CSS linter threw a couple of errors. But that's a bug fix for another day. I committed just the JavaScript files to another feature branch and submitted my <a href="https://github.com/bradvin/FooTable/pull/277">second pull request of the evening.</a>{:target=&quot;_blank&quot;}</p>
+
+  </div>
+</article>
+
+      </div>
+    </div>
+
+    <!-- Render nice latex formulas -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 130
+        }
+      });
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </body>
+</html>

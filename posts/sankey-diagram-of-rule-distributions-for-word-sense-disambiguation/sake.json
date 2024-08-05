@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {"name":"Sake"},
+    {"name":"*Sake"},
+
+    {"name":"4"},
+    {"name":"5"},
+    {"name":"6"},
+    {"name":"7"},
+    {"name":"8"},
+
+    {"name":"Correct"},
+    {"name":"Incorrect"}
+  ],
+
+  "links": [
+    {"source":0,"target":2,"value":553},
+    {"source":1,"target":2,"value":13},
+
+    {"source":0,"target":3,"value":135},
+    {"source":1,"target":3,"value":1},
+
+    {"source":0,"target":4,"value":48},
+
+    {"source":0,"target":5,"value":14},
+
+    {"source":0,"target":6,"value":5},
+
+
+    {"source":2,"target":7,"value":21},
+    {"source":2,"target":8,"value":2},
+
+    {"source":3,"target":7,"value":17},
+    {"source":3,"target":8,"value":1},
+
+    {"source":4,"target":7,"value":38},
+
+    {"source":5,"target":7,"value":7},
+
+    {"source":6,"target":7,"value":14}
+  ]
+}

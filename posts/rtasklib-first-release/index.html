@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Will Paul - rtasklib first release </title>
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/atom.xml">
+    
+
+    <link rel="stylesheet" href="https://will-paul.com/main.css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="hero">
+        <a href="/">
+          <h1 class='logo'>
+            &lambda;will.paul
+          </h1>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="https://will-paul.com">projects</a></li>
+            <li ><a href="https://will-paul.com/posts">posts</a></li>
+            <li><a href="http://github.com/dropofwill">github</a></li>
+            <li><a href="http://will-paul.com/resume">resume</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="typeset" role="main">
+        
+<article class="article row">
+  <h1>rtasklib first release</h1>
+  <time>May 19, 2015</time>
+  <div class="large-10 large-offset-1 columns typeset">
+    <p>So the semester has come to a close and I've made the first 'official' release of <code>rtasklib</code>. Install the gem <a href="https://rubygems.org/gems/rtasklib">from RubyGems.org</a> (<code>gem install rtasklib</code>) or <a href="https://github.com/dropofwill/rtasklib/tree/master/rpms">install the RPM on your Fedora system if you prefer</a>. I reached out to the TaskWarrior devs and they also are adding <code>rtasklib</code> to the list of <a href="http://taskwarrior.org/tools/#libraries">available libraries on the TaskWarrior main website in the next few days</a>, which is pretty cool.</p>
+<span id="continue-reading"></span>
+<p>Unfortunately, I was unable to finish <code>task_time</code> for the end of the semester. That said the pieces are in place and I hope to get something out over the summer.</p>
+<p>All in all it was good learning experience. I don't often tread that far away from Web Dev, despite the fact that I spend a good part of my day on the command line. It's also the first time I've went through the process of actually releasing one of the gems I've made to RubyGems, so that was a good experience. Packaging for RPMs was a lot less easy and made appreciate the Ruby system a lot more than I did previously.</p>
+<p>If anyone in the future needs to package up a Ruby Gem, I stumbled upon this random post on <a href="https://gitlab.com/fedora-ruby/gitlab-rpm/wikis/rubygem-packaging">Fedora's GitLab</a>, which was invaluable in just understanding the process from someone that obviously has done this quite a bit (and also not a first page Google result). Also, the <a href="https://github.com/fedora-ruby/gem2rpm">gem2rpm</a> gem (from Fedora) is pretty good at extracting as much meta data as it can from the Ruby .gemspec, but you have to do quite a bit more to get a working RPM (especially if you have many Gem dependencies).</p>
+
+  </div>
+</article>
+
+      </div>
+    </div>
+
+    <!-- Render nice latex formulas -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 130
+        }
+      });
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </body>
+</html>

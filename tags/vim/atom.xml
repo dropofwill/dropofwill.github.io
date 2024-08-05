@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - Vim</title>
+    <link href="https://will-paul.com/tags/vim/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://will-paul.com/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2014-11-15T04:53:00+00:00</updated>
+    <id>https://will-paul.com/tags/vim/atom.xml</id>
+    <entry xml:lang="en">
+        <title>My Vim Config Part 2: Shortcut Keys</title>
+        <published>2014-11-15T04:53:00+00:00</published>
+        <updated>2014-11-15T04:53:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/my-vim-config-part-2-shortcut-keys/" type="text/html"/>
+        <id>https://will-paul.com/posts/my-vim-config-part-2-shortcut-keys/</id>
+        
+        <summary type="html">&lt;p&gt;This is a continuation of my short series (&lt;a href=&quot;&#x2F;posts&#x2F;my-vim-config-part-1-the-basics&#x2F;&quot;&gt;part 1&lt;&#x2F;a&gt;) on how I setup Vim to be a little more fully featured looking at the custom shortcuts. By no means is my setup the best, but there are a few neat things I&#x27;ve stumbled upon and my thought is that by aggregating them here someone else might find something new to add. Or maybe someone knows a better way to do something and lets me know. So let&#x27;s get started!&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>My Vim Config Part 1: The Basics</title>
+        <published>2014-11-02T03:23:00+00:00</published>
+        <updated>2014-11-02T03:23:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/my-vim-config-part-1-the-basics/" type="text/html"/>
+        <id>https://will-paul.com/posts/my-vim-config-part-1-the-basics/</id>
+        
+        <summary type="html">&lt;p&gt;As someone that came to Vim from Sublime Text (through the excellent Vi-ntage mode), one thing that held me back was just how annoying the default Vim settings are. In a way looking back at it that wasn&#x27;t a bad thing, it let me really craft my own configuration that I&#x27;m pretty happy with, but always looking for ways to improve. In order to help someone else a who is headed down that path find a config that works for them a little quicker.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Run Processing Sketches from Vim</title>
+        <published>2014-09-08T03:09:00+00:00</published>
+        <updated>2014-09-08T03:09:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/run-processing-sketches-from-vim/" type="text/html"/>
+        <id>https://will-paul.com/posts/run-processing-sketches-from-vim/</id>
+        
+        <summary type="html">&lt;p&gt;So I started writing Processing for one of my classes (Interactive Media Development) and unfortunately the default development workflow they want us to use is tightly bound to the IDE that it ships with. In general I&#x27;m not a huge fan of IDEs anyways, but the Processing one is especially terrible. It&#x27;s obviously been designed to abstract away programming concepts to make the barrier to entry really low (I think it was originally made to help artist make procedural art), but in the end this makes for an annoying experience for those of us with a bit of experience.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Will Paul - Blink project: Hacking on an Arduino </title>
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/atom.xml">
+    
+
+    <link rel="stylesheet" href="https://will-paul.com/main.css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="hero">
+        <a href="/">
+          <h1 class='logo'>
+            &lambda;will.paul
+          </h1>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="https://will-paul.com">projects</a></li>
+            <li ><a href="https://will-paul.com/posts">posts</a></li>
+            <li><a href="http://github.com/dropofwill">github</a></li>
+            <li><a href="http://will-paul.com/resume">resume</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="typeset" role="main">
+        
+<article class="article row">
+  <h1>Blink project: Hacking on an Arduino</h1>
+  <time>Feb 11, 2015</time>
+  <div class="large-10 large-offset-1 columns typeset">
+    <p>For my Physical Computing &amp; Alt Interfaces class we had to use an Arduino (I have the latest Uno) to control LED(s) in a non-trivial way. I knew I wanted to make some kind of LED matrix, but didn't know how big of one I could make on my half sized breadboard and limited number of pins. What I ended up with was a 16 LED (4x4) matrix controlled by just 8 pins, each of which can be individually controlled.</p>
+<span id="continue-reading"></span>
+<p><img src="https://will-paul.com/posts/blink-project-hacking-on-an-arduino/matrix_scheme.png" alt="Rough schematic of the led matrix setup" /></p>
+<p>So how does that work? Basically you wire it up so each row and column are interconnected and each has it's own, you can get a rough idea how it works in my simplified schematic to the right. To light up an LED all you need to do is set the row or column that its anode is connected to HIGH to give it current and then set the row or column that its cathode is connected to LOW grounding the circuit. This way even though 4 LED's are getting current and 4 LED's are grounded, only 1 is completing the circuit and lighting up. The code would look something like this:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>// pins for my anodes
+</span><span>int row[] = {3,5,6,9};
+</span><span>// pins for my cathodes
+</span><span>int col[] = {10,11,12,13};
+</span><span>
+</span><span>// Prime all the LED&#39;s
+</span><span>void led_setup() {
+</span><span>  for (int i = 0; i &lt; 4; i++) {
+</span><span>    pinMode(row[i], OUTPUT);
+</span><span>  }
+</span><span>  for (int j = 0; j &lt; 4; j++) {
+</span><span>    pinMode(col[j], OUTPUT);
+</span><span>  }
+</span><span>  allOff();
+</span><span>}
+</span><span>
+</span><span>// Shortcut to turn off all the LEDs
+</span><span>void allOff() {
+</span><span>  for (int i = 0; i &lt; 4; i++)  {
+</span><span>    digitalWrite(row[i], LOW);
+</span><span>  }
+</span><span>  for (int i = 0; i &lt; 4; i++)  {
+</span><span>    digitalWrite(col[i], HIGH);
+</span><span>  }
+</span><span>}
+</span><span>
+</span><span>// And finally light the LED!
+</span><span>void lightPin(int i, int j) {
+</span><span>  digitalWrite(row[i], HIGH);
+</span><span>  digitalWrite(col[j], LOW);
+</span><span>}
+</span></code></pre>
+<p>What if we want to light up multiple LED's at once? Well, that depends, if they're on the same row or column than there's no problem we can light them up as before. But what if they're are diagonally adjacent (as in (0,0) and (1,1)), by turning on the pins to those 4 pins we are completing the circuit for 4 LEDs instead of just the two we wanted!</p>
+<p><img src="https://will-paul.com/posts/blink-project-hacking-on-an-arduino/matrix_overview.jpg" alt="Rough schematic of the led matrix setup" /></p>
+<p>One way to deal with this is to light just one LED at a time, but swap back and forth between them faster than the human eye can detect. This works quite well actually, it ends up becoming a balancing act between giving enough time for the current to light up the LED and not waiting long enough for humans to be able to detect the flicker. In my own experience the best value varies with the LED and resistors that you happen to be using, so you will probably have to experiment. In the end I went with 2 milliseconds for the best balance.</p>
+<p>So how did I manage to stuff all of this wiring onto a half-sized breadboard? The trick is to use the built in wiring that the breadboard gives you. Put all of the your anodes or cathodes on the same row (whichever ones you decide to line up with the breadboards internal wiring), and then place the opposite lead one or two slots over (alternate, remember these should not share a row, but rather a column). With this technique you only need 4 wires to setup the rows (shoot the gap in the middle) and it only takes up 3 breadboard rows each, which leaves you just enough room to wire in the columns, which are a little bit more tricky, but doable because you were so space efficient with the rows. That was probably a fairly confusing, hopefully the following pictures should clear it up.</p>
+<p><img src="https://will-paul.com/posts/blink-project-hacking-on-an-arduino/matrix_breadboard.jpg" alt="Closeup of breadboard" /></p>
+<p><img src="https://will-paul.com/posts/blink-project-hacking-on-an-arduino/matrix_closeup.jpg" alt="Closeup of the led matrix setup" /></p>
+<p>So cool we've got an LED matrix what to do with it? The first thing I did was make a little bar graph to test how well I could control the individual LEDs. This evolved into something like a music visualizer, only it's not visualizing a music signal, just the Arduino's random number generator.</p>
+<p>That was cool, but I also wanted to make something a little more interactive, so I hooked up a potentiometer to a separate 5V power source and an analog pin. From there I use the signal from the potentiometer to steer one light as it moves about the screen. In the script your able to set the speed, degrees of control, and whether it wraps or bounces off the walls. It's kind of fun to play with, but would greatly benefit from another one or two rows of LEDs to wander about on, but as is it is a pretty cool proof of concept.</p>
+<p><a href="https://gist.github.com/dropofwill/2596fab1d9236557d862">All the code used in this project is available as a gist on my github</a>.</p>
+
+  </div>
+</article>
+
+      </div>
+    </div>
+
+    <!-- Render nice latex formulas -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 130
+        }
+      });
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </body>
+</html>

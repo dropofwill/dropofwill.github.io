@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - Business and Legal</title>
+    <link href="https://will-paul.com/tags/business-and-legal/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://will-paul.com/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2015-05-20T02:04:00+00:00</updated>
+    <id>https://will-paul.com/tags/business-and-legal/atom.xml</id>
+    <entry xml:lang="en">
+        <title>A Scanner Orderly: The smart coaster</title>
+        <published>2015-05-20T02:04:00+00:00</published>
+        <updated>2015-05-20T02:04:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/a-scanner-orderly-the-smart-coaster/" type="text/html"/>
+        <id>https://will-paul.com/posts/a-scanner-orderly-the-smart-coaster/</id>
+        
+        <summary type="html">&lt;p&gt;What if you could order drink with your coaster? This blog post explains how we made one using an Arduino and Node.js.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>rtasklib first release</title>
+        <published>2015-05-19T14:31:00+00:00</published>
+        <updated>2015-05-19T14:31:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/rtasklib-first-release/" type="text/html"/>
+        <id>https://will-paul.com/posts/rtasklib-first-release/</id>
+        
+        <summary type="html">&lt;p&gt;So the semester has come to a close and I&#x27;ve made the first &#x27;official&#x27; release of &lt;code&gt;rtasklib&lt;&#x2F;code&gt;. Install the gem &lt;a href=&quot;https:&#x2F;&#x2F;rubygems.org&#x2F;gems&#x2F;rtasklib&quot;&gt;from RubyGems.org&lt;&#x2F;a&gt; (&lt;code&gt;gem install rtasklib&lt;&#x2F;code&gt;) or &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;dropofwill&#x2F;rtasklib&#x2F;tree&#x2F;master&#x2F;rpms&quot;&gt;install the RPM on your Fedora system if you prefer&lt;&#x2F;a&gt;. I reached out to the TaskWarrior devs and they also are adding &lt;code&gt;rtasklib&lt;&#x2F;code&gt; to the list of &lt;a href=&quot;http:&#x2F;&#x2F;taskwarrior.org&#x2F;tools&#x2F;#libraries&quot;&gt;available libraries on the TaskWarrior main website in the next few days&lt;&#x2F;a&gt;, which is pretty cool.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>rtasklib update</title>
+        <published>2015-04-20T14:36:00+00:00</published>
+        <updated>2015-04-20T14:36:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/rtasklib-update/" type="text/html"/>
+        <id>https://will-paul.com/posts/rtasklib-update/</id>
+        
+        <summary type="html">&lt;p&gt;In the Ruby world the most common way to generate documentation is with &lt;a href=&quot;http:&#x2F;&#x2F;yardoc.org&quot;&gt;Yardocs&lt;&#x2F;a&gt;. It basically generates documentation by scraping the code comments and provides a structured API for writing comments that it can interpret. For example to annotate that a parameter of a certain method is a duck type that responds to &lt;code&gt;#to_s&lt;&#x2F;code&gt; (to string), you would simply make a comment above the method definition that says: &lt;code&gt;# @param parameter_name [#to_s] a parameter that responds to #to_s&lt;&#x2F;code&gt;.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>rtasklib update = Ruby and external tools</title>
+        <published>2015-04-06T02:22:00+00:00</published>
+        <updated>2015-04-06T02:22:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/rtasklib-update-ruby-and-external-tools/" type="text/html"/>
+        <id>https://will-paul.com/posts/rtasklib-update-ruby-and-external-tools/</id>
+        
+        <summary type="html">&lt;p&gt;It turns out that one of the reasons Ruby was popular before the advent of Rails was because it was so easy to integrate with 3rd party tools through subprocesses. In fact Ruby has at least 7 ways of executing processes either in the core or the standard libraries and many more user implemented varieties. Since &lt;code&gt;rtasklib&lt;&#x2F;code&gt; is at its core concerned with interacting with a subprocess having a solid understanding of the available options is important. Below I summarize the results of my research for several of Ruby&#x27;s subprocess methods.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Writing Command Line Tools with Ruby</title>
+        <published>2015-02-13T17:16:00+00:00</published>
+        <updated>2015-02-13T17:16:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/commnad-line-tools-with-ruby/" type="text/html"/>
+        <id>https://will-paul.com/posts/commnad-line-tools-with-ruby/</id>
+        
+        <summary type="html">&lt;p&gt;I&#x27;ve written a lot of Ruby code over the years from web applications, to rack frameworks, to rake tasks, even packaged a few up as gems, but one thing I&#x27;ve never done is write a command line tool directly in ruby. This post just sums up my initial foray into making Ruby cli tools, as usual with Ruby it&#x27;s not nearly as hard as it sounds.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Initial thoughts for an MPD project</title>
+        <published>2015-02-05T21:30:00+00:00</published>
+        <updated>2015-02-05T21:30:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/source-code-review-of-mpd-and-mpd-wrappers/" type="text/html"/>
+        <id>https://will-paul.com/posts/source-code-review-of-mpd-and-mpd-wrappers/</id>
+        
+        <summary type="html">&lt;p&gt;For my Software Development in Linux class we are making one large project over the course of the class and then packaging it up for distribution at the end (probably Debian, RPM, and AUR).  This is a little bit of a paradigm shift for me personally, as for most of my projects distribution means pushing to a Heroku instance, so I&#x27;ve had to brain storm some new non-web-based projects. I&#x27;ve come up with two basic trains of thought either a better time-tracking&#x2F;Freshbooks integration for taskwarrior (the current ones are all bare-bones) or any number of music&#x2F;analytics ideas for the music players, specifically MPD.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

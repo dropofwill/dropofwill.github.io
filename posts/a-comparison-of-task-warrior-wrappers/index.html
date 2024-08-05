@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Will Paul - A Comparison of Task Warrior Wrappers </title>
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/atom.xml">
+    
+
+    <link rel="stylesheet" href="https://will-paul.com/main.css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="hero">
+        <a href="/">
+          <h1 class='logo'>
+            &lambda;will.paul
+          </h1>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="https://will-paul.com">projects</a></li>
+            <li ><a href="https://will-paul.com/posts">posts</a></li>
+            <li><a href="http://github.com/dropofwill">github</a></li>
+            <li><a href="http://will-paul.com/resume">resume</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="typeset" role="main">
+        
+<article class="article row">
+  <h1>A Comparison of Task Warrior Wrappers</h1>
+  <time>Feb 22, 2015</time>
+  <div class="large-10 large-offset-1 columns typeset">
+    <p>So as it turns out there were 3 main libraries written to interact with the TaskWarrior database (I think there is also a Perl and maybe a PHP wrapper as well, but I couldn't find them again and let's face it: I'm not interested in using either of those languages anyways).</p>
+<span id="continue-reading"></span><h2 id="python-taskw-gpl-v3">Python: <a href="https://github.com/ralphbean/taskw">taskw</a>, GPL v3</h2>
+<p>A project developed by Rochester's own Ralph Bean with help from 12 other devs, it is by far the most actively developed wrapper available and had a new commit just 3 days ago. It is developed by a dev who talks at rocpy every month and is the #rit-foss channel all the time, so that's a big plus. The current build status has an error, but it looks like maybe some sort of <a href="https://travis-ci.org/ralphbean/taskw">network connection problem?</a> Will have to look into that further.</p>
+<p>Unfortunately, it is licensed under the v3 GPL license, which is going to make things annoying because the taskwarrior community primarily uses permissive licenses (the MIT in particular) and I prefer permissive licenses in general. However, using a copyleft non-LGPL licensed library with a compatible OSI license <a href="http://en.wikipedia.org/wiki/GNU_General_Public_License#Compatibility_and_multi-licensing">is legally ambiguous</a>, which puts me in an awkward situation. Probably going to talk to Remy about this in our next Business and Legal class and report back here with some thoughts on the situation.</p>
+<p>On my first run through it did not appear to have filter passing ability, which is problematic for my planned API.</p>
+<p>File structure:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>├── CHANGELOG.rst
+</span><span>├── LICENSE.txt
+</span><span>├── MANIFEST.in
+</span><span>├── README.rst
+</span><span>├── requirements.txt
+</span><span>├── setup.cfg
+</span><span>├── setup.py
+</span><span>├── taskw
+</span><span>│   ├── __init__.py
+</span><span>│   ├── exceptions.py
+</span><span>│   ├── fields
+</span><span>│   │   ├── __init__.py
+</span><span>│   │   ├── annotationarray.py
+</span><span>│   │   ├── array.py
+</span><span>│   │   ├── base.py
+</span><span>│   │   ├── choice.py
+</span><span>│   │   ├── commaseparateduuid.py
+</span><span>│   │   ├── date.py
+</span><span>│   │   ├── duration.py
+</span><span>│   │   ├── numeric.py
+</span><span>│   │   ├── string.py
+</span><span>│   │   └── uuid.py
+</span><span>│   ├── task.py
+</span><span>│   ├── taskrc.py
+</span><span>│   ├── test
+</span><span>│   │   ├── __init__.py
+</span><span>│   │   ├── data
+</span><span>│   │   │   ├── default.taskrc
+</span><span>│   │   │   └── included.taskrc
+</span><span>│   │   ├── test_datas.py
+</span><span>│   │   ├── test_fields.py
+</span><span>│   │   ├── test_task.py
+</span><span>│   │   ├── test_taskrc.py
+</span><span>│   │   └── test_utils.py
+</span><span>│   ├── utils.py
+</span><span>│   └── warrior.py
+</span><span>├── test_requirements.txt
+</span><span>└── tox.ini
+</span><span>
+</span><span>4 directories, 34 files
+</span></code></pre>
+<h2 id="python-tasklib-bsd-3-clause">Python: <a href="https://github.com/robgolding63/tasklib">tasklib</a>, BSD 3 Clause</h2>
+<p>A project developed by two authors: <code>robgolding63</code> and <code>tbabej</code>, it's under fairly active development with the latest commit being two days ago. It tries to mirror the API of a Django ORM and seems to have complete read and write functionality, including a filtering class that <code>taskw</code> appears to be missing.</p>
+<p>File Structure:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>├── AUTHORS
+</span><span>├── LICENSE
+</span><span>├── MANIFEST.in
+</span><span>├── README.rst
+</span><span>├── docs
+</span><span>│   ├── Makefile
+</span><span>│   ├── conf.py
+</span><span>│   └── index.rst
+</span><span>├── setup.py
+</span><span>└── tasklib
+</span><span>    ├── __init__.py
+</span><span>    ├── task.py
+</span><span>    └── tests.py
+</span><span>
+</span><span>2 directories, 11 files
+</span></code></pre>
+<h2 id="ruby-taskwarrior-mit">Ruby: <a href="https://github.com/dropofwill/taskwarrior">taskwarrior</a>, MIT</h2>
+<p>And last, but not least the only Ruby library available. Unfortunately, it currently only supports read operations, which means it would require heavy modifications on my end to be usable for the <code>task_time</code> project. It also hasn't seen active development since 2013. That said it is written Ruby and MIT licensed, so it is basically what I'm looking for.</p>
+<p>On closer look though, this project works with the JSON export, so it doesn't actually interact with the TaskWarrior database at all, which is almost entirely the point of using a wrapper at all. It's looking more like if I want to do this in Ruby I'm going to be doing it on my own.</p>
+<p>File Structure:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>├── Gemfile
+</span><span>├── Guardfile
+</span><span>├── LICENSE
+</span><span>├── README.md
+</span><span>├── Rakefile
+</span><span>├── examples
+</span><span>│   └── finished-early
+</span><span>├── lib
+</span><span>│   ├── taskwarrior
+</span><span>│   │   ├── annotation.rb
+</span><span>│   │   ├── annotation_mapper.rb
+</span><span>│   │   ├── attributes.rb
+</span><span>│   │   ├── priority_mapper.rb
+</span><span>│   │   ├── project.rb
+</span><span>│   │   ├── repository.rb
+</span><span>│   │   ├── tag.rb
+</span><span>│   │   ├── task.rb
+</span><span>│   │   ├── task_mapper.rb
+</span><span>│   │   ├── validations.rb
+</span><span>│   │   └── version.rb
+</span><span>│   └── taskwarrior.rb
+</span><span>├── taskwarrior.gemspec
+</span><span>└── test
+</span><span>    ├── fixtures
+</span><span>    │   ├── no_deps.json
+</span><span>    │   ├── party.json
+</span><span>    │   ├── party2.json
+</span><span>    │   └── party_taxes.json
+</span><span>    ├── test_helper.rb
+</span><span>    └── unit
+</span><span>        ├── test_annotation.rb
+</span><span>        ├── test_priority_mapper.rb
+</span><span>        ├── test_project.rb
+</span><span>        ├── test_repository.rb
+</span><span>        ├── test_tag.rb
+</span><span>        ├── test_tag_habtm.rb
+</span><span>        └── test_task.rb
+</span><span>
+</span><span>6 directories, 31 files
+</span></code></pre>
+<h2 id="final-thoughts">Final Thoughts</h2>
+<p>As much as I hate to admit it, I might have to pivot to using Python for this project, because the library wrapper is basically unusable. My options are to remake <code>tasklib</code> or <code>taskw</code> in Ruby (or at least get them to working condition). Licensing problems and the lack of a filter feature are problematic for <code>taskw</code>, which means my current top option is <code>tasklib</code>. My current plan of attack is to finalize my public API and goals for the project in parallel and finish research on dependencies by the end of next week.</p>
+
+  </div>
+</article>
+
+      </div>
+    </div>
+
+    <!-- Render nice latex formulas -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 130
+        }
+      });
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </body>
+</html>

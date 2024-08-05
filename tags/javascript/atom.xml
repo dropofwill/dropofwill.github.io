@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - JavaScript</title>
+    <link href="https://will-paul.com/tags/javascript/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://will-paul.com/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2014-12-17T01:15:00+00:00</updated>
+    <id>https://will-paul.com/tags/javascript/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Geocoding my Last.fm Data</title>
+        <published>2014-12-17T01:15:00+00:00</published>
+        <updated>2014-12-17T01:15:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/geocoding-my-lastfm-data/" type="text/html"/>
+        <id>https://will-paul.com/posts/geocoding-my-lastfm-data/</id>
+        
+        <summary type="html">&lt;p&gt;One question that often comes to my mind is how does geographical location (and the culture that comes with it) influence the band’s music and therefore my taste as well. So that’s why I decided to use this data to create a cartogram of my listening data.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>C-Graph: A new tool to grok C-source code</title>
+        <published>2014-12-15T01:43:00+00:00</published>
+        <updated>2014-12-15T01:43:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/c-graph-a-new-tool-to-grok-c-source-code/" type="text/html"/>
+        <id>https://will-paul.com/posts/c-graph-a-new-tool-to-grok-c-source-code/</id>
+        
+        <summary type="html">&lt;p&gt;A joint post by &lt;a href=&quot;http:&#x2F;&#x2F;brendan-w.com&#x2F;&quot;&gt;Brendan Whitfield&lt;&#x2F;a&gt; &amp;amp; Will Paul&lt;&#x2F;p&gt;
+&lt;p&gt;Source code is often the most up to date documentation available, but while code is written in a linear fashion, the execution is a network of calls that often jump across files. Known as a function call graph, this data can help programmers quickly grasp the structure of a program. How can  we use visualization to make the process of grokking source code easier?&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Bugfix: FooTable</title>
+        <published>2014-09-24T05:43:00+00:00</published>
+        <updated>2014-09-24T05:43:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/bugfix-footable/" type="text/html"/>
+        <id>https://will-paul.com/posts/bugfix-footable/</id>
+        
+        <summary type="html">&lt;p&gt;Everyone in the frontend community likes to hate on tables, it&#x27;s like Comic Sans in the design community. And this is for mostly good reasons, tables for layouts are pretty much unnecessary in this day in age (unless you&#x27;re looking to center something vertically, &lt;a href=&quot;http:&#x2F;&#x2F;css-tricks.com&#x2F;centering-in-the-unknown&#x2F;&quot;&gt;then &lt;em&gt;maybe&lt;&#x2F;em&gt; you can use it in your CSS, not the markup&lt;&#x2F;a&gt;{:target=&amp;quot;_blank&amp;quot;}), but there are still actually legitimate uses of tables. You know like for tabular data.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

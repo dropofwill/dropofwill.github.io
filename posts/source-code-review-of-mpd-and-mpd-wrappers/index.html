@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Will Paul - Initial thoughts for an MPD project </title>
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/atom.xml">
+    
+
+    <link rel="stylesheet" href="https://will-paul.com/main.css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="hero">
+        <a href="/">
+          <h1 class='logo'>
+            &lambda;will.paul
+          </h1>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="https://will-paul.com">projects</a></li>
+            <li ><a href="https://will-paul.com/posts">posts</a></li>
+            <li><a href="http://github.com/dropofwill">github</a></li>
+            <li><a href="http://will-paul.com/resume">resume</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="typeset" role="main">
+        
+<article class="article row">
+  <h1>Initial thoughts for an MPD project</h1>
+  <time>Feb  5, 2015</time>
+  <div class="large-10 large-offset-1 columns typeset">
+    <p>For my Software Development in Linux class we are making one large project over the course of the class and then packaging it up for distribution at the end (probably Debian, RPM, and AUR).  This is a little bit of a paradigm shift for me personally, as for most of my projects distribution means pushing to a Heroku instance, so I've had to brain storm some new non-web-based projects. I've come up with two basic trains of thought either a better time-tracking/Freshbooks integration for taskwarrior (the current ones are all bare-bones) or any number of music/analytics ideas for the music players, specifically MPD.</p>
+<span id="continue-reading"></span>
+<p>For now I've decided to just review MPD, its current state, and what options are available to me in terms of wrappers (preferably Ruby wrappers, my scripting language of choice). The goal here is to just establish what the MPD landscape looks like so that I can effectively scope an 11-12 week project.</p>
+<h2 id="the-music-player-daemon">The Music Player Daemon</h2>
+<p>First off it's important to establish what MPD is and isn't. It is a music player that works with a server-client architecture. It plays music, organizes playlists, and maintains a database of music. What it isn't is a client to play with, you need anyone of many clients to do this from ncurses-command line based players to GUI players that resemble iTunes. In this way it does one thing well and very efficiently, which is why I've decided to target it as the home for any music-based apps I want to create.</p>
+<p>So where to start? There is extensive documentation of the C++ inner workings of <a href="http://www.musicpd.org/doc/user/">MPD here</a>. One important part of any integration with other music programs is playlist formats, MPD supports <a href="http://www.musicpd.org/doc/user/playlist_plugins.html"><code>embcue</code>, <code>m3u</code>, <code>extm3u</code>, <code>pls</code>, and <code>xspf</code></a> through a plugin system. It uses m3u by default, which is an extremely simple format consisting of only the time in seconds, the artist, the name, and the file path.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>#EXTM3U
+</span><span>
+</span><span>#EXTINF:123, Sample artist - Sample title
+</span><span>~/music/sample_artist/sample_song.mp3
+</span></code></pre>
+<p>This is nice from a readability standpoint, but there is problem, it hard codes all the file paths, which makes it hard to port from one platform to another. That's one thing that <code>.xspf</code> <a href="http://xspf.org/xspf-v1.html">tries to remedy.</a>, it uses a unique identifier (mbid from MusicBrainz for example) to resolve different file locations to the same unique identifier, here's a basic example file:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+</span><span>&lt;playlist version=&quot;1&quot; xmlns=&quot;http://xspf.org/ns/0/&quot;&gt;
+</span><span>  &lt;trackList&gt;
+</span><span>    &lt;track&gt;
+</span><span>      &lt;title&gt;Song Title&lt;/title&gt;
+</span><span>      &lt;identifier&gt;http://musicbrainz.org/track/7fe96b15-5608-430e-ad25-77a01353c5d9.html&lt;/identifier&gt;
+</span><span>      &lt;location&gt;music/foo.mp3&lt;/location&gt;
+</span><span>      &lt;location&gt;alternate/music/foo.mp3&lt;/location&gt;
+</span><span>    &lt;/track&gt;
+</span><span>  &lt;/trackList&gt;
+</span><span>&lt;/playlist&gt;
+</span></code></pre>
+<p>So what libraries are already out there to further investigate?</p>
+<h3 id="ruby-libraries">Ruby Libraries</h3>
+<p><a href="https://github.com/marcransome/Spfy">Spfy</a> - a Ruby Xspf parser (last commit 03/2014)</p>
+<p><a href="https://rubygems.org/gems/xspf/versions/0.4.1.1">Xspf</a> - a Ruby Xspf parser (last commit 04/2007), source code forge is down, so this one is fairly rusty.</p>
+<p>Since the .xspf spec is simple, well formed XML, is using one of these Ruby wrappers necessary? Or could I just use the great, built in XML support?</p>
+<p><a href="https://github.com/robinst/taglib-ruby">taglib-ruby</a> a wrapper around the C++ library <a href="https://github.com/taglib/taglib">TagLib</a> - meta data manager for audio files (last commit 08/2014 &amp; 02/2015 respectively)</p>
+<p><a href="https://github.com/archSeer/ruby-mpd">ruby-mpd</a> a ruby wrapper around MPD, which itself was the fork librmpd (last commit 12/2014)</p>
+<p>[mpd_client(https://github.com/mamantoha/mpd_client) a ruby wrapper around MPD, a port of the python-mpd library (last commit 12/2014)</p>
+<h3 id="other-stuff">Other Stuff</h3>
+<p><a href="http://soundiiz.com">Soundiiz</a> is doing something similar to what I want to, though it seems to be completely web based and closed source, which is sad to see.</p>
+<p>The web api's for <a href="https://developer.spotify.com/web-api/endpoint-reference/">Spotify</a>, <a href="http://developer.echonest.com">Echonest</a>, <a href="http://www.last.fm/api/show/user.getTopTracks">Last.fm</a>, <a href="http://www.last.fm/api/show/user.getTopTracks">Grooveshark</a>, <a href="https://developers.google.com/youtube/v3/docs/playlists">YouTube</a>, <a href="http://www.rdio.com/developers/docs/">Rdio</a>, <a href="https://musicbrainz.org/doc/Beginners_Guide">MusicBrainz</a>, and how to resolve content between them.</p>
+
+  </div>
+</article>
+
+      </div>
+    </div>
+
+    <!-- Render nice latex formulas -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 130
+        }
+      });
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </body>
+</html>

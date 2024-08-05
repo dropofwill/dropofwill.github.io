@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - Blog</title>
+    <link href="https://will-paul.com/tags/blog/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://will-paul.com/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2014-09-22T02:06:00+00:00</updated>
+    <id>https://will-paul.com/tags/blog/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Creating and Deploying a Middleman Blog, Part 2: Blogging with Middleman</title>
+        <published>2014-09-22T02:06:00+00:00</published>
+        <updated>2014-09-22T02:06:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/creating-and-deploying-a-middleman-blog-part-2-blogging-with-middleman/" type="text/html"/>
+        <id>https://will-paul.com/posts/creating-and-deploying-a-middleman-blog-part-2-blogging-with-middleman/</id>
+        
+        <summary type="html">&lt;p&gt;&lt;a href=&quot;&#x2F;posts&#x2F;creating-and-deploying-a-middleman-blog-part-1-what-s-middleman&#x2F;&quot;&gt;Last time&lt;&#x2F;a&gt; I talked about static site generators in general (why you would use them) and a little bit about Middleman specifically (why you would use it in particular). Today I am going to talk about Middleman&#x27;s blogging capabilities.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Creating and Deploying a Middleman Blog, Part 1: What&#x27;s Middleman?</title>
+        <published>2014-09-14T22:07:00+00:00</published>
+        <updated>2014-09-14T22:07:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/" type="text/html"/>
+        <id>https://will-paul.com/posts/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/</id>
+        
+        <summary type="html">&lt;p&gt;This is the first in what will probably be a three part series on creating and deploying a &lt;a href=&quot;https:&#x2F;&#x2F;github.com&#x2F;middleman&#x2F;middleman&quot;&gt;Middleman&lt;&#x2F;a&gt;{:target=&amp;quot;_blank&amp;quot;} site, specifically a blog deployed to a &lt;a href=&quot;https:&#x2F;&#x2F;devcenter.heroku.com&#x2F;start&quot;&gt;Heroku&lt;&#x2F;a&gt;{:target=&amp;quot;_blank&amp;quot;} instance.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>

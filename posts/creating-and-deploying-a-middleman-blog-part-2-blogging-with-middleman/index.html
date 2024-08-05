@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge;chrome=1' />
+    <title>Will Paul - Creating and Deploying a Middleman Blog, Part 2: Blogging with Middleman </title>
+
+    
+      <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://will-paul.com/atom.xml">
+    
+
+    <link rel="stylesheet" href="https://will-paul.com/main.css" />
+
+    <!-- Viewport declarations -->
+    <meta name="viewport" content="width=533">
+    <meta name="viewport" content="initial-scale=0.6">
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="hero">
+        <a href="/">
+          <h1 class='logo'>
+            &lambda;will.paul
+          </h1>
+        </a>
+
+        <nav>
+          <ul>
+            <li><a href="https://will-paul.com">projects</a></li>
+            <li ><a href="https://will-paul.com/posts">posts</a></li>
+            <li><a href="http://github.com/dropofwill">github</a></li>
+            <li><a href="http://will-paul.com/resume">resume</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <div class="typeset" role="main">
+        
+<article class="article row">
+  <h1>Creating and Deploying a Middleman Blog, Part 2: Blogging with Middleman</h1>
+  <time>Sep 22, 2014</time>
+  <div class="large-10 large-offset-1 columns typeset">
+    <p><a href="/posts/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/">Last time</a> I talked about static site generators in general (why you would use them) and a little bit about Middleman specifically (why you would use it in particular). Today I am going to talk about Middleman's blogging capabilities.</p>
+<span id="continue-reading"></span><h3 id="prepping-your-middleman-for-blogging">Prepping your Middleman for Blogging</h3>
+<p>Middleman doesn't ship with blogging capabilities, but this wasn't an oversight, it was by design. Trying to follow the Unix principle of <a href="http://en.wikipedia.org/wiki/Unix_philosophy#Doug_McIlroy_on_Unix_programming">do one thing, and do it well</a>{:target=&quot;_blank&quot;}, the Middleman core contains only what is required to run any Middleman site. The blogging features our definitely out of that scope so they're placed in their own gem, maintained by the same people that work on the core.</p>
+<p>So you might be thinking that sounds great and all, but how much work is it to get setup? Thankfully it's super easy. Just add this to you Gemfile:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>gem &quot;middleman-blog&quot;, &quot;~&gt; 3.5&quot;
+</span></code></pre>
+<p>And <code>bundle install</code> and you are all set to go.</p>
+<p>To activate it add this block to your config.rb:</p>
+<pre data-lang="ruby" style="background-color:#2b303b;color:#c0c5ce;" class="language-ruby "><code class="language-ruby" data-lang="ruby"><span>activate </span><span style="color:#a3be8c;">:blog </span><span style="color:#b48ead;">do </span><span>|</span><span style="color:#bf616a;">blog</span><span>|
+</span><span>  </span><span style="color:#65737e;"># set options on blog
+</span><span style="color:#b48ead;">end
+</span></code></pre>
+<p>While this method lets you take a more hands on look at the relevant setup, if this is your first rodeo with a static generated blog I recommend using the built in blog template (or one of the <a href="http://directory.middlemanapp.com/#/templates/blog">community submitted templates</a>{:target=&quot;_blank&quot;}) Just to get a better feel for what options are available.</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>middleman init project-name --template=blog
+</span></code></pre>
+<h3 id="markdown-and-frontmatter">Markdown and Frontmatter</h3>
+<p>In Middleman blog articles are generally written in whatever flavor of Markdown you like (or <a href="http://rriemann.github.io/middleman-blog-template-duocolor/demo/">LaTeX if that's more your style</a>{:target=&quot;_blank&quot;}).</p>
+<p>Frontmatter is YAML or JSON that you can include at the top of your markdown pages (or any page) to set local variables to access with your templates and layouts. A common use of this is to set the title of a page or in a blog context set tags and date information. For instance, on this blog I use YAML and the Frontmatter for this post looks as folows:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>+++
+</span><span>title = &quot;Creating and Deploying a Middleman Blog, Part 2: Blogging with Middleman&quot;
+</span><span>date = 2014-09-22 02:06 UTC
+</span><span>tags = Ruby, Middleman, Blog
+</span><span>summary: &quot;Last time I talked about static site generators in general (why you would use them) and a little bit about Middleman specifically (why you would use it in particular). Today I am going to talk about Middleman&#39;s blogging capabilities.&quot;
+</span><span>+++
+</span></code></pre>
+<p>Now you might be thinking cool, but that looks like a bit of a pain to have to type out, esp. the date. How do you remember to format that? The answer is I don't, instead I use a middleman scaffolding feature to give me the barebones of an article to start with:</p>
+<pre style="background-color:#2b303b;color:#c0c5ce;"><code><span>middleman article &quot;Title&quot; [optional args]
+</span></code></pre>
+<p>Of course all this can be configured in your config.rb, but chances are the defaults will get you mostly where you want to go (convention over configuration ftw!).</p>
+<h3 id="what-about-feature-x">What About Feature X?</h3>
+<p>No doubt you have qualms about ditching the backend completely for something even as simple as a blog. What if in the future I want to implement a tag cloud, or calendar, or whatever? First let me direct you to the <a href="http://middlemanapp.com/basics/blogging/">middleman-blog documentation page</a>, which shows you how to do just about everything that WordPress does out of the box (feeds, pagination, calendar, etc).</p>
+<p>But what I think is really important to highlight is that you are not really abandoning the backend, the code you write for Middleman can look practically the same as you Rails code, what really is happening is we're moving the backend into a preprocessing step saving not just developer time, but CPU time as well. It's a bit of a paradigm shift for sure and certainly isn't for every or even most situations (just see my last post), but I think personal blogging is an domain where it really shines. Especially for developers who want to have control over the stack, but don't want to mess around learning the idiosyncrasies of Drupal or WordPress.</p>
+
+  </div>
+</article>
+
+      </div>
+    </div>
+
+    <!-- Render nice latex formulas -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        CommonHTML: {
+          scale: 130
+        }
+      });
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </body>
+</html>

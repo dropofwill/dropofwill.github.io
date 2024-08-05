@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+    <title> - Semantics</title>
+    <link href="https://will-paul.com/tags/semantics/atom.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://will-paul.com/"/>
+    <generator uri="https://www.getzola.org/">Zola</generator>
+    <updated>2014-11-15T06:14:00+00:00</updated>
+    <id>https://will-paul.com/tags/semantics/atom.xml</id>
+    <entry xml:lang="en">
+        <title>Sankey diagram of rule distributions for word sense disambiguation</title>
+        <published>2014-11-15T06:14:00+00:00</published>
+        <updated>2014-11-15T06:14:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/sankey-diagram-of-rule-distributions-for-word-sense-disambiguation/" type="text/html"/>
+        <id>https://will-paul.com/posts/sankey-diagram-of-rule-distributions-for-word-sense-disambiguation/</id>
+        
+        <summary type="html">&lt;p&gt;Crazy long title, I know, but it&#x27;s not as complicated as it sounds. For my Natural Language Processing class we recently approached the problem of Word Sense Disambiguation from a Machine Learning perspective (we also looked at others, including lookup approaches like Lesk), using the simple, but effective, decision list algorithm. This is my attempt at visualizing the results.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+    <entry xml:lang="en">
+        <title>Word Sense Disambiguation with Python</title>
+        <published>2014-10-13T01:48:00+00:00</published>
+        <updated>2014-10-13T01:48:00+00:00</updated>
+        <author>
+          <name>Unknown</name>
+        </author>
+        <link rel="alternate" href="https://will-paul.com/posts/word-sense-disambiguation-with-python/" type="text/html"/>
+        <id>https://will-paul.com/posts/word-sense-disambiguation-with-python/</id>
+        
+        <summary type="html">&lt;p&gt;One of the first things you realize when working with any sort of linguistic data is just how ambiguous just about anything we say or write really is. From the smallest units of sound (what was that garbled bit of sound?) to the document unit of meaning (what was that article about?), there aren&#x27;t many parts of language that we can be 100% sure of even as native speakers, much less as an outside observer, like our programs.&lt;&#x2F;p&gt;
+</summary>
+        
+    </entry>
+</feed>
