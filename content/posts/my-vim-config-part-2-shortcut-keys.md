@@ -8,7 +8,7 @@ tags = ["Vim", "Config"]
 
 +++
 
-This is a continuation of my short series ([part 1](/2014/11/02/my-vim-config-part-1-the-basics/)) on how I setup Vim to be a little more fully featured looking at the custom shortcuts. By no means is my setup the best, but there are a few neat things I've stumbled upon and my thought is that by aggregating them here someone else might find something new to add. Or maybe someone knows a better way to do something and lets me know. So let's get started!
+This is a continuation of my short series ([part 1](/posts/my-vim-config-part-1-the-basics/)) on how I setup Vim to be a little more fully featured looking at the custom shortcuts. By no means is my setup the best, but there are a few neat things I've stumbled upon and my thought is that by aggregating them here someone else might find something new to add. Or maybe someone knows a better way to do something and lets me know. So let's get started!
 
 <!-- more -->
 

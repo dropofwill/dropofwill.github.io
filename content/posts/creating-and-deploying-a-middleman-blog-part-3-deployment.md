@@ -9,7 +9,7 @@ tags = ["Ruby", "Middleman", "Deployment"]
 
 +++
 
-[Two posts ago](/2014/09/14/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/) I talked about static site generators in general and Middleman specifically. [After that](/2014/09/22/creating-and-deploying-a-middleman-blog-part-2-blogging-with-middleman/) I talked about how to use Middleman for blogging and again talked about different use cases. Today I am going to talk about deployment options and how you can get your site onto the web.
+[Two posts ago](/posts/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/) I talked about static site generators in general and Middleman specifically. [After that](/posts/creating-and-deploying-a-middleman-blog-part-2-blogging-with-middleman/) I talked about how to use Middleman for blogging and again talked about different use cases. Today I am going to talk about deployment options and how you can get your site onto the web.
 
 <!-- more -->
 

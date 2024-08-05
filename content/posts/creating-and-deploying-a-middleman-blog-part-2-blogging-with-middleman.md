@@ -8,7 +8,7 @@ tags = ["Ruby", "Middleman", "Blog"]
 
 +++
 
-[Last time](/2014/09/14/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/) I talked about static site generators in general (why you would use them) and a little bit about Middleman specifically (why you would use it in particular). Today I am going to talk about Middleman's blogging capabilities.
+[Last time](/posts/creating-and-deploying-a-middleman-blog-part-1-what-s-middleman/) I talked about static site generators in general (why you would use them) and a little bit about Middleman specifically (why you would use it in particular). Today I am going to talk about Middleman's blogging capabilities.
 
 <!-- more -->
 
